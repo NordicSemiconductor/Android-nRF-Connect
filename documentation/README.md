@@ -254,3 +254,22 @@ The instance-id attributes are optional and set to 0 by default.
 ```
 
 Waits a NUMBER value of milliseconds. Always results with SUCCESS.
+
+##### DFU - Device Firmware Update
+
+```xml
+<!-- 
+  You may upload an application, bootloader, soft device or multiple files. Use 'type=X' attribute where X may be one of the following:
+  * 1 - for soft device
+  * 2 - for bootloadere
+  * 4 - for application
+  * 0 - for auto (all from ZIP or an application) (default)
+-->
+<dfu [description="DFU operation"] file="${FIRMWARE_PATH}" [initFile="${FIRMWARE_INIT_PATH}"] [target="TARGET_ID"] [expected="SUCCESS"] />
+```
+
+The **dfu** operation sends the firmware Over-the-Air to the target using DFU. In case of DFU Bootloader from SDK 7.0+ the init file is required. Check the [How to create Init file for DFU](../init packet handling/README.md) for details.
+
+The script may send the Soft Device, Bootloader or the application, or any combinations of those packed in a ZIP file. The ZIP file must contain the following content in order to be parsed correctly:
+
+![ZIP content](../images/zip.png)
