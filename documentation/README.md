@@ -1,5 +1,7 @@
 # Automated tests
 
+The automated tests are now in BETA version. It has been tested but some issues may occur. Fill free to submit comments, bugs or feature ideas.
+
 ## Resources
 
 1. [test.bat](test.bat) - the Windows script that may be used to run the test on the Android device.
