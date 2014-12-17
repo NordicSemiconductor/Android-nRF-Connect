@@ -265,10 +265,10 @@ Waits a NUMBER value of milliseconds. Always results with SUCCESS.
   * 4 - for application
   * 0 - for auto (all from ZIP or an application) (default)
 -->
-<dfu [description="DFU operation"] file="${FIRMWARE_PATH}" [initFile="${FIRMWARE_INIT_PATH}"] [target="TARGET_ID"] [expected="SUCCESS"] />
+<dfu [description="DFU operation"] file="${FIRMWARE_PATH}" [initFile="${FIRMWARE_INIT_PATH}"] [type="TYPE_NUMBER"] [target="TARGET_ID"] [expected="SUCCESS"] />
 ```
 
-The **dfu** operation sends the firmware Over-the-Air to the target using DFU. In case of DFU Bootloader from SDK 7.0+ the init file is required. Check the [How to create Init file for DFU](../init packet handling/README.md) for details.
+The **dfu** operation sends the firmware Over-the-Air to the target using DFU. In case of a DFU Bootloader from SDK 7.0+ the init file is required. Check the [How to create Init file for DFU](../init packet handling/README.md) for details.
 
 The script may send the Soft Device, Bootloader or the application, or any combinations of those packed in a ZIP file. The ZIP file must contain the following content in order to be parsed correctly:
 
