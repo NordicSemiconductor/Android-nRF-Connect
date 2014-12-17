@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Copyright (c) 2013 Nordic Semiconductor. All Rights Reserved.
+  
+  The information contained herein is property of Nordic Semiconductor ASA.
+  Terms and conditions of usage are described in detail in NORDIC SEMICONDUCTOR STANDARD SOFTWARE LICENSE AGREEMENT.
+  Licensees are granted free, non-transferable use of the information. NO WARRANTY of ANY KIND is provided. 
+  This heading must NOT be removed from the file.
+-->
+
+<!-- 
+	Automated test script example and documentation.
+
+	This script is an example of a test suite definition which can be parsed and performed by nRF Master Control Panel application.
+	nRF MCP may be used in automated tests for Bluetooth Smart devices.
+
+	Should you have any comments or suggestions, please write us on android-devs@nordicsemi.no.
+-->
+
+<!-- Test-Suite element defines the test suite. It MAY have a 'description' attribute. All descriptions in the script are used when creating a result file. -->
+<test-suite description="Very important test">
+	<!-- 
+		Tests MAY be parameterized. To define a variable use the 'set' element. 
+		You may also inject variables from the command line with -E KEY VALUE, f.e. 'test -E EXTRA_ADDRESS 00:11:22:33:44:55 example.xml'.
+	-->
+	<set name="DESC_NAME" value="[global] CCCD" />
+	<set name="CCCD_UUID" value="00002902-0000-1000-8000-00805f9b34fb" />
+	<set name="HRM_SERVICE_UUID" value="0000180D-0000-1000-8000-00805f9b34fb" />
+	<set name="HR_MEASUREMENT_CHAR_UUID" value="00002A37-0000-1000-8000-00805f9b34fb" />
+	<set name="BODY_SENDOR_LOCATION_CHAR_UUID" value="00002A38-0000-1000-8000-00805f9b34fb" />
+
+	<!-- The following file and a matching init file will be sent using 'dfu' operation. -->
+	<set name="FIRMWARE_PATH" value="/Nordic Semiconductor/Board/pca10028/ble_app_hrs_dfu_s110_v7_1_0.hex" />
+	<set name="FIRMWARE_INIT_PATH" value="/Nordic Semiconductor/Board/pca10028/ble_app_hrs_dfu_s110_v7_1_0_ext_init.dat" />
+
+	<!-- 
+		Define devices to test. A Target MAY hava a 'name' attribute with a user friendly name and MUST have the 'address' definition with the Bluetooth Smart device address.
+		You MAY specify more than one target but at least one MUST be specified. 
+	-->
+	<target id="devkit" name="Dev Kit" address="${EXTRA_ADDRESS}" />
+
+	<!-- 
+		Define tests. Test MUST contain at least one operation elements. Each operation will be performed in order from top to bottom and a result will be logged in the output file.
+		Each test and operation MAY have a 'description' attribute and a target reference. Target may be specified for the test (as a default one for every included operation) and
+		for each operation inside, so you may connect to more than one device in a single test.
+		All operations in the test, except Assert-Services and "DFU" may have a timeout specified using 'timeout' attribute (in milliseconds). The default timeout is 5000 milliseconds.
+	-->
+	<test id="basics" description="Check basic connectivity of ${EXTRA_ADDRESS}" target="devkit">
+	
+		<!-- 
+			First let's connect to the device. The 'description' attribute has been omitted. The tag name will be used as the description. 
+			By setting the 'timeout' attribute to 4000 ms we ensure that the connection attempt will take no longer than that. 
+		-->
+		<connect timeout="4000" />
+		
+		<!-- 
+			In order to read or write something we have to discover available services. 
+			The 'target' is set, but as it is the same as for the test, it could have been omitted.
+			The 'description' has not been specified and therfore it's set to a default value - "Discover-Services".
+		-->
+		<discover-services target="devkit" timeout="10000" />
+		
+		<!-- Check if device has specified service. Instance id MAY be specified using instance-id="n". The default instance id value is 0. -->
+		<assert-service description="Check if HRM Service exists" uuid="${HRM_SERVICE_UUID}" instance-id="0">
+		
+			<!-- The service should have the following characteristics. -->
+			<assert-characteristic description="Check Heart Rate Measurement characteristic" uuid="00002A37-0000-1000-8000-00805f9b34fb" instance-id="0" >
+				<!-- Let's check if the characteristic has required properties. Requirement="MANDATORY" is default and MAY be skipped. -->
+				<property name="NOTIFY" requirement="MANDATORY" />
+				<!-- It may also have some other properties (this section may be skipped as this is does not do any checking -->
+				<property name="READ" requirement="OPTIONAL" />
+				<!-- But for sure it must not have those properties -->
+				<property name="WRITE" requirement="EXCLUDED" />
+				<property name="WRITE_WITHOUT_RESPONSE" requirement="EXCLUDED" />
+				<!-- 
+					Property name is case-sensitive and must be one of the following: 
+						- BROADCAST
+						- READ
+						- WRITE
+						- WRITE_WITHOUT_RESPONSE
+						- NOTIFY
+						- INDICATE
+						- SIGNED_WRITE
+						- EXTENDED_PROPERTIES
+
+					Requirement name is also case-sensitive and must be one of the following:
+						- MANDATORY (default)
+						- OPTIONAL
+						- EXCLUDED
+				-->
+				<property name="SIGNED_WRITE" requirement="EXCLUDED" />
+				
+				<!-- This characteristic should have the CCCD descriptor. Attribute 'instance-id' is optional -->
+				<assert-descriptor description="Checking ${DESC_NAME} descriptor" uuid="${CCCD_UUID}" />
+				<!-- We may also check if the characteristic has Client Characteristic Configuration with assert-cccd command -->
+				<assert-cccd description="Another way of checking only the CCCD">
+					<!-- And even check the value of any descriptor, including the CCCD -->
+					<assert-value description="Check if notifications are disabled by default" value="0000" />
+				</assert-cccd>
+				<!-- 
+					The following descriptor should not be in this characteristic.
+
+					An 'expected' attribute may be set to all operations (except 'property' and 'sleep') to specify the expected result.
+					Expected result may be one of the following:
+						- SUCCESS                 - success is required to go on (default)
+						- SUCCESS_WARNING_ON_FAIL - a warning will be logged in the result file but the test will continue
+						- FAIL                    - a fail is required to proceed
+						- FAIL_WARNING_ON_SUCCESS - a fail is expected but in case of a success a warning will be logged to the result file.
+				-->
+				<assert-descriptor description="This descriptor should not be found" uuid="00002906-0000-1000-8000-00805f9b34fb" expected="FAIL" />
+			</assert-characteristic>
+			
+			<!-- Another required characteristic. Like in assert-service the instance-id does not have to be specified if equal to 0 -->
+			<assert-characteristic description="Check Body Sensor Location characteristic" uuid="${BODY_SENDOR_LOCATION_CHAR_UUID}">
+				<!-- Read property is required. We don't care about the others -->
+				<property name="READ" />
+
+				<!-- Additionally we may assert the characteristic value. Here, as we have not read it yet, it will be null. -->
+				<assert-value description="Characteristic should have no value here" value="" />
+			</assert-characteristic>
+		</assert-service>
+		
+		<!-- Read a value from characteristic. Attributes: 'service-instance-id' and 'characteristic-instance-id' are optional. -->
+		<read description="Read sensor location" service-uuid="${HRM_SERVICE_UUID}" service-instance-id="0" characteristic-uuid="${BODY_SENDOR_LOCATION_CHAR_UUID}" characteristic-instance-id="0">
+		
+			<!-- Check if the value is what we expect to be . A value may be goven in bytes using 'value' attribute or as string using 'value-string'-->
+			<assert-value description="Check if location equals FINGER" value="03" />
+		</read>
+
+		<!-- We may want to check whether the device name is equal to Some name. If not, a warning will be logged. -->
+		<read description="Read the device name" service-uuid="00001800-0000-1000-8000-00805f9b34fb" characteristic-uuid="00002A00-0000-1000-8000-00805f9b34fb">
+		
+			<!-- Check if the value is equal to some name -->
+			<assert-value description="Check the name" value-string="Some name" expected="SUCCESS_WARNING_ON_FAIL" />
+		</read>
+
+		<!-- The script may also try to bond to the target. Bonding may take more time on several devices as full service discovery may be performed.-->
+		<bond timeout="10000" />
+		
+		<!-- 
+			Try to write a new value to a characteristic with WRITE REQUEST (default).
+			Type is case-sensitive and must be one of the following: 
+				- WRITE_REQUEST (default)
+				- WRITE_COMMAND
+			The - WRITE_SIGNED is currently not supported. // TODO
+		-->
+		<write description="Write a name" type="WRITE_REQUEST" service-uuid="00001800-0000-1000-8000-00805f9b34fb" characteristic-uuid="00002A00-0000-1000-8000-00805f9b34fb" value-string="New name" />
+		
+		<!-- Read a value from the same characteristic -->
+		<read description="Read the new name" service-uuid="00001800-0000-1000-8000-00805f9b34fb" characteristic-uuid="00002A00-0000-1000-8000-00805f9b34fb">
+		
+			<!-- Check if the value is equal to what we have written -->
+			<assert-value description="Check the new value" value-string="New name" />
+		</read>
+
+		<!-- We may enable notification by writing to the CCC descriptor -->
+		<write-descriptor description="Enable notifications" uuid="${CCCD_UUID}" service-uuid="${HRM_SERVICE_UUID}" characteristic-uuid="${HR_MEASUREMENT_CHAR_UUID}" value="0100" />
+				
+		<!-- Read a value from characteristic. Attributes: service-instance-id and characteristic-instance-id are optional. -->
+		<read-descriptor description="Read descriptor value" uuid="${CCCD_UUID}" service-uuid="${HRM_SERVICE_UUID}" characteristic-uuid="${HR_MEASUREMENT_CHAR_UUID}">
+		
+			<!-- Check if the value is what we expect to be -->
+			<assert-value description="Check if notifications are enabled" value="0100" />
+		</read-descriptor>
+
+		<!-- Check if the notifications or indications(!) are being sent. This tag wait up to 2000ms for incomming notification or indication. It may also assert its value. -->
+		<assert-notification description="Check the first notification" service-uuid="${HRM_SERVICE_UUID}" characteristic-uuid="${HR_MEASUREMENT_CHAR_UUID}" timeout="2000">
+
+			<!-- We can assert the correct notifivation value -->
+			<!-- NOTE: This tag has been commented out because the notifications, in our HRM sample, are randomly generated -->
+			<!-- <assert-value description="200 BPM, Contact deteected, RR intercvals" value="16C87200730074007500" /> -->
+		</assert-notification>
+
+		<!-- The value of the second notification/indication is irrelevant -->
+		<assert-notification description="Check the second notification, with any value" service-uuid="${HRM_SERVICE_UUID}" characteristic-uuid="${HR_MEASUREMENT_CHAR_UUID}" />
+
+		<!-- Disconnect from the device. This element MAY be omitted at the end of the test as every device is automatically disconnected here. -->
+		<disconnect />
+
+		<!-- We may want to remove the pairing after operation is complete. Unbonding will also disconnect the device, if it's connected. -->
+		<!-- 
+			This operation is not necessary as we will remove the bond information it in a separate test in case one of the operations above failed and aborted the test before. 
+		-->
+		<!-- <unbond /> -->
+	</test>
+
+	<!-- The nRF Master Control Panel may also perform the DFU operation. Let's create a test that will upload a HRM firmware to the device. -->
+	<test id="dfu" description="DFU Test">
+
+		<!-- 
+			In order to send a frimware using DFU a device should be disconnected, as the DFU service will connect by it own. 
+			You may upload an application, bootloader, soft device or multiple files. Use 'type=X' attribute where X may be one of the following:
+			* 1 - for soft device
+			* 2 - for bootloadere
+			* 4 - for application
+			* 0 - for auto (all from ZIP or an application) (default)
+		-->
+		<dfu description="DFU operation" file="${FIRMWARE_PATH}" initFile="${FIRMWARE_INIT_PATH}" target="devkit" />
+
+		<!--
+			There is always a 2 second break after the last operation of a test before the service starts to clear the resources. The break is required for some operations to complete,
+			f.e. bonding. If 'bond' tag would be the last one, the service would bond and immediately started to disconnect what causes the Android to hang.
+
+			However, a custom break may ba added anywhere in the test. The default timeout is 5000ms but may be set just like for other commands, f.e. <sleep timeout="10000" />. 
+			F.e. in case of 
+			<connect />
+			<bond /> 
+			<disconnect />
+			a 'sleep' may be required before 'disconnect' to make it work.
+		-->
+		<sleep />
+	</test>
+
+	<test id="unbond" description="Remove the bond information">
+		<!-- As this is a new test, this operation will be executed no matter if the basic test succeeded or not. -->
+		<unbond target="devkit" />
+	</test>
+	
+	<!-- 
+		At last we provide test cases to be performed. Each may overwrite 'set' parameters.
+
+		To be able to perform basic tests on Heart Rate Monitor we must first use the DFU to send HRM firmware onto the device.
+		The DFU operation might have beenn specified as a part of basic test but here we have defined a designated test only for DFU testing.
+	-->
+	<run-test ref="dfu" description="Upload HRM onto the Dev Kit" />
+	
+	<!-- Start basic tests. We may overwrite the global variable here. -->
+	<run-test ref="basics" description="Basic tests for HRM">
+		<!-- Parameters may be given for a single test also, Overwriting global one -->
+		<set name="DESC_NAME" value="[local] CCCD" />
+	</run-test>
+
+	<run-test ref="unbond" description="Clean up" />
+	
+</test-suite>
