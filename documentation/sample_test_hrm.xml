@@ -49,7 +49,7 @@
 	
 		<!-- 
 			First let's connect to the device. The 'description' attribute has been omitted. The tag name will be used as the description. 
-			By setting the 'timeout' attribute to 4000 ms we ensure that the connection attempt will take no longer than that. 
+			By setting the 'timeout' attribute to 4000 ms we ensure that the connection attempt will take no longer than that.
 			The 'connect' operation is followed by 1 second break to give Android some time before the next operation.
 		-->
 		<connect timeout="4000" />
@@ -179,8 +179,8 @@
 		<assert-notification description="Check the first notification" service-uuid="${HRM_SERVICE_UUID}" characteristic-uuid="${HR_MEASUREMENT_CHAR_UUID}" timeout="2000">
 
 			<!-- We can assert the correct notifivation value -->
-			<!-- NOTE: This tag has been commented out because the notifications, in our HRM sample, are randomly generated -->
-			<!-- <assert-value description="200 BPM, Contact deteected, RR intercvals" value="16C87200730074007500" /> -->
+			<!-- NOTE: This tag has expected result SUCCESS_WARNING_ON_FAIL because the notifications, in our HRM sample, are randomly generated -->
+			<assert-value description="200 BPM, Contact deteected, RR intercvals" value="16C87200730074007500" expected="SUCCESS_WARNING_ON_FAIL" />
 		</assert-notification>
 
 		<!-- The value of the second notification/indication is irrelevant -->

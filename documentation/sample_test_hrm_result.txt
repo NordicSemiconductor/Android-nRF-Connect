@@ -1,8 +1,6 @@
-Starting 'DFU Test' for 'Upload HRM onto the Dev Kit'
-   DFU operation...OK
-   Sleep...OK
 Starting 'Check basic connectivity of E3:EC:B1:48:6D:C2' for 'Basic tests for HRM'
    Connect...OK
+   Refresh...OK
    Discover-Services...OK
    Check if HRM Service exists...OK
    Read sensor location...OK
@@ -13,7 +11,8 @@ Starting 'Check basic connectivity of E3:EC:B1:48:6D:C2' for 'Basic tests for HR
    Read the new name...OK
    Enable notifications...OK
    Read descriptor value...OK
-   Check the first notification...OK
+   Check the first notification...WARNING:
+     - Value of the characteristic '16BEA300A400A500A600' is not equal to '16C87200730074007500'
    Check the second notification, with any value...OK
    Disconnect...OK
 Starting 'Remove the bond information' for 'Clean up'
