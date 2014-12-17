@@ -180,7 +180,7 @@
 
 			<!-- We can assert the correct notifivation value -->
 			<!-- NOTE: This tag has expected result SUCCESS_WARNING_ON_FAIL because the notifications, in our HRM sample, are randomly generated -->
-			<assert-value description="200 BPM, Contact deteected, RR intercvals" value="16C87200730074007500" expected="SUCCESS_WARNING_ON_FAIL" />
+			<assert-value description="200 BPM, Contact deteected, RR intervals" value="16C87200730074007500" expected="SUCCESS_WARNING_ON_FAIL" />
 		</assert-notification>
 
 		<!-- The value of the second notification/indication is irrelevant -->
