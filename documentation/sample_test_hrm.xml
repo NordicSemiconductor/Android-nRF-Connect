@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Copyright (c) 2013 Nordic Semiconductor. All Rights Reserved.
+  Copyright (c) 2014 Nordic Semiconductor. All Rights Reserved.
   
   The information contained herein is property of Nordic Semiconductor ASA.
   Terms and conditions of usage are described in detail in NORDIC SEMICONDUCTOR STANDARD SOFTWARE LICENSE AGREEMENT.
@@ -50,8 +50,20 @@
 		<!-- 
 			First let's connect to the device. The 'description' attribute has been omitted. The tag name will be used as the description. 
 			By setting the 'timeout' attribute to 4000 ms we ensure that the connection attempt will take no longer than that. 
+			The 'connect' operation is followed by 1 second break to give Android some time before the next operation.
 		-->
 		<connect timeout="4000" />
+
+		<!-- 
+			Before we discover services let's make sure that the cache is clear. The services might have changed on the device. The 'refresh' operation must be called after the 
+			device has been connected at least once (a BluetoothGatt object has been created using connectGatt(...) method).
+
+			Actually there is not need to refresh services in this sample as the 'dfu' operation in the DFU Test (check the next test definition), which is being run prior to this, 
+			does it automatically when completed.
+
+			The 'refresh' operation is followed by 1 second break to give Android some time before the next operation as it will cause the Android-internal service discovery.
+		-->
+		<refresh />
 		
 		<!-- 
 			In order to read or write something we have to discover available services. 
