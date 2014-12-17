@@ -25,7 +25,7 @@ The Device Firmware Update BLE protocol may be used to update the Soft Device, B
 
 Since SDK 6.1 the DFU does not require physical intereaction with the device (f.e. pressing a button). A 'buttonless' DFU is available. The application, that supports the buttonless DFU should have the DFU Service present in its services list. See the SDK for samples.
 
-The DFU Bootloader from SDK 7.0+ requires the extended init packet. The init packet should be provided in a DAT file and should match the matching HEX or BIN file. Please, check the Init packet handling documentation http://developer.nordicsemi.com/nRF51_SDK/doc/7.1.0/s110/html/a00065.html or How to create the init packet.
+The DFU Bootloader from SDK 7.0+ requires the extended init packet. The init packet should be provided in a DAT file and should match the matching HEX or BIN file. Please, check the Init packet handling documentation http://developer.nordicsemi.com/nRF51_SDK/doc/7.1.0/s110/html/a00065.html or [How to create the init packet](init packet handling/README.md).
 
 ## Automated testing
 
