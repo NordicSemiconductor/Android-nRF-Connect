@@ -17,7 +17,7 @@ https://play.google.com/store/apps/details?id=no.nordicsemi.android.mcp
 5. Reading and writing characteristics
 6. Logging events and packets to nRF Logger app
 7. Device Firmware Update (DFU)
-8. NEW - Automated tests
+8. NEW - Automated tests BETA
 
 ## DFU - Device Firmware Update
 
