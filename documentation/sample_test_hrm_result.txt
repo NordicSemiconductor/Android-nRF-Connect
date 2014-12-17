@@ -1,0 +1,19 @@
+Checking Beacon Config configuration...OK
+Check basic configuration of D7:C8:55:6E:3C:81...OK
+Connect...OK
+Discover-Services...OK
+Beacon DFU service exists...OK
+Beacon Config service exists...OK
+Read DFU Version...OK
+Write Major and Minor to 1 and 2...OK
+Read the Major and Minor...OK
+Read the Calibration...OK
+Read the UUID...OK
+Read the Manufacturer ID...OK
+Read the Manufacturer ID...OK
+Read the LED configuration...OK
+Enable LED...OK
+Read the LED configuration...OK
+Disable LED...OK
+Disconnect...OK
+Connect...FAIL
