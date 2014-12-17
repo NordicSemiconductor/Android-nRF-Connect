@@ -14,5 +14,5 @@ The [hex2bin.exe](hex2bin.exe) and [crc.exe](crc.exe) files may be downloaded ou
 
 ##### Sources
 
-The hex2bin program is available on SourceForge: http://sourceforge.net/projects/hex2bin/
-The crc.exe is available here: http://www.lammertbies.nl/comm/info/crc-calculation.html
+- The hex2bin program is available on SourceForge: http://sourceforge.net/projects/hex2bin/
+- The crc.exe is available here: http://www.lammertbies.nl/comm/info/crc-calculation.html
