@@ -11,6 +11,8 @@ For older versions of the DFU a init packet with only the 2-byte CRC may be spec
 Please, read the PDF file with the instruction: [PDF](How to generate the INIT file for DFU.pdf).
 
 The [hex2bin.exe](hex2bin.exe) and [crc.exe](crc.exe) files may be downloaded from our GitHub page.
+hex2bin.exe SHA1 hash: 51db618cb72d30d5ef3151e59a47aa47c4ee1a93
+crc.exe SHA1 hash: e96180fc2f1dba5d5f7fe98da1d531495de52dcb
 
 ##### Sources and home pages
 
