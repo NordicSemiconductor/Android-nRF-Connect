@@ -5,7 +5,7 @@ The automated tests are now in BETA version. It has been tested but some issues 
 ## Resources
 
 1. [test.bat](test.bat) - the Windows script that may be used to run the test on the Android device.
-2. [sample_test_hrm.xml](sample_test_htm.xml) - the sample test. It contains all supported features with some in-code documentation.
+2. [sample_test_hrm.xml](sample_test_hrm.xml) - the sample test. It contains all supported features with some in-code documentation.
 
 ## How to begin
 
