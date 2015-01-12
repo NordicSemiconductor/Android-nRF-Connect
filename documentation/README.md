@@ -36,21 +36,21 @@ The test suite is defined in XML in the **test-suite** node. The basis test suit
 
 ```xml
 <test-suite>
-  <!-- Definitios -->
+  <!-- Definitions (0+) -->
   <set name="KEY" value="VALUE" /> 
   ...
-  <!-- Target(s) -->
+  <!-- Target(s) (1+) -->
   <target id="TARGET_ID" name="TARGET_NAME" address="AA:DD:DR:RE:ES:SS" />
   ...
-  <!-- Test definition(s) -->
+  <!-- Test definition(s) (1+) -->
   <test id="TEST_ID" description="DESCRIPTION" [target="TARGET_ID"]>
     ...
   </test>
   ...
   
-  <!-- Run test command(s) -->
+  <!-- Run test command(s) (1+) -->
   <run-test ref="TEST_ID" description="DESCRIPTION">
-    <!-- Optional constants redefinition -->
+    <!-- Optional constants redefinition (0+) -->
     <set name="KEY" value="OTHER_VALUE" />
   </run-test>
   ...
