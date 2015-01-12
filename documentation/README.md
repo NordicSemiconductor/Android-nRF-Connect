@@ -106,7 +106,7 @@ This operation clears the device services cache. It's using the hidden Android m
 
 This method must be called after the device has been connected at least once in the test using the **connect** operation. Otherwise an error message will be shown. This is because it is being invoked on a *BluetoothGatt* object which is created using *connectGatt(..)* method.
 
-The **refresh** operation is folowed by 1 second break to give Android some time before the next operation. This seconds may be used f.e. for starting the Android-internal service discovery.
+The **refresh** operation is folowed by 1 second break to give Android some time before the next operation. The break may be used to start the Android-internal service discovery.
 
 ##### Disconnect
 
@@ -114,7 +114,7 @@ The **refresh** operation is folowed by 1 second break to give Android some time
 <disconnect [description="DESCRIPTION"] [timeout="NUMBER"] [target="TARGET_ID"] />
 ```
 
-Each device used in the test is automatically disconnected when the test ends (with any result). However, a diconnection may be used in the test.
+Each device used in the test is automatically disconnected when the test ends (no matter the result). However, when a diconnection is to be a part of the test this operation may be used.
 
 ##### Assert services and characteristics
 
@@ -168,9 +168,9 @@ Each device used in the test is automatically disconnected when the test ends (w
 </assert-service>
 ```
 
-The **assert-service** operation and its child nodes may be used to validate the proper configuration of the device. For all assert operations a **expected** attribute may be specified (see above).
+The **assert-service** operation and its child nodes may be used to validate the proper configuration of the device. For all assert operations an **expected** attribute may be specified (see above).
 
-Remember that before you read the characteristic its value is *null* (null is equal to 00+, as on the example above). The only exception are the CCCD descriptors for bonded devices. When notifications or indications were enabled in the previuos connection the value of the descriptor will not change. However, there is no guarantee that that is the real value of the descriptor on the target device unless the **read** operation will be executed.
+Remember that before you read the characteristic its value is *null* (null is equal to 00+, as on the example above or to an empty string). The only exception are the CCCD descriptors for bonded devices. When notifications or indications were enabled in the previuos connection the value of the descriptor is saved in application's database and will not change. However, there is no guarantee that that is the real value of the descriptor on the target device unless the **read-descriptor** operation will be executed.
 
 The value may be given in bytes using the **value** attribute, or as a string using **value-string**.
 
@@ -188,12 +188,12 @@ Bonds to the device. This operation may be called even when the device is not co
 <unbond [description="DESCRIPTION"] [timeout="NUMBER"] [target="TARGET_ID"] [expected="SUCCESS"] />
 ```
 
-Removes the bond information from the phone/tablet. This operation may be called even when the device is not connected, but when will cause disconnection when invoked on connected device.
+Removes the bond information from the phone/tablet. This operation may be called even when the device is not connected and will cause disconnection when invoked on connected device.
 
 ##### Read characteristic
 
 ```xml
-<read [description="DESCRIPTION"] service-uuid="SERVICE_UUID" [service-instance-id="SIU"] characteristic-uuid="CHAR_UUID" [characteristic-instance-id="CIU"] [target="TARGET_ID"] [expected="SUCCESS"]>
+<read [description="DESCRIPTION"] service-uuid="SERVICE_UUID" [service-instance-id="SII"] characteristic-uuid="CHAR_UUID" [characteristic-instance-id="CIU"] [timeout="NUMBER"] [target="TARGET_ID"] [expected="SUCCESS"]>
   <!-- Assert characteristic value -->
   <assert-value [description="DESCRIPTION"] value="BYTES"|value-string="TEXT" [expected="SUCCESS"] />
 </read>
@@ -206,7 +206,7 @@ The instance-id attributes are optional and set to 0 by default.
 ##### Read descriptor
 
 ```xml
-<read-descriptor [description="DESCRIPTION"] uuid="DESCRIPTOR_UUID" service-uuid="SERVICE_UUID" [service-instance-id="SIU"] characteristic-uuid="CHAR_UUID" [characteristic-instance-id="CIU"] [target="TARGET_ID"] [expected="SUCCESS"]>
+<read-descriptor [description="DESCRIPTION"] uuid="DESCRIPTOR_UUID" service-uuid="SERVICE_UUID" [service-instance-id="SII"] characteristic-uuid="CHAR_UUID" [characteristic-instance-id="CII"] [timeout="NUMBER"] [target="TARGET_ID"] [expected="SUCCESS"]>
   <!-- Assert characteristic value -->
   <assert-value [description="DESCRIPTION"] value="BYTES"|value-string="TEXT" [expected="SUCCESS"] />
 </read-descriptor>
@@ -219,7 +219,7 @@ The instance-id attributes are optional and set to 0 by default.
 ##### Write characteristic
 
 ```xml
-<write [description="DESCRIPTION"] service-uuid="SERVICE_UUID" [service-instance-id="SIU"] characteristic-uuid="CHAR_UUID" [characteristic-instance-id="CIU"] value="BYTES"|value-string="TEXT" [target="TARGET_ID"] [expected="SUCCESS"] />
+<write [description="DESCRIPTION"] service-uuid="SERVICE_UUID" [service-instance-id="SII"] characteristic-uuid="CHAR_UUID" [characteristic-instance-id="CII"] value="BYTES"|value-string="TEXT" [timeout="NUMBER"] [target="TARGET_ID"] [expected="SUCCESS"] />
 ```
 
 Writes the given value to the characteristic.
@@ -229,7 +229,7 @@ The instance-id attributes are optional and set to 0 by default.
 ##### Write descriptor
 
 ```xml
-<write-descriptor [description="DESCRIPTION"] uuid="DESCRIPTOR_UUID" service-uuid="SERVICE_UUID" [service-instance-id="SIU"] characteristic-uuid="CHAR_UUID" [characteristic-instance-id="CIU"] value="BYTES"|value-string="TEXT" [target="TARGET_ID"] [expected="SUCCESS"] />
+<write-descriptor [description="DESCRIPTION"] uuid="DESCRIPTOR_UUID" service-uuid="SERVICE_UUID" [service-instance-id="SII"] characteristic-uuid="CHAR_UUID" [characteristic-instance-id="CII"] value="BYTES"|value-string="TEXT" [timeout="NUMBER"] [target="TARGET_ID"] [expected="SUCCESS"] />
 ```
 
 Writes the given value to the descriptor.
@@ -239,13 +239,13 @@ The instance-id attributes are optional and set to 0 by default.
 ##### Notifications / indications
 
 ```xml
-<assert-notification [description="DESCRIPTION"] service-uuid="SERVICE_UUID" [service-instance-id="SIU"] characteristic-uuid="CHAR_UUID" [characteristic-instance-id="CIU"] [target="TARGET_ID"] [expected="SUCCESS"]>
+<assert-notification [description="DESCRIPTION"] service-uuid="SERVICE_UUID" [service-instance-id="SII"] characteristic-uuid="CHAR_UUID" [characteristic-instance-id="CII"] [timeout="NUMBER"] [target="TARGET_ID"] [expected="SUCCESS"]>
   <!-- Assert characteristic value -->
   <assert-value [description="DESCRIPTION"] value="BYTES"|value-string="TEXT" [expected="SUCCESS"] />
 </assert-notification>
 ```
 
-Writes the given value to the characteristic.
+Waits NUMBER of milliseconds for a notification from a characteristic with given parameters. A value assertion may be used to check its value.
 
 The instance-id attributes are optional and set to 0 by default.
 
@@ -255,7 +255,7 @@ The instance-id attributes are optional and set to 0 by default.
 <sleep [description="DESCRIPTION"] [timeout="NUMBER"] />
 ```
 
-Waits a NUMBER value of milliseconds. Always results with SUCCESS.
+Waits a NUMBER value of milliseconds without doing anything. Always results with SUCCESS.
 
 ##### DFU - Device Firmware Update
 
