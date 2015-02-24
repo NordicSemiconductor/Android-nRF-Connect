@@ -2,7 +2,7 @@
 
 The DFU bootloader from SDK 7.0+ requires an init packet containing additional data. Read more about the init packet in the documentation:
 
-http://developer.nordicsemi.com/nRF51_SDK/doc/7.1.0/s110/html/a00065.html
+http://developer.nordicsemi.com/nRF51_SDK/doc/7.2.0/s110/html/a00065.html
 
 For older versions of the DFU a init packet with only the 2-byte CRC may be specified.
 
