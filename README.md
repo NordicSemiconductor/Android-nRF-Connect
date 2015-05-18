@@ -8,6 +8,8 @@ The applicaiton requires Android version 4.3 or later and is available on Google
 
 https://play.google.com/store/apps/details?id=no.nordicsemi.android.mcp
 
+Note. The source code of nFR Master Control Panel is not published here.
+
 ## Features
 
 1. Scanning for Bluetooth Smart devices in range
