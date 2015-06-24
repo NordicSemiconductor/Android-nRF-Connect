@@ -27,7 +27,7 @@ The Device Firmware Update BLE protocol may be used to update the Soft Device, B
 
 Since SDK 6.1 the DFU does not require physical intereaction with the device (f.e. pressing a button). A 'buttonless' DFU is available. The application, that supports the buttonless DFU should have the DFU Service present in its services list. See the SDK for samples.
 
-The DFU Bootloader from SDK 7.0+ requires the extended init packet. Please, check the [Creating a zip with image and init packet](http://developer.nordicsemi.com/nRF51_SDK/nRF51_SDK_v8.x.x/doc/8.0.0/s110/html/a00092.html) or [How to create the init packet](init packet handling/README.md). The Distribution packet (ZIP) will be supported in nRF Master Control Panel soon. Until then, the old ZIP file with the fixed naming convention or the separate HEX/BIN and DAT files should ne used. 
+The DFU Bootloader from SDK 7.0+ requires the extended init packet. Please, check the [Creating a zip with image and init packet](http://developer.nordicsemi.com/nRF51_SDK/nRF51_SDK_v8.x.x/doc/8.0.0/s110/html/a00092.html) or [How to create the init packet](init packet handling/README.md). The Distribution packet (ZIP) is supported in nRF Master Control Panel since version 3.0. For older versions, the old ZIP file with the fixed naming convention or the separate HEX/BIN and DAT files should ne used. 
 
 ## Automated testing
 
