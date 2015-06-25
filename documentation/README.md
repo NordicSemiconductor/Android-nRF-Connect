@@ -249,6 +249,19 @@ Waits NUMBER of milliseconds for a notification from a characteristic with given
 
 The instance-id attributes are optional and set to 0 by default.
 
+##### Read RSSI while connected
+
+```xml
+<read-rssi [description="DESCRIPTION"] [timeout="NUMBER"] [target="TARGET_ID"] [expected="SUCCESS"]>
+  <!-- Assert RSSI value range -->
+  <assert-value [description="DESCRIPTION"] value="NUMBER (e.g. -50)|LESS THNN (e.g. -50-)|GREATER THAN (e.g. -50+)" [expected="SUCCESS"] />
+</read-rssi>
+```
+
+Reads the RSSI value of the given (or default) target. The RSSI value may be validated using the **assert-value** tag. In order to check whether the device signal is strong use '''value="-50+"''' attribute. The test will pass if the RSSI is higher (the signal is stronger) than -50 dBm. Be aware that the RSSI value may vary from test to test. Using a expected="SUCCESS_WARNING_ON_FAIL" is recommended.
+
+The device must be connected to read the RSSI as scanning is not yet supported in automated tests.
+
 ##### Sleep
 
 ```xml
@@ -272,6 +285,6 @@ Waits a NUMBER value of milliseconds without doing anything. Always results with
 
 The **dfu** operation sends the firmware Over-the-Air to the target using DFU. In case of a DFU Bootloader from SDK 7.0+ the init file is required. Check the [How to create Init file for DFU](../init packet handling/README.md) for details.
 
-The script may send the Soft Device, Bootloader or the application, or any combinations of those packed in a ZIP file. The ZIP file must contain the following content in order to be parsed correctly:
+The script may send the Soft Device, Bootloader or the application, or any combinations of those packed in a ZIP file. The new Distribution packets (recommended) are supported since nRF Master Control Panel version 3.0, however you may also use the ZIP file that contains the following content in order to be parsed correctly:
 
 ![ZIP content](../images/zip.png)
