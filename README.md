@@ -8,18 +8,21 @@ The applicaiton requires Android version 4.3 or later and is available on Google
 
 https://play.google.com/store/apps/details?id=no.nordicsemi.android.mcp
 
+or [here](release), in case Google Play is not available. We recommend to install the application using Google Play as it will get automatic updates.
+
 Note. The source code of nFR Master Control Panel is not published here.
 
 ## Features
 
 1. Scanning for Bluetooth Smart devices in range
 2. Displaying the RSSI graph and exporting to CSV or EXCEL
+3. Displaying detailed packet history with RSSI, packet changes and advertising intervals
 3. Connecting to multiple devices at the same time
 4. Showing device services and characteristics
 5. Reading and writing characteristics
 6. Logging events and packets to nRF Logger app
 7. Device Firmware Update (DFU)
-8. NEW - Automated tests BETA
+8. Automated tests BETA
 
 ## DFU - Device Firmware Update
 
