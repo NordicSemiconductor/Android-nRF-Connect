@@ -8,7 +8,7 @@ The applicaiton requires Android version 4.3 or later and is available on Google
 
 https://play.google.com/store/apps/details?id=no.nordicsemi.android.mcp
 
-or [here](https://github.com/NordicSemiconductor/nRF-Master-Control-Panel/releases/latest), in case Google Play is not available. We recommend to install the application using Google Play as it will get automatic updates.
+or [here](https://github.com/NordicSemiconductor/nRF-Master-Control-Panel/releases), in case Google Play is not available. We recommend to install the application using Google Play as it will get automatic updates.
 
 Note. The source code of nFR Master Control Panel is not published here.
 

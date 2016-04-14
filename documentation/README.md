@@ -5,20 +5,26 @@ The automated tests are now in BETA version. It has been tested but some issues 
 ## Resources
 
 1. [test.bat](test.bat) - the Windows script that may be used to run the test on the Android device.
-2. [sample_test_hrm.xml](sample_test_hrm.xml) - the sample test. It contains all supported features with some in-code documentation.
+2. [sample_test_hrm.xml](sample_test_hrm.xml) - the sample test. It contains all supported features with some in-code documentation. It matches the HRS_DFU sample application from the SDK. You may modify it to match your application.
 
 ## How to begin
 
-1. nRF Master Control Panel v2.1 will create the above files in your phone's file system in */Nordic Semiconductor* folder. **Note:** newly created files may not be visible on the PC when connected with USB. This is beacuse Android must perform a scan of media files. Get the files from GitHub or trigger the media scanner manually: restart the phone/tablet or install and launch the *Rescan SD* application (or similar) from Google Play.
+The automated tests should work with any Bluetooth Smart device that's use the GATT protocol. A test XML can be created to test it the services, characteristics and descriptors have the correct values and behaviour. A Device Firmware Update (DFU) also may be performed. 
+
+To make an easy start the *sample_test_hrm.xml* file contains a test that can be used with the HRS_DFU sample from the SDK. The instruction below describes steps that should be performed to successfully run this test. 
+
+**Note:** Starting from the SDK 8.0 the bootloader, in case the buttonless update is NOT being used, advertises with a device address increased by 1. Therefore, the test may fail in the first run if you have just the Soft Device and Bootloader flashed on the device. After flashing the HRS application onto it, it will start to advertise with a different address and a timeout will be thrown during connection attempt. But the test should work for the second time as the bootloader uses the same address if buttonless update is in use.
+
+1. nRF Master Control Panel (v2.1 or newer) will create the above files in your phone's file system in */Nordic Semiconductor* folder. **Note:** newly created files may not be visible on the PC when connected with USB. This is beacuse Android must perform a scan of media files. Get the files from GitHub or trigger the media scanner manually: restart the phone/tablet or install and launch the *Rescan SD* application (or similar) from Google Play.
 2. Copy those files to your PC. You will use the *test.bat* to start the testing service. The sample may be used as a demo or a starting point.
-3. The sample HRM test is compatible with the Nordic Semiconductor nRF51 DK: http://www.nordicsemi.com/eng/Products/nRF51-DK/%28language%29/eng-GB or similar.
-  1. Flash the Soft Device s110 version 7.1.0 using nRF Go Studio
-  2. Flash the DFU Bootloader from SDK 7.1 (both SD and Bootloader are available on http://www.nordicsemi.com website)
-    - If you want to use the buttonless update modify the *dfu_transport_ble.c* file in your bootloader source (you may have to unlock the file in Explorer first as it's READ ONLY by default). 
+3. To prepare the nRF51 DK for the test flash the Soft Device and the DFU bootloader.
+  1. Flash the Soft Device s110 version 7.1.0 or newer (for example using nRF Go Studio)
+  2. Flash the DFU Bootloader from SDK 7.1 or newer (both SD and Bootloader are available on http://www.nordicsemi.com website)
+    - If you want to use the buttonless update in DFU bootloader from SDK 7.1, modify the *dfu_transport_ble.c* file in your bootloader source (you may have to unlock the file in Explorer first as it's READ ONLY by default). 
     - Increase the **APP_DIRECTED_ADV_TIMEOUT** value to 50 (it's 5 by default) in line 62: `#define APP_DIRECTED_ADV_TIMEOUT             50`
     - Compile the modified Bootloader and flash the new HEX.
     - This change is required for the Android to reconnect to the bootloader after switching the device to bootloader mode. By default, the bootloader advertises for 6 seconds (5 * 1.28s) which is shorter than the disconnection timeout on Android. The Android, after sending *jump* command, waits for the disconnection event about 22 seconds, depending on the device model. Value 50 (1 minute) should be more than enough.
-    - Note: this change will not be required in the next release of the SDK.
+    - Note: this change is not be required for newer versions of the DFU bootloader.
 4. Connect your Android device to the PC, enable USB debugging on it and install required drivers and ADB (Android Debug Bridge) on the PC. Add the ABD to the PATH global variable or copy it (and dlls) to the same folder.
 5. Try the ADB by writing `adb devices` command in the command line. A list of connected Android devices should be shown.
 6. Find out the address of your device. You may use the nRF Master Control Panel to do that. Your device should advertise as a DFU Targ. Make sure you are not connected with the bootloader.
@@ -32,7 +38,7 @@ The automated tests are now in BETA version. It has been tested but some issues 
 
 ## Documentation
 
-The test suite is defined in XML in the **test-suite** node. The basis test suite structure is shown below:
+The test suite is defined in XML in the **test-suite** node. The basic test suite structure is shown below:
 
 ```xml
 <test-suite>
