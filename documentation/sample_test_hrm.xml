@@ -1,12 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  Copyright (c) 2014 Nordic Semiconductor. All Rights Reserved.
-  
-  The information contained herein is property of Nordic Semiconductor ASA.
-  Terms and conditions of usage are described in detail in NORDIC SEMICONDUCTOR STANDARD SOFTWARE LICENSE AGREEMENT.
-  Licensees are granted free, non-transferable use of the information. NO WARRANTY of ANY KIND is provided. 
-  This heading must NOT be removed from the file.
--->
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~ Copyright (c) 2015, Nordic Semiconductor
+  ~ All rights reserved.
+  ~
+  ~ Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+  ~
+  ~ 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+  ~
+  ~ 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the
+  ~ documentation and/or other materials provided with the distribution.
+  ~
+  ~ 3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this
+  ~ software without specific prior written permission.
+  ~
+  ~ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  ~ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  ~ HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  ~ LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+  ~ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
+  ~ USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
 
 <!-- 
 	Automated test script example and documentation.
@@ -20,21 +33,20 @@
 <!-- Test-Suite element defines the test suite. It MAY have a 'description' attribute. All descriptions in the script are used when creating a result file. -->
 <test-suite description="Very important test">
 	<!-- 
-		Tests MAY be parameterized. To define a variable use the 'set' element. 
+		Tests MAY be parametrized. To define a variable use the 'set' element.
 		You may also inject variables from the command line with -E KEY VALUE, f.e. 'test -E EXTRA_ADDRESS 00:11:22:33:44:55 example.xml'.
 	-->
 	<set name="DESC_NAME" value="[global] CCCD" />
 	<set name="CCCD_UUID" value="00002902-0000-1000-8000-00805f9b34fb" />
 	<set name="HRM_SERVICE_UUID" value="0000180D-0000-1000-8000-00805f9b34fb" />
 	<set name="HR_MEASUREMENT_CHAR_UUID" value="00002A37-0000-1000-8000-00805f9b34fb" />
-	<set name="BODY_SENDOR_LOCATION_CHAR_UUID" value="00002A38-0000-1000-8000-00805f9b34fb" />
+	<set name="BODY_SENSOR_LOCATION_CHAR_UUID" value="00002A38-0000-1000-8000-00805f9b34fb" />
 
 	<!-- The following file and a matching init file will be sent using 'dfu' operation. -->
-	<set name="FIRMWARE_PATH" value="/Nordic Semiconductor/Board/pca10028/ble_app_hrs_dfu_s110_v7_1_0.hex" />
-	<set name="FIRMWARE_INIT_PATH" value="/Nordic Semiconductor/Board/pca10028/ble_app_hrs_dfu_s110_v7_1_0_ext_init.dat" />
+	<set name="FIRMWARE_PATH" value="/Nordic Semiconductor/Board/pca10028/ble_app_hrm_dfu_s110_v8_0_0_sdk_v9_0.zip" />
 
 	<!-- 
-		Define devices to test. A Target MAY hava a 'name' attribute with a user friendly name and MUST have the 'address' definition with the Bluetooth Smart device address.
+		Define devices to test. A Target MAY have a 'name' attribute with a user friendly name and MUST have the 'address' definition with the Bluetooth Smart device address.
 		You MAY specify more than one target but at least one MUST be specified. 
 	-->
 	<target id="devkit" name="Dev Kit" address="${EXTRA_ADDRESS}" />
@@ -68,7 +80,7 @@
 		<!-- 
 			In order to read or write something we have to discover available services. 
 			The 'target' is set, but as it is the same as for the test, it could have been omitted.
-			The 'description' has not been specified and therfore it's set to a default value - "Discover-Services".
+			The 'description' has not been specified and therefore it's set to a default value - "Discover-Services".
 		-->
 		<discover-services target="devkit" timeout="10000" />
 		
@@ -133,9 +145,9 @@
 		</assert-service>
 		
 		<!-- Read a value from characteristic. Attributes: 'service-instance-id' and 'characteristic-instance-id' are optional. -->
-		<read description="Read sensor location" service-uuid="${HRM_SERVICE_UUID}" service-instance-id="0" characteristic-uuid="${BODY_SENDOR_LOCATION_CHAR_UUID}" characteristic-instance-id="0">
+		<read description="Read sensor location" service-uuid="${HRM_SERVICE_UUID}" service-instance-id="0" characteristic-uuid="${BODY_SENSOR_LOCATION_CHAR_UUID}" characteristic-instance-id="0">
 		
-			<!-- Check if the value is what we expect to be . A value may be goven in bytes using 'value' attribute or as string using 'value-string'-->
+			<!-- Check if the value is what we expect to be . A value may be given in bytes using 'value' attribute or as string using 'value-string'-->
 			<assert-value description="Check if location equals FINGER" value="03" />
 		</read>
 
@@ -175,12 +187,22 @@
 			<assert-value description="Check if notifications are enabled" value="0100" />
 		</read-descriptor>
 
-		<!-- Check if the notifications or indications(!) are being sent. This tag wait up to 2000ms for incomming notification or indication. It may also assert its value. -->
+		<!-- Check if the notifications or indications(!) are being sent. This tag wait up to 2000ms for incoming notification or indication. It may also assert its value. -->
 		<assert-notification description="Check the first notification" service-uuid="${HRM_SERVICE_UUID}" characteristic-uuid="${HR_MEASUREMENT_CHAR_UUID}" timeout="2000">
+			<!--
+				 Before the notification will be received you may want to send or read a characteristic or descriptor.
+				 By doing it here you ensure that the notification listener will be initiated before sending the value, as the reply may be too fast.
+				 If the 'write' operation was executed before calling the 'assert-notification', the notification could have been
+				 received before this operation was started and thous the test could fail.
 
-			<!-- We can assert the correct notifivation value -->
+				 The following operations may be called here: write, write-descriptor, read, read-descriptor.
+				 Example:
+			-->
+			<!--<write description="Write notification trigger" service-uuid="some UUID" characteristic-uuid="some other UUID" value="012345" />-->
+
+			<!-- We can assert the correct notification value -->
 			<!-- NOTE: This tag has expected result SUCCESS_WARNING_ON_FAIL because the notifications, in our HRM sample, are randomly generated -->
-			<assert-value description="200 BPM, Contact deteected, RR intervals" value="16C87200730074007500" expected="SUCCESS_WARNING_ON_FAIL" />
+			<assert-value description="200 BPM, Contact detected, RR intervals" value="16C87200730074007500" expected="SUCCESS_WARNING_ON_FAIL" />
 		</assert-notification>
 
 		<!-- The value of the second notification/indication is irrelevant -->
@@ -200,21 +222,23 @@
 	<test id="dfu" description="DFU Test">
 
 		<!-- 
-			In order to send a frimware using DFU a device should be disconnected, as the DFU service will connect by it own. 
+			In order to send a firmware using DFU a device should be disconnected, as the DFU service will connect by it own.
 			You may upload an application, bootloader, soft device or multiple files. Use 'type=X' attribute where X may be one of the following:
 			* 1 - for soft device
-			* 2 - for bootloadere
+			* 2 - for bootloader
 			* 4 - for application
-			* 0 - for auto (all from ZIP or an application) (default)
+			* 0 - for auto (all files from ZIP or an application in case the HEX file is used) (default)
+
+			Use the 'initFile' attribute to specify the path to the init file in case it's required (SDK 7+) and you are not using the Distribution Packets (ZIP).
 		-->
-		<dfu description="DFU operation" file="${FIRMWARE_PATH}" initFile="${FIRMWARE_INIT_PATH}" target="devkit" />
+		<dfu description="DFU operation" file="${FIRMWARE_PATH}" target="devkit" />
 
 		<!--
 			There is always a 2 second break after the last operation of a test before the service starts to clear the resources. The break is required for some operations to complete,
-			f.e. bonding. If 'bond' tag would be the last one, the service would bond and immediately started to disconnect what causes the Android to hang.
+			e.g. bonding. If 'bond' tag would be the last one, the service would bond and immediately started to disconnect what causes the Android to hang.
 
 			However, a custom break may ba added anywhere in the test. The default timeout is 5000ms but may be set just like for other commands, f.e. <sleep timeout="10000" />. 
-			F.e. in case of 
+			For example. in case of
 			<connect />
 			<bond /> 
 			<disconnect />
@@ -232,7 +256,7 @@
 		At last we provide test cases to be performed. Each may overwrite 'set' parameters.
 
 		To be able to perform basic tests on Heart Rate Monitor we must first use the DFU to send HRM firmware onto the device.
-		The DFU operation might have beenn specified as a part of basic test but here we have defined a designated test only for DFU testing.
+		The DFU operation might have been specified as a part of basic test but here we have defined a designated test only for DFU testing.
 	-->
 	<run-test ref="dfu" description="Upload HRM onto the Dev Kit" />
 	

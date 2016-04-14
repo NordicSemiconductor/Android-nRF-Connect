@@ -240,6 +240,17 @@ The instance-id attributes are optional and set to 0 by default.
 
 ```xml
 <assert-notification [description="DESCRIPTION"] service-uuid="SERVICE_UUID" [service-instance-id="SII"] characteristic-uuid="CHAR_UUID" [characteristic-instance-id="CII"] [timeout="NUMBER"] [target="TARGET_ID"] [expected="SUCCESS"]>
+  <!--
+     Before the notification will be received you may want to send or read a characteristic or descriptor.
+     By doing it here you ensure that the notification listener will be initiated before sending the value, as the reply may be too fast.
+     If the 'write' operation was executed before calling the 'assert-notification', the notification could have been
+     received before this operation was started and thous the test could fail.
+
+     The following operations may be called here: write, write-descriptor, read, read-descriptor.
+     Example:
+  -->
+  <!--<write description="Write notification trigger" service-uuid="some UUID" characteristic-uuid="some other UUID" value="012345" />-->
+
   <!-- Assert characteristic value -->
   <assert-value [description="DESCRIPTION"] value="BYTES"|value-string="TEXT" [expected="SUCCESS"] />
 </assert-notification>
@@ -248,6 +259,8 @@ The instance-id attributes are optional and set to 0 by default.
 Waits NUMBER of milliseconds for a notification from a characteristic with given parameters. A value assertion may be used to check its value.
 
 The instance-id attributes are optional and set to 0 by default.
+
+To ensure the notification is sent after another command is executed put this command inside the notification tag. The following operations are supported (since nRF MCP 4.1): **write**, **write-descriptor**, **read**, **read-descriptor**.
 
 ##### Read RSSI while connected
 
