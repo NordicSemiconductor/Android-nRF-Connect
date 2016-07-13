@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-  ~ Copyright (c) 2015, Nordic Semiconductor
+  ~ Copyright (c) 2016, Nordic Semiconductor
   ~ All rights reserved.
   ~
   ~ Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
@@ -24,17 +24,17 @@
 <!-- 
 	Automated test script example and documentation.
 
-	This script is an example of a test suite definition which can be parsed and performed by nRF Master Control Panel application.
-	nRF MCP may be used in automated tests for Bluetooth Smart devices.
+	This script is an example of a test suite definition which can be parsed and performed by nRF Connect application.
+	nRF Connect may be used in automated tests for Bluetooth Smart devices.
 
-	Should you have any comments or suggestions, please write us on android-devs@nordicsemi.no.
+	Should you have any comments or suggestions, please write us on mag@nordicsemi.no.
 -->
 
 <!-- Test-Suite element defines the test suite. It MAY have a 'description' attribute. All descriptions in the script are used when creating a result file. -->
 <test-suite description="Very important test">
 	<!-- 
 		Tests MAY be parametrized. To define a variable use the 'set' element.
-		You may also inject variables from the command line with -E KEY VALUE, f.e. 'test -E EXTRA_ADDRESS 00:11:22:33:44:55 example.xml'.
+		You may also inject variables from the command line with -E KEY VALUE, e.g. 'test -E EXTRA_ADDRESS 00:11:22:33:44:55 example.xml'.
 	-->
 	<set name="DESC_NAME" value="[global] CCCD" />
 	<set name="CCCD_UUID" value="00002902-0000-1000-8000-00805f9b34fb" />
@@ -53,9 +53,10 @@
 
 	<!-- 
 		Define tests. Test MUST contain at least one operation elements. Each operation will be performed in order from top to bottom and a result will be logged in the output file.
-		Each test and operation MAY have a 'description' attribute and a target reference. Target may be specified for the test (as a default one for every included operation) and
+		Each test and operation MAY have a 'description' attribute and a target reference. A target MAY be specified for the test (as a default one for every included operation) and
 		for each operation inside, so you may connect to more than one device in a single test.
-		All operations in the test, except Assert-Services and "DFU" may have a timeout specified using 'timeout' attribute (in milliseconds). The default timeout is 5000 milliseconds.
+		All operations in the test, except 'assert-service' (and its children) and 'dfu' may have a timeout specified using 'timeout' attribute (in milliseconds).
+		The default timeout is 5000 milliseconds.
 	-->
 	<test id="basics" description="Check basic connectivity of ${EXTRA_ADDRESS}" target="devkit">
 	
@@ -135,7 +136,7 @@
 			</assert-characteristic>
 			
 			<!-- Another required characteristic. Like in assert-service the instance-id does not have to be specified if equal to 0 -->
-			<assert-characteristic description="Check Body Sensor Location characteristic" uuid="${BODY_SENDOR_LOCATION_CHAR_UUID}">
+			<assert-characteristic description="Check Body Sensor Location characteristic" uuid="${BODY_SENSOR_LOCATION_CHAR_UUID}">
 				<!-- Read property is required. We don't care about the others -->
 				<property name="READ" />
 
@@ -177,10 +178,13 @@
 			<assert-value description="Check the new value" value-string="New name" />
 		</read>
 
-		<!-- We may enable notification by writing to the CCC descriptor -->
+		<!--
+			We may enable notification by writing to the CCC descriptor.
+			Attributes: 'service-instance-id', 'characteristic-instance-id' or 'descriptor-instance-id' are optional.
+		 -->
 		<write-descriptor description="Enable notifications" uuid="${CCCD_UUID}" service-uuid="${HRM_SERVICE_UUID}" characteristic-uuid="${HR_MEASUREMENT_CHAR_UUID}" value="0100" />
 				
-		<!-- Read a value from characteristic. Attributes: service-instance-id and characteristic-instance-id are optional. -->
+		<!-- Read a value from characteristic. Attributes: 'service-instance-id', 'characteristic-instance-id' or 'descriptor-instance-id' are optional. -->
 		<read-descriptor description="Read descriptor value" uuid="${CCCD_UUID}" service-uuid="${HRM_SERVICE_UUID}" characteristic-uuid="${HR_MEASUREMENT_CHAR_UUID}">
 		
 			<!-- Check if the value is what we expect to be -->
@@ -218,7 +222,7 @@
 		<!-- <unbond /> -->
 	</test>
 
-	<!-- The nRF Master Control Panel may also perform the DFU operation. Let's create a test that will upload a HRM firmware to the device. -->
+	<!-- The nRF Connect may also perform the DFU operation. Let's create a test that will upload a HRM firmware to the device. -->
 	<test id="dfu" description="DFU Test">
 
 		<!-- 

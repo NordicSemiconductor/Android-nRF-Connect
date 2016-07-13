@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~ Copyright (c) 2016, Nordic Semiconductor
+  ~ All rights reserved.
+  ~
+  ~ Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+  ~
+  ~ 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+  ~
+  ~ 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the
+  ~ documentation and/or other materials provided with the distribution.
+  ~
+  ~ 3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this
+  ~ software without specific prior written permission.
+  ~
+  ~ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  ~ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  ~ HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  ~ LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+  ~ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
+  ~ USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<!--
+	Automated test script example and documentation.
+
+	This script is an example of a test suite definition which can be parsed and performed by nRF Connect application.
+	nRF Connect may be used in automated tests for Bluetooth Smart devices.
+
+	Should you have any comments or suggestions, please write us on mag@nordicsemi.no.
+
+	This is a second sample for Automated Tests covering the scanner feature. See sample_test_hrm.xml for more information.
+-->
+
+<!-- Test-Suite element defines the test suite. It MAY have a 'description' attribute. All descriptions in the script are used when creating a result file. -->
+<test-suite description="Test using scanning">
+	<!--
+		Tests MAY be parametrized. To define a variable use the 'set' element.
+		You may also inject variables from the command line with -E KEY VALUE.
+	-->
+	<set name="DESC_NAME" value="[global] CCCD" />
+	<set name="CCCD_UUID" value="00002902-0000-1000-8000-00805f9b34fb" />
+	<set name="HRM_SERVICE_UUID" value="0000180D-0000-1000-8000-00805f9b34fb" />
+	<set name="HR_MEASUREMENT_CHAR_UUID" value="00002A37-0000-1000-8000-00805f9b34fb" />
+	<set name="BODY_SENSOR_LOCATION_CHAR_UUID" value="00002A38-0000-1000-8000-00805f9b34fb" />
+
+	<!--
+		In this test the target will not have the address specified as a parameter.
+		Instead, the service will scan for a BLE devices and assign first that matches the filter to it.
+
+		NEW: device address is no longer a required parameter but to use the target later it must be bound with a scanned device using 'scan-for' command.
+	-->
+	<target id="devkit" name="Dev Kit" />
+
+	<!--
+		Define tests. The first test will list all received advertising packets from nearby devices.
+	-->
+	<test id="scanning" description="Test scanning">
+
+		<!--
+			The 'scan' command will perform a BLE scan for exactly the time given by a 'timeout' attribute (default 5000 ms)
+			and will list all received advertising packets matching filters in a format: TIME ADDRESS RSSI(decimal) DATA(hex) (one line per packet),
+			for example:
+				12:34:56.123 11:22:33:44:55:66 -45 0B094E6F726469635F48524D0319410302010607030D180F180A18
+
+			Attributes 'address', 'rssi', 'data' and/or 'target' MAY be specified to filter the device by address or advertising data:
+				'address' - scan will log packets from a device with given Bluetooth address
+				'rssi'    - scan will log packets with RSSI value greater or equal to specified is received.
+				            RSSI values vary from around -100 dBm (far) to approx -40 dBm (very close)
+				'data'    - scan log packets matching given data in received advertising packet.
+				            Matching is done using Pattern#find(String) method after converting the adv. packet to an uppercase HEX string representation.
+				            This means, that if a device advertises with "020104" a data="10" will be found.
+				            The 'data' attribute SHOULD contain only HEX characters, otherwise it will for 100% not match any HEX data.
+				'target'  - scan will log packets from a device with the same address as the target is found. The target must be bound before.
+
+			NEW: 'scan' command
+		-->
+		<scan description="List nearby devices" rssi="-60" timeout="10000" />
+
+	</test>
+
+	<!--
+		The second test will scan for a device with given address and, if such found, perform some operations on this target.
+		The 'devkit' target is not yet bound with any device address. It has to be bound prior to using it in a command
+		that requires a connection ('connect' in this case). To bound a target with a device use 'scan-for' command and 'bind-target' attribute.
+	-->
+	<test id="scan_and_connect" description="Test scanning and connecting to HRM" target="devkit">
+
+		<!--
+			The 'scan-for' command will perform a BLE scan and finish when a device matching given filter parameters (address, rssi and/or advertising data)
+			is found, or the timeout specified by the 'timeout' attribute occur.
+
+			Attributes 'address', 'rssi', 'data' and/or 'target' MAY be specified to filter the device by address or advertising data:
+				'address' - scan will continue until a device with given Bluetooth address
+				'rssi'    - scan will continue until a packet with RSSI value greater or equal to specified is received.
+				            RSSI values vary from around -100 dBm (far) to approx -40 dBm (very close)
+				'data'    - scan will continue until given data will be found in received advertising packet.
+				            Matching is done using Pattern#find(String) method after converting the adv. packet to an uppercase HEX string representation.
+				            This means, that if a device advertises with "020104" a data="10" will be found.
+				            The 'data' attribute SHOULD contain only HEX characters, otherwise it will fo r100% not match any HEX data.
+				'target'  - scan will continue until a device with the same address as the target is found. The target must be bound before.
+
+			Attribute 'bind-target' MAY be used to bind the first matching device with given target identifier.	A target may be bound multiple times
+			(but only when it's not connected), so you may reuse the test using multiple 'run-test' commands with different filters.
+
+			An 'expected' attribute may be set to all operations (except 'property' and 'sleep') to specify the expected result.
+			Expected result may be one of the following:
+				- SUCCESS                 - success is required to go on (default) (device required to proceed)
+				- SUCCESS_WARNING_ON_FAIL - a warning will be logged in the result file but the test will continue (checking if device advertises, but no bounding to target)
+				- FAIL                    - a fail is required to proceed (device must not be found)
+				- FAIL_WARNING_ON_SUCCESS - a fail is expected but in case of a success a warning will be logged to the result file (device should not be found, but is not critical if it does)
+
+			NEW: 'scan-for' command
+		-->
+		<!--<scan-for description="Scan for ${EXTRA_ADDRESS}" address="${EXTRA_ADDRESS}" rssi="-90" data="${FILTER}" bind-target="devkit" expected="SUCCESS"/>-->
+		<scan-for description="Scan for HRM" data="${FILTER}" bind-target="devkit" expected="SUCCESS"/>
+
+		<!-- Perform some standard tests on the target. Connect... -->
+		<connect timeout="4000"/>
+
+		<!-- Refresh cache... -->
+		<refresh />
+
+		<!-- Discover services... -->
+		<discover-services />
+
+		<!--
+			When connected, the device should not advertise any more. Let's check it using 'expected' attribute set to FAIL.
+			Instead of providing an address, rssi or advertising data filter, we want to scan for the device we found last time (the same address),
+			so we set the 'target' attribute instead. An advertising data or RSSI filter could also be applied.
+		-->
+		<scan-for description="Scan again for the same device" target="devkit" timeout="2000" expected="FAIL"/>
+
+		<!-- Check if device has specified service. Instance id MAY be specified using instance-id="n". The default instance id value is 0. -->
+		<assert-service description="Check if HRM Service exists" uuid="${HRM_SERVICE_UUID}" instance-id="0">
+
+			<!-- The service should have the following characteristics. -->
+			<assert-characteristic description="Check Heart Rate Measurement characteristic" uuid="${HR_MEASUREMENT_CHAR_UUID}" instance-id="0" >
+				<!-- Let's check if the characteristic has required properties. Requirement="MANDATORY" is default and MAY be skipped. -->
+				<property name="NOTIFY" requirement="MANDATORY" />
+				<!-- But for sure it must not have those properties -->
+				<property name="WRITE" requirement="EXCLUDED" />
+				<property name="WRITE_WITHOUT_RESPONSE" requirement="EXCLUDED" />
+				<property name="SIGNED_WRITE" requirement="EXCLUDED" />
+
+				<!-- This characteristic should have the CCCD descriptor. Attribute 'instance-id' is optional -->
+				<assert-descriptor description="Checking ${DESC_NAME} descriptor" uuid="${CCCD_UUID}">
+					<!-- And even check the value of any descriptor, including the CCCD -->
+					<assert-value description="Check if notifications are disabled by default" value="0000" />
+				</assert-descriptor>
+			</assert-characteristic>
+
+			<!-- Another required characteristic. Like in assert-service the instance-id does not have to be specified if equal to 0 -->
+			<assert-characteristic description="Check Body Sensor Location characteristic" uuid="${BODY_SENSOR_LOCATION_CHAR_UUID}">
+				<!-- Read property is required. We don't care about the others -->
+				<property name="READ" />
+			</assert-characteristic>
+		</assert-service>
+
+		<!-- Read a value from characteristic. Attributes: 'service-instance-id' and 'characteristic-instance-id' are optional. -->
+		<read description="Read sensor location" service-uuid="${HRM_SERVICE_UUID}" service-instance-id="0" characteristic-uuid="${BODY_SENSOR_LOCATION_CHAR_UUID}" characteristic-instance-id="0">
+
+			<!-- Check if the value is what we expect to be . A value may be given in bytes using 'value' attribute or as string using 'value-string'-->
+			<assert-value description="Check if location equals FINGER" value="03" />
+		</read>
+
+	</test>
+
+	<!--
+		At last we provide test cases to be performed. Each may overwrite 'set' parameters.
+	-->
+	<run-test ref="scanning" description="List nearby devices"/>
+
+	<run-test ref="scan_and_connect" description="Run Scan and Connect with local CCCD">
+		<!-- Parameters may be given for a single test also, Overwriting global one -->
+		<set name="DESC_NAME" value="[local] CCCD" />
+		<set name="FILTER" value="0D18" />
+	</run-test>
+
+</test-suite>

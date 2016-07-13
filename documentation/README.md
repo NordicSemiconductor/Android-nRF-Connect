@@ -1,25 +1,26 @@
 # Automated tests
 
-The automated tests are now in BETA version. It has been tested but some issues may occur. Fill free to submit comments, bugs or feature ideas.
+Automated tests allow you to configure and run set of tests foor your Bluetooth Smart device using an Android 4.3+ phone. Fill free to submit comments, bugs or feature ideas.
 
 ## Resources
 
 1. [test.bat](test.bat) - the Windows script that may be used to run the test on the Android device.
-2. [sample_test_hrm.xml](sample_test_hrm.xml) - the sample test. It contains all supported features with some in-code documentation. It matches the HRS_DFU sample application from the SDK. You may modify it to match your application.
+2. [sample_test_hrm.xml](sample_test_hrm.xml) - one of the sample tests. It covers almost all features of the automated tests, except those added in nRF Connect 4.3 or later. It can be run on the HRS_DFU sample application from the SDK. You may modify it to match your application.
+3. [sample_test_scanning.xml](sample_test_scanning.xml) - the second sample test. Covers new scanning feature in automated tests added in nRF Connect v. 4.3.
 
 ## How to begin
 
-The automated tests should work with any Bluetooth Smart device that's use the GATT protocol. A test XML can be created to test it the services, characteristics and descriptors have the correct values and behaviour. A Device Firmware Update (DFU) also may be performed. 
+The automated tests should work with any Bluetooth Smart device that comunicates over the GATT protocol. A test XML can be created to test it the services, characteristics and descriptors have the correct values and behaviour. A Device Firmware Update (DFU) also may be performed. 
 
 To make an easy start the *sample_test_hrm.xml* file contains a test that can be used with the HRS_DFU sample from the SDK. The instruction below describes steps that should be performed to successfully run this test. 
 
 **Note:** Starting from the SDK 8.0 the bootloader, in case the buttonless update is NOT being used, advertises with a device address increased by 1. Therefore, the test may fail in the first run if you have just the Soft Device and Bootloader flashed on the device. After flashing the HRS application onto it, it will start to advertise with a different address and a timeout will be thrown during connection attempt. But the test should work for the second time as the bootloader uses the same address if buttonless update is in use.
 
-1. nRF Master Control Panel (v2.1 or newer) will create the above files in your phone's file system in */Nordic Semiconductor* folder. **Note:** newly created files may not be visible on the PC when connected with USB. This is beacuse Android must perform a scan of media files. Get the files from GitHub or trigger the media scanner manually: restart the phone/tablet or install and launch the *Rescan SD* application (or similar) from Google Play.
+1. nRF Connect (nRF Master Control Panel v2.1 or newer) will create the above files in your phone's file system in */Nordic Semiconductor* folder. **Note:** newly created files may not be visible on the PC when connected with USB. This is beacuse Android must perform a scan of media files. Get the files from GitHub or trigger the media scanner manually: restart the phone/tablet or install and launch the *Rescan SD* application (or similar) from Google Play.
 2. Copy those files to your PC. You will use the *test.bat* to start the testing service. The sample may be used as a demo or a starting point.
 3. To prepare the nRF51 DK for the test flash the Soft Device and the DFU bootloader.
-  1. Flash the Soft Device s110 version 7.1.0 or newer (for example using nRF Go Studio)
-  2. Flash the DFU Bootloader from SDK 7.1 or newer (both SD and Bootloader are available on http://www.nordicsemi.com website)
+  1. Flash the Soft Device s110 version 8.0 or newer (for example using nRF Go Studio)
+  2. Flash the DFU Bootloader from SDK 9.0 or newer (both SD and Bootloader are available on http://www.nordicsemi.com website)
     - If you want to use the buttonless update in DFU bootloader from SDK 7.1, modify the *dfu_transport_ble.c* file in your bootloader source (you may have to unlock the file in Explorer first as it's READ ONLY by default). 
     - Increase the **APP_DIRECTED_ADV_TIMEOUT** value to 50 (it's 5 by default) in line 62: `#define APP_DIRECTED_ADV_TIMEOUT             50`
     - Compile the modified Bootloader and flash the new HEX.
@@ -27,7 +28,7 @@ To make an easy start the *sample_test_hrm.xml* file contains a test that can be
     - Note: this change is not be required for newer versions of the DFU bootloader.
 4. Connect your Android device to the PC, enable USB debugging on it and install required drivers and ADB (Android Debug Bridge) on the PC. Add the ABD to the PATH global variable or copy it (and dlls) to the same folder.
 5. Try the ADB by writing `adb devices` command in the command line. A list of connected Android devices should be shown.
-6. Find out the address of your device. You may use the nRF Master Control Panel to do that. Your device should advertise as a DFU Targ. Make sure you are not connected with the bootloader.
+6. Find out the address of your device. You may use the nRF Connect to do that. Your device should advertise as a DFU Targ. Make sure you are not connected with the bootloader.
 7. Optional: install the [nRF Logger](https://play.google.com/store/apps/details?id=no.nordicsemi.android.log) application to get more information about the test progress and syntax errors.
 8. Start the sample test with the following command. Use your device address, f.e. AA:BB:CC:DD:EE:FF instead of address*. The -d option is required only when more than one Android device is connected and configured for USB debugging.
 
@@ -35,6 +36,10 @@ To make an easy start the *sample_test_hrm.xml* file contains a test that can be
 
 9. A *Test in progress...* notification will be shown. If you had the nRF Logger installed click the notification to display the test progress.
 10. When test is completed the *sample_test_hrm_result.txt* file will be created in the script location. The result of the sample HRM test is [here](sample_test_hrm_result.txt).
+
+To test the HRM sample test on nRF52 device you have to modify the XML script and either remove the run-test with id **dfu**, or modify the FIRMWARE_PATH constant to ```/Nordic Semiconductor/Board/pca10040/ble_app_hrm_dfu_s132_v2_0_0_sdk_11_0.zip``` and make sure the Soft Device 2.0.0 and HRM_DFU app is flashed.
+
+**Scanning sample test** - the second test does not require providing the device address. The test service will perform a BLE scan and find a device that advertises with HRM service UUID, connect and do some basic operations just to prove it works.
 
 ## Documentation
 
@@ -45,8 +50,8 @@ The test suite is defined in XML in the **test-suite** node. The basic test suit
   <!-- Definitions (0+) -->
   <set name="KEY" value="VALUE" /> 
   ...
-  <!-- Target(s) (1+) -->
-  <target id="TARGET_ID" name="TARGET_NAME" address="AA:DD:DR:RE:ES:SS" />
+  <!-- Target(s) (0+) -->
+  <target id="TARGET_ID" name="TARGET_NAME" [address="AA:DD:DR:RE:ES:SS"] />
   ...
   <!-- Test definition(s) (1+) -->
   <test id="TEST_ID" description="DESCRIPTION" [target="TARGET_ID"]>
@@ -65,7 +70,7 @@ The test suite is defined in XML in the **test-suite** node. The basic test suit
 
 #### Targets
 
-A test suite may test one or more devices. A default target may be set for the test and/or specified for each operation (see below). The operation's target, if specified, overwrites the test target.
+A test suite may test one or more devices. A default target may be set for the test and/or specified for each operation (see below). The operation's target, if specified, overwrites the test target. Since version 4.3 defining a target is not required (as **scan** operation does not require it). If set, the address may not be specified, as the new **scan-for** command may bind the target with an advertising device based on defined filters.
 
 #### Operation expected result
 
@@ -83,6 +88,46 @@ Each operation, except **dfu** may have the timeout specified. The default timeo
 #### Operations
 
 The fillowing operations are currently supported:
+
+##### Scan
+
+```xml
+<scan [description="DESCRIPTION"] [rssi="RSSI_VALUE"] [data="ADV_PACKET_FILTER"] [target="TARGET_ID"] [timeout="NUMBER"] />
+```
+
+The **scan** command will perform a BLE scan for exactly the time given by a **timeout** attribute (default 5000 ms) and will list all received advertising packets matching filters in a format: ```TIME ADDRESS RSSI(decimal) DATA(hex)``` (one line per packet), for example:
+
+```12:34:56.123 11:22:33:44:55:66 -45 0B094E6F726469635F48524D0319410302010607030D180F180A18```
+
+Attributes **address**, **rssi**, **data** and/or **target** MAY be specified to filter packets by address or advertising data:
+ - **address** - scan will log packets from a device with given Bluetooth address
+ - **rssi**    - scan will log packets with RSSI value greater or equal to specified is received.
+               RSSI values vary from around -100 dBm (far) to approx -40 dBm (very close)
+ - **data**    - scan log packets matching given data in received advertising packet.
+               Matching is done using Pattern#find(String) method after converting the adv. packet to an uppercase HEX string representation.
+               This means, that if a device advertises with "020104" a data="10" will be found.
+               The **data** attribute SHOULD contain only HEX characters, otherwise it will for 100% not match any HEX data.
+ - **target**  - scan will log packets from a device with the same address as the target is found. The target must be bound before.
+
+##### Scan-For
+
+```xml
+<scan-for [description="DESCRIPTION"] [rssi="RSSI_VALUE"] [data="ADV_PACKET_FILTER"] [target="TARGET_ID"] [bind-target="TARGET_ID"] [timeout="NUMBER"] />
+```
+
+The **scan-for** command will perform a BLE scan and finish when a device matching given filter parameters (address, rssi and/or advertising data) is found, or the timeout specified by the **timeout** attribute occur.
+
+Attributes **address**, **rssi**, **data** and/or **target** MAY be specified to filter packets by address or advertising data:
+ - **address** - scan will continue until a device with given Bluetooth address
+ - **rssi**    - scan will continue until a packet with RSSI value greater or equal to specified is received.
+               RSSI values vary from around -100 dBm (far) to approx -40 dBm (very close)
+ - **data**    - scan will continue until given data will be found in received advertising packet.
+               Matching is done using Pattern#find(String) method after converting the adv. packet to an uppercase HEX string representation.
+               This means, that if a device advertises with "020104" a data="10" will be found.
+               The **data** attribute SHOULD contain only HEX characters, otherwise it will for 100% not match any HEX data.
+ - **target**  - scan will continue until a device with the same address as the target is found. The target must be bound before.
+
+Attribute **bind-target** MAY be used to bind the first matching device with given target identifier. A target may be bound multiple times (but only when it's not connected), so you may reuse the test using multiple **run-test** commands with different filters.
 
 ##### Connect
 
@@ -108,7 +153,7 @@ To be able to assert, read or write characteristics a **discover-services** oper
 <refresh [description="DESCRIPTION"] [timeout="NUMBER"] [target="TARGET_ID"] />
 ```
 
-This operation clears the device services cache. It's using the hidden Android method *BluetoothGatt#refresh()* which may be removed from the API in the future. It may be useful when multiple different BLE applications are being flashed on the same Bluetooth Smart device (f.e. DK).
+This operation clears the device services cache. It's using the hidden Android method *BluetoothGatt#refresh()* which may be removed from the API in the future. It may be useful when multiple different BLE applications are being flashed on the same Bluetooth Smart device (e.g. DK).
 
 This method must be called after the device has been connected at least once in the test using the **connect** operation. Otherwise an error message will be shown. This is because it is being invoked on a *BluetoothGatt* object which is created using *connectGatt(..)* method.
 
@@ -277,7 +322,7 @@ To ensure the notification is sent after another command is executed put this co
 </read-rssi>
 ```
 
-Reads the RSSI value of the given (or default) target. The RSSI value may be validated using the **assert-value** tag. In order to check whether the device signal is strong use '''value="-50+"''' attribute. The test will pass if the RSSI is higher (the signal is stronger) than -50 dBm. Be aware that the RSSI value may vary from test to test. Using a expected="SUCCESS_WARNING_ON_FAIL" is recommended.
+Reads the RSSI value of the given (or default) target. The RSSI value may be validated using the **assert-value** tag. In order to check whether the device signal is strong use ```value="-50+"``` attribute. The test will pass if the RSSI is higher (the signal is stronger) than -50 dBm. Be aware that the RSSI value may vary from test to test. Using a expected="SUCCESS_WARNING_ON_FAIL" is recommended.
 
 The device must be connected to read the RSSI as scanning is not yet supported in automated tests.
 
@@ -304,6 +349,6 @@ Waits a NUMBER value of milliseconds without doing anything. Always results with
 
 The **dfu** operation sends the firmware Over-the-Air to the target using DFU. In case of a DFU Bootloader from SDK 7.0+ the init file is required. Check the [How to create Init file for DFU](../init packet handling/README.md) for details.
 
-The script may send the Soft Device, Bootloader or the application, or any combinations of those packed in a ZIP file. The new Distribution packets (recommended) are supported since nRF Master Control Panel version 3.0, however you may also use the ZIP file that contains the following content in order to be parsed correctly:
+The script may send the Soft Device, Bootloader or the application, or any combinations of those packed in a ZIP file. The new Distribution packets (recommended) are recommended since nRF Connect version 3.0 (known as nRF Master Control Panel at that time), however you may also use the ZIP file that contains the following content in order to be parsed correctly:
 
 ![ZIP content](../images/zip.png)

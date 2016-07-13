@@ -15,7 +15,7 @@ rem Requirements:
 rem -------------
 rem 1. Android device with Android version 4.3+ connected by USB cable with the PC
 rem 2. The path to Android platform-tools directory must be added to %PATH% environment variable, f.e: C:\Program Files\Android ADT Bundle\sdk\platform-tools
-rem 3. nRF Master Control Panel (2.1.0+) application installed on the Android device
+rem 3. nRF Connect (previously nRF Master Control Panel) (2.1.0+) application installed on the Android device
 rem 4. "Developer options" and "USB debugging" must be enabled on the Android device
 rem
 rem Usage:
@@ -42,7 +42,7 @@ rem Check ADB
 call adb devices > nul 2>&1
 if errorLevel 1 (
 	call :info
-	echo Error: adb is not recognized as an external command. 
+	echo Error: adb is not recognized as an external command.
 	echo        Add [Android Bundle path]/sdk/platform-tools to %%PATH%%
 	goto error
 )
@@ -78,7 +78,6 @@ if defined EXTRAS_SET (
 )
 rem More extras?
 if /I "%~1"=="-e" goto :read_extras
-echo %EXTRAS%
 
 rem ==================================================================================
 rem Write intro
@@ -106,7 +105,7 @@ if "%DEVICE%"=="" (
 			goto error
 		)
 		if not "%%a"=="1" (
-			echo Error: More than one device connected. 
+			echo Error: More than one device connected.
 			echo        Specify the device serial number using -d option:
 			call adb devices
 			goto usage_only
@@ -127,11 +126,9 @@ if "%DEVICE%"=="" (
 rem ==================================================================================
 rem Remove old result file (if exists)
 echo|set /p=Removing old result file...
-call adb shell rm "/sdcard/Nordic Semiconductor/Test/%RESULT_FILE%" > nul 2>&1
+call adb shell rm "/sdcard/Nordic\ Semiconductor/Test/%RESULT_FILE%" > nul 2>&1
 if errorLevel 1 (
-	echo FAIL
-	echo Error: Device not found.
-	goto error
+	echo NOT FOUND
 ) else echo OK
 
 rem Copy selected file onto the device
@@ -146,7 +143,7 @@ if errorLevel 1 (
 rem Start test service on the device
 echo|set /p=Starting test service...
 call adb %S_DEVICE% shell am startservice -a no.nordicsemi.android.action.START_TEST^
- %EXTRAS% -e no.nordicsemi.android.test.extra.EXTRA_FILE_PATH "/sdcard/Nordic Semiconductor/Test/%XML_FILE%" > nul 2>&1
+ %EXTRAS% -e no.nordicsemi.android.test.extra.EXTRA_FILE_PATH "/sdcard/Nordic\ Semiconductor/Test/%XML_FILE%" > nul 2>&1
 if errorLevel 1 (
 	echo FAIL
 	echo Error: Required application not installed.

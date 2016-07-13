@@ -1,3 +1,10 @@
+04-07-2016 15:16:11
+Version: 4.3
+Device: Nexus 6P, Android version: N (NPD56N)
+
+Starting 'DFU Test' for 'Upload HRM onto the Dev Kit'
+   DFU operation...OK
+   Sleep...OK
 Starting 'Check basic connectivity of E3:EC:B1:48:6D:C2' for 'Basic tests for HRM'
    Connect...OK
    Refresh...OK
