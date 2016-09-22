@@ -52,4 +52,10 @@ You may specify key-value pairs in execution or inside the test using
     
 and then use them as ${KEY} (see the sample_test_hrm.xml).
 
-Read mode about the test suites in the [documentation](documentation/README.md).
+Read mode about the test suites in the [documentation](documentation/Automated tests/README.md).
+
+## Macros
+
+Starting from version 4.4.0 it is now possible to automate operations using macros. Macros can be recorded, or imported from a XML file.
+
+Read more about macros in the [macros documentation](documentation/Macros/README.md).
