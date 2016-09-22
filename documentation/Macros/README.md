@@ -7,34 +7,32 @@ Macros can be exported to XML and imported on another device.
 ## Usage
 
 After you connect to a device, tap the red floating action bar at the bottom-right corner of the screen. A macros sheet will pop up.
-At first you will find there the Tutorial folder with 3 sample macros. Click the Tutorial folder row to go inside.
+You will find there the Tutorial folder with 3 sample macros. Click the Tutorial folder row to go inside.
 
 Each of the 3 sample macros demonstrates some features. It is recommended to complete them to get a general overview about Macros.
-Tap a macro row to expand it and see operation list.
+Tap a macro row to expand it and see operation list. You may also export each macro to XML and see how has it been built.
 
-The last sample requires enabling GATT Server and selecting the Sample configuration. To do that open the Navigation drawer, by pressing
-the hamburger icon 
-After the configuration is complete go back to previous screen with a Back button. The third sample should now be available.
+The last sample requires enabling GATT Server and selecting the Sample configuration. To do that open the Navigation drawer by pressing
+the hamburger icon (top-left corner of the screen), tap *Configure GATT Server* and then select *Sample configuration* from the drop down list at the top.
+After the configuration is set, go back to the previous screen using a Back button. The third sample should now be available.
 
-On the screenshot below, you will find some basic information how to record or import a macro, or how to run macros and operations:
+On the screenshot below, you will find some basic information how to record or import a macro, and how to run macros and operations:
 
 ![Tutorial image](macros.png)
 
 If a macro is not compatible with the device services, an information will be displayed with a short error message.
 
-If macro was loaded successfully, each operation is marked with a gray dot. Tapping a *Step Over* icon will excute the next operation. Operation may end with success, warnig or an error. Some operations may validate the incoming data. If the data received is different from data obtained during recording, a orange triangle will be shown. You may then check what went wrong in the log pane.
+If macro was loaded successfully, each operation is marked with a gray dot. Tapping a *Step Over* icon will excute the next operation. Operation may end with success, warning or an error. Some operations may validate the incoming data. If the data received is different from data obtained during recording, an orange triangle will be shown. You may then check what went wrong in the log pane.
 
-If operation was executed successfully the dot will change color to blue. If it has failed - to red.
+When operation finishes successfully the dot will change color to blue. If it fails - to red.
 
-You may also skip the next operation using the *Skip operation* button, or run the whole macro with *Run macro* button. A macor may also be run in a loop. To enable this feature select the *Loop* icon 
+You may also skip the next operation using the *Skip operation* button, or run the whole macro with *Run macro* button. To run a macor in a loop, select the *Loop* icon (it will change color to blue).
 
 ## Documentation
 
-After exporting a macro to XML it can be modified and imported again 
+After exporting a macro to XML it can be modified and imported again (make sure the name is different, or remove the previous macro as names must be unique).
 
-Below there is a list of all commands supported by the current version of nRF Connect.
-
-The macro is defined in XML in the **macro** node. The macro structure is shown below:
+A macro is defined in the XML format in **macro** node. The macro structure is shown below:
 
 ```xml
 <macro name="NAME" icon="ICON">
@@ -144,25 +142,25 @@ The icon may have one of the following values:
 
 A macro may have zero or more **assert-server-service** or **assert-service** in random order.
 
-These two sections 
+These two sections (one for the Server and one for Client) are added automatically by nRF Connect when imported, based on the services, characteristics and descriptors used in the macro. More restrictive asserts may be created by the user (for example to ensure presense of a characteristic that is not used by macro).
 
 A sample XML structure is shown above.
 
 ### Operations
 
-This chapter lists operations that are currently supported by nRF Connect. Based on their functionality they have been divided into:
+This chapter lists operations that are currently supported by nRF Connect. Based on their functionality they are divided into these groups:
 
 - Client operations
 - Server operations
 - Other
 
-The XML representation is similar to one in Automated tests to allow macros be converted to a test, however not all of them are supported in Automated tests. Also, automated tests allow operations like **connect**, **discover-services**, **disconnect**, **dfu**, etc. which are not supported by macros.
+The XML representation of a macro is similar to one used by [Automated tests](../Automated tests/README.md). This allows macros be converted to tests. However not all of oppeartions or attributes are supported in Automated tests. Also, Automated tests allow operations like **connect**, **discover-services**, **disconnect**, **dfu**, etc., or attributes like **espected** or **timeout**, which are not supported by macros.
 
-All instance-id attributes are optional and set to 0 by default.
+All **instance-id** attributes are optional and set to 0 by default.
 
 #### Client operations
 
-The following opertations are using the remote device attributes.
+The following opertations are using the remote device attributes and may be used to write or read data to device's characteristics or descriptors, or to wait for notifications.
 
 ##### Read characteristic
 
@@ -191,7 +189,7 @@ Reads the value of the descriptor with given UUID and asserts its value.
 ```xml
 <!-- 
 	The type value is case-sensitive and may have one of the following values:
-	- WRITE_REQUEST 
+	- WRITE_REQUEST (default)
 	- WRITE_COMMAND
 -->
 <write [description="DESCRIPTION"] service-uuid="SERVICE_UUID" [service-instance-id="SII"] characteristic-uuid="CHAR_UUID" [characteristic-instance-id="CII"] [type="TYPE"] value="BYTES"|value-string="TEXT" />
@@ -234,13 +232,13 @@ Waits for a indication from a characteristic with given parameters. A value asse
 ```xml
 <!-- 
 	The type value is case-sensitive and may have one of the following values:
-	- WRITE_REQUEST 
+	- WRITE_REQUEST (default)
 	- WRITE_COMMAND
 -->
 <unlock-eddystone [description="DESCRIPTION"] service-uuid="SERVICE_UUID" [service-instance-id="SII"] characteristic-uuid="CHAR_UUID" [characteristic-instance-id="CII"] [type="TYPE"] key="16_BYTE_KEY" />
 ```
 
-The **unlock-eddystone** command may be sent only to the *Unlock* characteristic of the [Eddystone Configuration Service]
+The **unlock-eddystone** command may be sent only to the *Unlock* characteristic of the [Eddystone Configuration Service](https://github.com/google/eddystone/tree/master/configuration-service). It must be preceded with **read** operation on the same characteristic, in order to read the challenge value. When executed, it will encrypt the challenge using the provided 16-byte key and send the result to unlock the beacon.
 
 #### Server operations
 
@@ -338,7 +336,7 @@ Waits a NUMBER value of milliseconds without doing anything.
 <read-rssi [description="DESCRIPTION"]/>
 ```
 
-Reads the RSSI value of the given 
+Reads the RSSI value of the given (or default) target.
 
 ##### Request MTU change
 
@@ -355,9 +353,9 @@ Sends a MTU change request to the peripheral. MTU value must be between 23 and 5
 ```xml
 <!-- 
       Property type is case-sensitive and must be one of the following: 
-        - LOW_POWER 
-        - BALANCED 
-        - HIGH 
+        - LOW_POWER (Conn interval: 100-125ms, slave latency: 2, supervision timeout multiplier: 20)
+        - BALANCED (default) (Conn interval: 30-55ms, slave latency: 0, supervision timeout multiplier: 20)
+        - HIGH (Conn interval: 11.25-15ms on Android 6+ or 7.5-10ms before, slave latency: 0, supervision timeout multiplier: 20)
 -->
 <request-connection-priority [description="DESCRIPTION"] type="TYPE"/>
 ```
