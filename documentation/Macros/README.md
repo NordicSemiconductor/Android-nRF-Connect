@@ -18,7 +18,7 @@ After the configuration is complete go back to previous screen with a Back butto
 
 On the screenshot below, you will find some basic information how to record or import a macro, or how to run macros and operations:
 
-![Tutorial image]
+![Tutorial image](macros.png)
 
 If a macro is not compatible with the device services, an information will be displayed with a short error message.
 
