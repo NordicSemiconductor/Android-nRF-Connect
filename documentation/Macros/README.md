@@ -61,6 +61,12 @@ The macro is defined in XML in the **macro** node. The macro structure is shown 
 					- EXCLUDED
     		-->
     		<property name="NAME" [requirement="VALUE"] />
+
+    		<!-- Descriptors may also be asserted. -->
+    		<assert-descriptor uuid="DESC_UUID" [instance-id="0_BASED_ID"]/>
+
+    		<!-- To assert the Client Characteristic Configuration descriptor a shorter form may be used. -->
+    		<assert-cccd/>
 		</assert-characteristic>
 	</assert-server-service>
 
@@ -70,6 +76,12 @@ The macro is defined in XML in the **macro** node. The macro structure is shown 
 		<assert-characteristic [description="DESCRIPTION"] uuid="CHAR_UUID" [instance-id="0_BASED_ID"]>
 			<!-- Just like above a characteristic assert may also check characteristic's properties. -->
     		<property name="NAME" [requirement="VALUE"] />
+
+    		<!-- Descriptors may also be asserted. -->
+    		<assert-descriptor uuid="DESC_UUID" [instance-id="0_BASED_ID"]/>
+
+    		<!-- To assert the Client Characteristic Configuration descriptor a shorter form may be used. -->
+    		<assert-cccd/>
 		</assert-characteristic>
 	</assert-service>
 
