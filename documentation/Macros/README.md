@@ -137,6 +137,7 @@ The icon may have one of the following values:
 - NUMBER_7
 - NUMBER_8
 - NUMBER_9
+- CLOSE
 
 ### Service assertion
 
