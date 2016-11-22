@@ -12,7 +12,7 @@ https://play.google.com/store/apps/details?id=no.nordicsemi.android.mcp
 
 or [here](https://github.com/NordicSemiconductor/Android-nRF-Connect/releases), in case Google Play is not available. We recommend to install the application using Google Play as it will get automatic updates.
 
-Note: The source code of nFR Connect is not available.
+Note: The source code of nRF Connect is not available.
 
 ## Features
 
