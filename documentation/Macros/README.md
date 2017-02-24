@@ -228,6 +228,26 @@ Waits for a notification from a characteristic with given parameters. A value as
 
 Waits for a indication from a characteristic with given parameters. A value assertion may be used to check its value.
 
+##### Sleep If
+
+```xml
+<sleep-if [description="DESCRIPTION"] service-uuid="SERVICE_UUID" [service-instance-id="SII"] characteristic-uuid="CHAR_UUID" [characteristic-instance-id="CII"] value="BYTES"|value-string="TEXT" [timeout="NUMBER"] server="BOOLEAN"/>
+```
+
+Waits if value of the given characteristic is equal to the given one. Timeout may be set to force stop waiting. The default timeout equals 0 (no timeout). A value containing only 0s is equal to no value. If the characteristic value was different than given one when operation started the operation ends immediately.
+
+Works both for Client and Server characteristics. For Client characteristics notifications should be enabled for given characteristic (otherwise value can't change). For Server the ```server``` flag must be set to *true* and the characteritic should be writable (WRITE or WRITE_NO_RESPONSE properties). 
+
+##### Sleep Until
+
+```xml
+<sleep-until [description="DESCRIPTION"] service-uuid="SERVICE_UUID" [service-instance-id="SII"] characteristic-uuid="CHAR_UUID" [characteristic-instance-id="CII"] value="BYTES"|value-string="TEXT" [timeout="NUMBER"] server="BOOLEAN"/>
+```
+
+Waits until value of the given characteristic is equal to the given one. Timeout may be set to force stop waiting. The default timeout equals 0 (no timeout). A value containing only 0s is equal to no value. If the characteristic value was equal to than given one when operation started the operation ends immediately.
+
+Works both for Client and Server characteristics. For Client characteristics notifications should be enabled for given characteristic (otherwise value can't change). For Server the ```server``` flag must be set to *true* and the characteritic should be writable (WRITE or WRITE_NO_RESPONSE properties).
+
 ##### Special operation - Unlock Eddystone
 
 ```xml
