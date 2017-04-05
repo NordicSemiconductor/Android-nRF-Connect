@@ -74,13 +74,15 @@ A test suite may test one or more devices. A default target may be set for the t
 
 ### Operation expected result
 
-Each operation in the test may end with SUCCESS, WARNING or FAIL. If the operation fails the test is aborted and the device is being disconnected. Warning does not abort the test but the cause of the warning is logged. In addition the expected result for each operation may be specified using **expected** attribute. Using this attribute a test can check some conditions that should not happen. This attribute may have one of the following values:
+Each operation in the test may end with SUCCESS, WARNING or FAIL. If the operation fails the test is aborted and the device is being disconnected. Warning does not abort the test but the cause of the warning is logged. In addition, the expected result for each operation may be specified using **expected** attribute. Using this attribute a test can check some conditions that should not happen. This attribute may have one of the following values:
 
-- SUCCESS                 - success is required to go on (default)
-- SUCCESS_WARNING_ON_FAIL - a warning will be logged in the result file but the test will continue
-- FAIL                    - a fail is required to proceed
+- SUCCESS                 - success is required to go on (default),
+- SUCCESS_WARNING_ON_FAIL - a warning will be logged in the result file but the test will continue,
+- FAIL                    - a fail is required to proceed,
 - FAIL_WARNING_ON_SUCCESS - a fail is expected but in case of a success a warning will be logged to the result file. 
- 
+
+If **expected** attribute is set to FAIL the tag may also specify the exected error code using **expectedErrorCode** attribute. For example, it writing to a characteritistic should fail because of its CCCD not being enabled the **read** tag may contain ```expected="FAIL" expectedErrorCode="253"``` (GATT CCCD CFG ERROR, 0xFD). This attribute has been added in nRF Connect v.4.11.
+
 ### Timeouts
 
 Each operation, except **dfu** may have the timeout specified. The default timeout for each is set to 5000ms and may be changed using the **timeout="NUMBER"** attribute. The number is in milliseconds.
@@ -92,7 +94,7 @@ The fillowing operations are currently supported:
 ##### Scan
 
 ```xml
-<scan [description="DESCRIPTION"] [rssi="RSSI_VALUE"] [data="ADV_PACKET_FILTER"] [target="TARGET_ID"] [timeout="NUMBER"] />
+<scan [description="DESCRIPTION"] [rssi="RSSI_VALUE"] [name="NAME"] [data="ADV_PACKET_FILTER"] [target="TARGET_ID"] [timeout="NUMBER"] />
 ```
 
 The **scan** command will perform a BLE scan for exactly the time given by a **timeout** attribute (default 5000 ms) and will list all received advertising packets matching filters in a format: ```TIME ADDRESS RSSI(decimal) DATA(hex)``` (one line per packet), for example:
@@ -100,9 +102,10 @@ The **scan** command will perform a BLE scan for exactly the time given by a **t
 ```12:34:56.123 11:22:33:44:55:66 -45 0B094E6F726469635F48524D0319410302010607030D180F180A18```
 
 Attributes **address**, **rssi**, **data** and/or **target** MAY be specified to filter packets by address or advertising data:
- - **address** - scan will log packets from a device with given Bluetooth address
+ - **address** - scan will log packets from a device with given Bluetooth address.
  - **rssi**    - scan will log packets with RSSI value greater or equal to specified is received.
-               RSSI values vary from around -100 dBm (far) to approx -40 dBm (very close)
+               RSSI values vary from around -100 dBm (far) to approx -40 dBm (very close).
+ - **name**    - scan will log packets from a device with given Complete or Shortened Local Name.
  - **data**    - scan log packets matching given data in received advertising packet.
                Matching is done using Pattern#find(String) method after converting the adv. packet to an uppercase HEX string representation.
                This means, that if a device advertises with "020104" a data="10" will be found.
@@ -112,15 +115,16 @@ Attributes **address**, **rssi**, **data** and/or **target** MAY be specified to
 ##### Scan-For
 
 ```xml
-<scan-for [description="DESCRIPTION"] [rssi="RSSI_VALUE"] [data="ADV_PACKET_FILTER"] [target="TARGET_ID"] [bind-target="TARGET_ID"] [timeout="NUMBER"] />
+<scan-for [description="DESCRIPTION"] [rssi="RSSI_VALUE"] [name="NAME"] [data="ADV_PACKET_FILTER"] [target="TARGET_ID"] [bind-target="TARGET_ID"] [timeout="NUMBER"] />
 ```
 
 The **scan-for** command will perform a BLE scan and finish when a device matching given filter parameters (address, rssi and/or advertising data) is found, or the timeout specified by the **timeout** attribute occur.
 
 Attributes **address**, **rssi**, **data** and/or **target** MAY be specified to filter packets by address or advertising data:
- - **address** - scan will continue until a device with given Bluetooth address
+ - **address** - scan will continue until a device with given Bluetooth address.
  - **rssi**    - scan will continue until a packet with RSSI value greater or equal to specified is received.
-               RSSI values vary from around -100 dBm (far) to approx -40 dBm (very close)
+               RSSI values vary from around -100 dBm (far) to approx -40 dBm (very close).
+ - **name**    - scan will log packets from a device with given Complete or Shortened Local Name.
  - **data**    - scan will continue until given data will be found in received advertising packet.
                Matching is done using Pattern#find(String) method after converting the adv. packet to an uppercase HEX string representation.
                This means, that if a device advertises with "020104" a data="10" will be found.
