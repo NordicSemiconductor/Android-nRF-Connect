@@ -189,9 +189,9 @@ Reads the value of the descriptor with given UUID and asserts its value.
 
 ```xml
 <!-- 
-	The type value is case-sensitive and may have one of the following values:
-	- WRITE_REQUEST (default)
-	- WRITE_COMMAND
+  The type value is case-sensitive and may have one of the following values:
+  - WRITE_REQUEST (default) - Write With Response
+  - WRITE_COMMAND - Write Without Response
 -->
 <write [description="DESCRIPTION"] service-uuid="SERVICE_UUID" [service-instance-id="SII"] characteristic-uuid="CHAR_UUID" [characteristic-instance-id="CII"] [type="TYPE"] value="BYTES"|value-string="TEXT" />
 ```
@@ -252,14 +252,14 @@ Works both for Client and Server characteristics. For Client characteristics not
 
 ```xml
 <!-- 
-	The type value is case-sensitive and may have one of the following values:
-	- WRITE_REQUEST (default)
-	- WRITE_COMMAND
+  The type value is case-sensitive and may have one of the following values:
+  - WRITE_REQUEST (default) - Write With Response
+  - WRITE_COMMAND - Write Without Response
 -->
 <unlock-eddystone [description="DESCRIPTION"] service-uuid="SERVICE_UUID" [service-instance-id="SII"] characteristic-uuid="CHAR_UUID" [characteristic-instance-id="CII"] [type="TYPE"] key="16_BYTE_KEY" />
 ```
 
-The **unlock-eddystone** command may be sent only to the *Unlock* characteristic of the [Eddystone Configuration Service](https://github.com/google/eddystone/tree/master/configuration-service). It must be preceded with **read** operation on the same characteristic, in order to read the challenge value. When executed, it will encrypt the challenge using the provided 16-byte key and send the result to unlock the beacon.
+The **unlock-eddystone** command may be sent only to the *Unlock* characteristic of the [Eddystone Configuration Service](https://github.com/google/eddystone/tree/master/configuration-service). It must be preceded with **read** operation on the same characteristic in order to read the challenge value. When executed, it will encrypt the challenge using the provided 16-byte key and send the result to unlock the beacon.
 
 #### Server operations
 
@@ -373,10 +373,10 @@ Sends a MTU change request to the peripheral. MTU value must be between 23 and 5
 
 ```xml
 <!-- 
-      Property type is case-sensitive and must be one of the following: 
-        - LOW_POWER (Conn interval: 100-125ms, slave latency: 2, supervision timeout multiplier: 20)
-        - BALANCED (default) (Conn interval: 30-55ms, slave latency: 0, supervision timeout multiplier: 20)
-        - HIGH (Conn interval: 11.25-15ms on Android 6+ or 7.5-10ms before, slave latency: 0, supervision timeout multiplier: 20)
+  Property type is case-sensitive and must be one of the following: 
+  - LOW_POWER (Conn interval: 100-125ms, slave latency: 2, supervision timeout multiplier: 20)
+  - BALANCED (default) (Conn interval: 30-55ms, slave latency: 0, supervision timeout multiplier: 20)
+  - HIGH (Conn interval: 11.25-15ms on Android 6+ or 7.5-10ms before, slave latency: 0, supervision timeout multiplier: 20)
 -->
 <request-connection-priority [description="DESCRIPTION"] type="TYPE"/>
 ```

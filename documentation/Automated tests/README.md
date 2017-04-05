@@ -270,7 +270,12 @@ The instance-id attributes are optional and set to 0 by default.
 ##### Write characteristic
 
 ```xml
-<write [description="DESCRIPTION"] service-uuid="SERVICE_UUID" [service-instance-id="SII"] characteristic-uuid="CHAR_UUID" [characteristic-instance-id="CII"] value="BYTES"|value-string="TEXT" [timeout="NUMBER"] [target="TARGET_ID"] [expected="SUCCESS"] />
+<!-- 
+  The type value is case-sensitive and may have one of the following values:
+  - WRITE_REQUEST (default) - Write With Response
+  - WRITE_COMMAND - Write Without Response
+-->
+<write [description="DESCRIPTION"] service-uuid="SERVICE_UUID" [service-instance-id="SII"] characteristic-uuid="CHAR_UUID" [characteristic-instance-id="CII"] [type="TYPE"] value="BYTES"|value-string="TEXT" [timeout="NUMBER"] [target="TARGET_ID"] [expected="SUCCESS"] />
 ```
 
 Writes the given value to the characteristic.
@@ -292,13 +297,13 @@ The instance-id attributes are optional and set to 0 by default.
 ```xml
 <assert-notification [description="DESCRIPTION"] service-uuid="SERVICE_UUID" [service-instance-id="SII"] characteristic-uuid="CHAR_UUID" [characteristic-instance-id="CII"] [timeout="NUMBER"] [target="TARGET_ID"] [expected="SUCCESS"]>
   <!--
-     Before the notification will be received you may want to send or read a characteristic or descriptor.
-     By doing it here you ensure that the notification listener will be initiated before sending the value, as the reply may be too fast.
-     If the 'write' operation was executed before calling the 'assert-notification', the notification could have been
-     received before this operation was started and thous the test could fail.
+    Before the notification will be received you may want to send or read a characteristic or descriptor.
+    By doing it here you ensure that the notification listener will be initiated before sending the value, as the reply may be too fast.
+    If the 'write' operation was executed before calling the 'assert-notification', the notification could have been
+    received before this operation was started and thous the test could fail.
 
-     The following operations may be called here: write, write-descriptor, read, read-descriptor.
-     Example:
+    The following operations may be called here: write, write-descriptor, read, read-descriptor.
+    Example:
   -->
   <!--<write description="Write notification trigger" service-uuid="some UUID" characteristic-uuid="some other UUID" value="012345" />-->
 
@@ -340,10 +345,10 @@ Sends a MTU change request to the peripheral. MTU value must be between 23 and 5
 
 ```xml
 <!-- 
-      Property type is case-sensitive and must be one of the following: 
-        - LOW_POWER (Conn interval: 100-125ms, slave latency: 2, supervision timeout multiplier: 20)
-        - BALANCED (default) (Conn interval: 30-55ms, slave latency: 0, supervision timeout multiplier: 20)
-        - HIGH (Conn interval: 11.25-15ms on Android 6+ or 7.5-10ms before, slave latency: 0, supervision timeout multiplier: 20)
+  Property type is case-sensitive and must be one of the following: 
+  - LOW_POWER (Conn interval: 100-125ms, slave latency: 2, supervision timeout multiplier: 20)
+  - BALANCED (default) (Conn interval: 30-55ms, slave latency: 0, supervision timeout multiplier: 20)
+  - HIGH (Conn interval: 11.25-15ms on Android 6+ or 7.5-10ms before, slave latency: 0, supervision timeout multiplier: 20)
 -->
 <request-connection-priority [description="DESCRIPTION"] type="TYPE" [target="TARGET_ID"] [expected="SUCCESS"]/>
 ```
@@ -383,10 +388,10 @@ Waits until value of the given characteristic is equal to the given one. Timeout
 
 ```xml
 <!-- 
-  You may upload an application, bootloader, soft device or multiple files. Use 'type=X' attribute where X may be one of the following:
-  * 1 - for soft device
-  * 2 - for bootloadere
-  * 4 - for application
+  You may upload an application, bootloader, soft device or multiple files. Use 'type="X"' attribute where X may be one of the following:
+  * 1 - for SoftDevice
+  * 2 - for Bootloader
+  * 4 - for Application
   * 0 - for auto (all from ZIP or an application) (default)
 -->
 <dfu [description="DFU operation"] file="${FIRMWARE_PATH}" [initFile="${FIRMWARE_INIT_PATH}"] [type="TYPE_NUMBER"] [target="TARGET_ID"] [expected="SUCCESS"] />
