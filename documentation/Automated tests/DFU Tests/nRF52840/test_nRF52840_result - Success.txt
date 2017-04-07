@@ -1,0 +1,14 @@
+06-04-2017 17:24:50
+Version: Instant Run
+Device: Pixel, Android version: O (OPP1.170223.012)
+
+Starting 'DFU test' for 'Update Application from SDK 13'
+   Scan for target device...
+17:24:51.542 C7:C5:1C:FF:47:C5 -32 0319000002010603030A18080944465533413133
+   OK
+   SDK 13 update...OK
+   Connecting to target...OK
+   Sleep...OK
+   Discovering services...OK
+   Checking Generic Access service...OK
+   Reading Device Name value...OK

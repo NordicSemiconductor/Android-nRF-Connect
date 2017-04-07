@@ -1,0 +1,64 @@
+04-04-2017 13:48:02
+Version: Instant Run
+Device: Pixel, Android version: O (OPP1.170223.012)
+
+Starting 'DFU test' for 'Update Application from SDK 13'
+   Scan for target device...
+13:48:03.398 D6:B6:4B:75:9D:06 -32 0319000002010603030A18080944465532413133
+   OK
+   SDK 13 app update...OK
+   Connecting to target...OK
+   Discovering services...OK
+   Checking Generic Access service...OK
+   Reading Device Name value...OK
+Starting 'DFU downgrade test' for 'Downgrade to SDK 12.2'
+   Scan for target device...
+13:48:49.326 D6:B6:4B:75:9D:06 -36 0319000002010603030A18080944465532413133
+   OK
+   SDK 13 -> 12.2 update...OK
+   Connecting to target...OK
+   Discovering services...OK
+   Checking Generic Access service...OK
+   Reading Device Name value...OK
+Starting 'DFU test' for 'Update Application from SDK 12.2'
+   Scan for target device...
+13:51:00.233 D6:B6:4B:75:9D:06 -42 0319000002010603030A1809094446553241313232
+   OK
+   SDK 12.2 app update...OK
+   Connecting to target...OK
+   Discovering services...OK
+   Checking Generic Access service...OK
+   Reading Device Name value...OK
+Starting 'DFU downgrade test' for 'Downgrade to SDK 11'
+   Scan for target device...
+13:51:30.540 D6:B6:4B:75:9D:06 -39 0319000002010603030A1809094446553241313232
+   OK
+   SDK 12.2 -> 11 update...OK
+   Connecting to target...OK
+   Discovering services...OK
+   Checking Generic Access service...OK
+   Reading Device Name value...OK
+Starting 'DFU test with bonding' for 'Connect, bond, enable HRM notifications and update SD+BL+App from SDK 11 and check if bonding is preserved'
+   Scan for target device...
+13:52:41.611 D6:B6:4B:75:9D:06 -31 0319410302010607030D180F180A18080944465532413131
+   OK
+   Connecting to target...OK
+   Discovering services...OK
+   Checking Generic Access service...OK
+   Checking HR service...OK
+   Bond...OK
+   Enable notifications...OK
+   Check the HRM notifications...   
+   |- Enable notifications...OK
+   OK
+   Disconnect...OK
+   SDK 11 app update...OK
+   Connecting to target...OK
+   Discovering services...OK
+   Checking Generic Access service...OK
+   Checking HR service...OK
+   Check notifications enabled...OK
+   Reading Device Name value...OK
+   Disconnect...OK
+Starting 'Delete bond information' for 'Clean up'
+   Unbond...OK

@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- Test-Suite element defines the test suite. It MAY have a 'description' attribute. All descriptions in the script are used when creating a result file. -->
+<test-suite description="Test DFU on nRF51422">
+	<!-- Constants to be overwritten in run-test -->
+	<set name="DEVICE_NAME" value="TODO" />
+	<set name="TEST_DEVICE_NAME" value="TODO" />
+	<set name="SDK" value="TODO" />
+	<set name="TARGET_SDK" value="TODO" />
+	<set name="FIRMWARE" value="TODO" />
+
+	<!-- Constants -->
+	<set name="CCCD_UUID" value="00002902-0000-1000-8000-00805f9b34fb" />
+	<set name="GENERIC_ATTRIBUTE_UUID" value="00001801-0000-1000-8000-00805F9B34FB" />
+	<set name="SERVICE_CHANGED_UUID" value="00002A05-0000-1000-8000-00805F9B34FB" />
+	<set name="GENERIC_ACCESS_UUID" value="00001800-0000-1000-8000-00805F9B34FB" />
+	<set name="DEVICE_NAME_UUID" value="00002A00-0000-1000-8000-00805F9B34FB" />
+	<set name="HR_SERVICE_UUID" value="0000180D-0000-1000-8000-00805F9B34FB" />
+	<set name="HR_MEASUREMENT_UUID" value="00002A37-0000-1000-8000-00805F9B34FB" />
+	<set name="SENSOR_LOCATION_UUID" value="00002A38-0000-1000-8000-00805F9B34FB" />
+
+	<!-- Target -->
+	<target id="devkit" name="nRF51422 DK" />
+
+	<!-- Tests -->
+	<test id="dfu_downgrade" description="DFU downgrade test" target="devkit">
+
+		<!-- Scan for out target device -->
+		<scan-for description="Scan for target device" name="${DEVICE_NAME}" bind-target="devkit" timeout="5000"/>
+		
+		<dfu description="SDK ${SDK} -&gt; ${TARGET_SDK} update" file="${FIRMWARE_PATH}/${FIRMWARE}" />
+		
+		<!-- Connect and verify -->
+		<connect description="Connecting to target" />
+		<sleep timeout="1600" />
+		<discover-services description="Discovering services" />
+		<!-- Check GATT Server Contents -->
+		<assert-service description="Checking Generic Access service" uuid="${GENERIC_ACCESS_UUID}" >
+			<assert-characteristic description="Checking Device Name characteristic" uuid="${DEVICE_NAME_UUID}">
+				<property name="READ" requirement="MANDATORY"/>
+				<property name="WRITE" requirement="OPTIONAL"/>
+				<property name="WRITE_WITHOUT_RESPONSE" requirement="EXCLUDED"/>
+				<property name="SIGNED_WRITE" requirement="EXCLUDED"/>
+				<property name="NOTIFY" requirement="EXCLUDED"/>
+				<property name="INDICATE" requirement="EXCLUDED"/>                
+				<property name="BROADCAST" requirement="EXCLUDED"/>
+				<property name="EXTENDED_PROPERTIES" requirement="EXCLUDED"/>
+			</assert-characteristic>
+		</assert-service>
+
+		<read description="Reading Device Name value" service-uuid="${GENERIC_ACCESS_UUID}" characteristic-uuid="${DEVICE_NAME_UUID}" >
+			<assert-value description="Check the name" value-string="${TEST_DEVICE_NAME}" />
+		</read>
+	</test>
+
+	<test id="dfu" description="DFU test" target="devkit">
+
+		<!-- Scan for out target device -->
+		<scan-for description="Scan for target device" name="${DEVICE_NAME}" bind-target="devkit" timeout="5000"/>
+		
+		<dfu description="SDK ${SDK} update" file="${FIRMWARE_PATH}/${FIRMWARE}" />
+		
+		<!-- Connect and verify -->
+		<connect description="Connecting to target" />
+		<sleep timeout="1600" />
+		<discover-services description="Discovering services" />
+		<!-- Check GATT Server Contents -->
+		<assert-service description="Checking Generic Access service" uuid="${GENERIC_ACCESS_UUID}" >
+			<assert-characteristic description="Checking Device Name characteristic" uuid="${DEVICE_NAME_UUID}">
+				<property name="READ" requirement="MANDATORY"/>
+				<property name="WRITE" requirement="OPTIONAL"/>
+				<property name="WRITE_WITHOUT_RESPONSE" requirement="EXCLUDED"/>
+				<property name="SIGNED_WRITE" requirement="EXCLUDED"/>
+				<property name="NOTIFY" requirement="EXCLUDED"/>
+				<property name="INDICATE" requirement="EXCLUDED"/>                
+				<property name="BROADCAST" requirement="EXCLUDED"/>
+				<property name="EXTENDED_PROPERTIES" requirement="EXCLUDED"/>
+			</assert-characteristic>
+		</assert-service>
+
+		<read description="Reading Device Name value" service-uuid="${GENERIC_ACCESS_UUID}" characteristic-uuid="${DEVICE_NAME_UUID}" >
+			<assert-value description="Check the name" value-string="${TEST_DEVICE_NAME}" />
+		</read>
+	</test>
+
+	<test id="bond" description="Bond" target="devkit">
+
+		<!-- Scan for out target device -->
+		<scan-for description="Scan for target device" name="${DEVICE_NAME}" bind-target="devkit" timeout="5000"/>
+
+		<!-- Connect -->
+		<connect description="Connecting to target" />
+		<discover-services description="Discovering services" />
+		<!-- Check GATT Server Contents -->
+		<assert-service description="Checking Generic Attribute service" uuid="${GENERIC_ATTRIBUTE_UUID}" >
+			<assert-characteristic description="Checking Device Name characteristic" uuid="${SERVICE_CHANGED_UUID}">
+				<property name="READ" requirement="OPTIONAL"/>
+				<property name="WRITE" requirement="EXCLUDED"/>
+				<property name="WRITE_WITHOUT_RESPONSE" requirement="EXCLUDED"/>
+				<property name="SIGNED_WRITE" requirement="EXCLUDED"/>
+				<property name="NOTIFY" requirement="EXCLUDED"/>
+				<property name="INDICATE" requirement="MANDATORY"/>                
+				<property name="BROADCAST" requirement="EXCLUDED"/>
+				<property name="EXTENDED_PROPERTIES" requirement="EXCLUDED"/>
+			</assert-characteristic>
+		</assert-service>
+		<assert-service description="Checking HR service" uuid="${HR_SERVICE_UUID}" >
+			<assert-characteristic description="Checking HRM characteristic" uuid="${HR_MEASUREMENT_UUID}">
+				<property name="READ" requirement="EXCLUDED"/>
+				<property name="WRITE" requirement="EXCLUDED"/>
+				<property name="WRITE_WITHOUT_RESPONSE" requirement="EXCLUDED"/>
+				<property name="SIGNED_WRITE" requirement="EXCLUDED"/>
+				<property name="NOTIFY" requirement="MANDATORY"/>
+				<property name="INDICATE" requirement="EXCLUDED"/>                
+				<property name="BROADCAST" requirement="EXCLUDED"/>
+				<property name="EXTENDED_PROPERTIES" requirement="EXCLUDED"/>
+				<assert-cccd/>
+			</assert-characteristic>
+			<assert-characteristic description="Checking Sensor Location characteristic" uuid="${SENSOR_LOCATION_UUID}">
+				<property name="READ" requirement="MANDATORY"/>
+				<property name="WRITE" requirement="EXCLUDED"/>
+				<property name="WRITE_WITHOUT_RESPONSE" requirement="EXCLUDED"/>
+				<property name="SIGNED_WRITE" requirement="EXCLUDED"/>
+				<property name="NOTIFY" requirement="EXCLUDED"/>
+				<property name="INDICATE" requirement="EXCLUDED"/>                
+				<property name="BROADCAST" requirement="EXCLUDED"/>
+				<property name="EXTENDED_PROPERTIES" requirement="EXCLUDED"/>
+			</assert-characteristic>
+		</assert-service>
+		<bond />
+		<!-- Make sure SC are enabled. Required for Android 4.3 - 5.1. Since Android 6.0 this is done automatically when bonding. -->
+		<write-descriptor description="Enable notifications" uuid="${CCCD_UUID}" service-uuid="${GENERIC_ATTRIBUTE_UUID}" characteristic-uuid="${SERVICE_CHANGED_UUID}" value="0200" />
+		<!-- Read Device Name -->
+		<read description="Reading Device Name value" service-uuid="${GENERIC_ACCESS_UUID}" characteristic-uuid="${DEVICE_NAME_UUID}" >
+			<assert-value description="Check the name" value-string="${DEVICE_NAME}" />
+		</read>
+		<!-- Enable HRM notifications and wait for one. First set the notification listener... -->
+		<assert-notification description="Check the HRM notifications" service-uuid="${HR_SERVICE_UUID}" characteristic-uuid="${HR_MEASUREMENT_UUID}" timeout="2000">
+			<!-- ...and when ready, start notifications -->
+			<write-descriptor description="Enable notifications" uuid="${CCCD_UUID}" service-uuid="${HR_SERVICE_UUID}" characteristic-uuid="${HR_MEASUREMENT_UUID}" value="0100" />
+		</assert-notification>
+		<!-- Ok, let's disconnect -->
+		<disconnect />
+	</test>
+
+	<test id="check_bond" description="Check bonding" target="devkit">
+
+		<!-- Scan for out target device -->
+		<scan-for description="Scan for target device" name="${DEVICE_NAME}" bind-target="devkit" timeout="5000"/>
+
+		<!-- Connect and verify -->
+		<connect description="Connecting to target" />
+		<!-- We have to wait for the Service Changed indication before discovering services -->
+		<sleep timeout="1600" />
+		<discover-services description="Discovering services" />
+		<!-- Check GATT Server Contents -->
+		<assert-service description="Checking HR service" uuid="${HR_SERVICE_UUID}" >
+			<assert-characteristic description="Checking HRM characteristic" uuid="${HR_MEASUREMENT_UUID}">
+				<property name="READ" requirement="EXCLUDED"/>
+				<property name="WRITE" requirement="EXCLUDED"/>
+				<property name="WRITE_WITHOUT_RESPONSE" requirement="EXCLUDED"/>
+				<property name="SIGNED_WRITE" requirement="EXCLUDED"/>
+				<property name="NOTIFY" requirement="MANDATORY"/>
+				<property name="INDICATE" requirement="EXCLUDED"/>                
+				<property name="BROADCAST" requirement="EXCLUDED"/>
+				<property name="EXTENDED_PROPERTIES" requirement="EXCLUDED"/>
+				<assert-cccd/>
+			</assert-characteristic>
+			<assert-characteristic description="Checking Sensor Location characteristic" uuid="${SENSOR_LOCATION_UUID}">
+				<property name="READ" requirement="MANDATORY"/>
+				<property name="WRITE" requirement="EXCLUDED"/>
+				<property name="WRITE_WITHOUT_RESPONSE" requirement="EXCLUDED"/>
+				<property name="SIGNED_WRITE" requirement="EXCLUDED"/>
+				<property name="NOTIFY" requirement="EXCLUDED"/>
+				<property name="INDICATE" requirement="EXCLUDED"/>                
+				<property name="BROADCAST" requirement="EXCLUDED"/>
+				<property name="EXTENDED_PROPERTIES" requirement="EXCLUDED"/>
+			</assert-characteristic>
+		</assert-service>
+
+		<!-- If bonding still exist the notifications should still be enabled -->
+		<assert-notification description="Check notifications enabled" service-uuid="${HR_SERVICE_UUID}" characteristic-uuid="${HR_MEASUREMENT_UUID}" timeout="2000"/>
+		<!-- Ok, let's disconnect -->
+		<disconnect />
+	</test>
+
+	<test id="unbond" description="Delete bond information" target="devkit">
+		<!-- Remove bonding -->
+		<unbond />
+	</test>
+	
+	<!-- Test executions -->
+	<run-test ref="dfu" description="Update Application from SDK 12.2">
+		<set name="DEVICE_NAME" value="DFU1A122" />
+		<set name="TEST_DEVICE_NAME" value="DFU1A122" />
+		<set name="SDK" value="12.2" />
+		<set name="FIRMWARE" value="nrf51422_sdk_12.2_app.zip"/>
+	</run-test>
+
+	<run-test ref="dfu_downgrade" description="Downgrade to SDK 11">
+		<set name="DEVICE_NAME" value="DFU1A122" />
+		<set name="TEST_DEVICE_NAME" value="DFU1A11" />
+		<set name="SDK" value="12.2" />
+		<set name="TARGET_SDK" value="11" />
+		<set name="FIRMWARE" value="nrf51422_sdk_12.2_to_11_all_in_one_android_only.zip"/>
+	</run-test>
+
+	<run-test ref="bond" description="Connect, bond and enable HRM notifications">
+		<set name="DEVICE_NAME" value="DFU1A11" />
+	</run-test>
+
+	<run-test ref="dfu" description="Update SD+BL+App from SDK 11">
+		<set name="DEVICE_NAME" value="DFU1A11" />
+		<set name="TEST_DEVICE_NAME" value="DFU1A11" />
+		<set name="SDK" value="11" />
+		<set name="FIRMWARE" value="nrf51422_sdk_11_all_in_one.zip"/>
+	</run-test>
+
+	<run-test ref="check_bond" description="Check if bonding is preserved">
+		<set name="DEVICE_NAME" value="DFU1A11" />
+	</run-test>
+
+	<!-- Bonding is removed when flasing SDK11 -> SDK8 :( -->
+	<run-test ref="unbond" description="Clean up" />
+
+	<run-test ref="dfu_downgrade" description="Downgrade to SDK 8">
+		<set name="DEVICE_NAME" value="DFU1A11" />
+		<set name="TEST_DEVICE_NAME" value="DFU1A08" />
+		<set name="SDK" value="11" />
+		<set name="TARGET_SDK" value="8" />
+		<set name="FIRMWARE" value="nrf51422_sdk_8_all_in_one.zip"/>
+	</run-test>
+
+	<run-test ref="dfu_downgrade" description="Downgrade to SDK 6.1">
+		<set name="DEVICE_NAME" value="DFU1A08" />
+		<set name="TEST_DEVICE_NAME" value="DFU1A061" />
+		<set name="SDK" value="8" />
+		<set name="TARGET_SDK" value="6.1" />
+		<set name="FIRMWARE" value="nrf51422_sdk_6.1_all_in_one.zip"/>
+	</run-test>
+
+	<run-test ref="dfu" description="Update App from SDK 6.1">
+		<set name="DEVICE_NAME" value="DFU1A061" />
+		<set name="TEST_DEVICE_NAME" value="DFU1A061" />
+		<set name="SDK" value="6.1" />
+		<set name="FIRMWARE" value="nrf51422_sdk_6.1_app.zip"/>
+	</run-test>
+
+	<run-test ref="dfu_downgrade" description="Downgrade to SDK 6.0">
+		<set name="DEVICE_NAME" value="DFU1A061" />
+		<set name="TEST_DEVICE_NAME" value="DFU1A06" />
+		<set name="SDK" value="6.1" />
+		<set name="TARGET_SDK" value="6.0" />
+		<set name="FIRMWARE" value="nrf51422_sdk_6.0_all_in_one.zip"/>
+	</run-test>
+
+	<!-- This is not possible, as in SDK 6 there was no Buttonless service. -->
+	<!-- <run-test ref="dfu" description="Update App from SDK 6">
+		<set name="DEVICE_NAME" value="DFU1A06" />
+		<set name="TEST_DEVICE_NAME" value="DFU1A06" />
+		<set name="SDK" value="6" />
+		<set name="FIRMWARE" value="nrf51422_sdk_6.0_app.zip"/>
+	</run-test> -->
+
+	<!-- This is not possible. SDK 6 does not allow to update SD. -->
+	<!-- <run-test ref="dfu_downgrade" description="Downgrade to SDK 5.2">
+		<set name="DEVICE_NAME" value="DFU1B06" />
+		<set name="TEST_DEVICE_NAME" value="DFU1A052" />
+		<set name="SDK" value="6.0" />
+		<set name="TARGET_SDK" value="5.2" />
+		<set name="FIRMWARE" value="nrf51422_sdk_5.2_all_in_one.zip"/>
+	</run-test> -->
+
+	<!-- Test code -->
+	<!-- <run-test ref="dfu" description="Update App from SDK 6">
+		<set name="DEVICE_NAME" value="DFU1B06" />
+		<set name="TEST_DEVICE_NAME" value="DFU1A06" />
+		<set name="SDK" value="6" />
+		<set name="FIRMWARE" value="nrf51422_sdk_6.0_app.zip"/>
+	</run-test> -->
+	
+</test-suite>

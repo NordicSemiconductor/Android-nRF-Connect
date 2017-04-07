@@ -1,0 +1,2632 @@
+nRF Connect Test, 2017-04-06
+Test DFU on nRF51422 (test_nRF51422.xml)
+A	16:20:16.128	Starting 'DFU test' for 'Update Application from SDK 12.2'
+A	16:20:16.170	Scan for target device...
+V	16:20:16.199	Starting scan...
+D	16:20:16.225	scanner.startScan(null, LOW_LATENCY, callback)
+V	16:20:16.428	Stopping scanning...
+D	16:20:16.445	scanner.stopScan(callback)
+I	16:20:16.457	Device found: FD:16:80:77:27:0B
+A	16:20:16.478	SDK 12.2 update...
+V	16:20:16.517	[DFU] DFU service started
+V	16:20:16.518	[DFU] Opening file...
+I	16:20:16.540	[DFU] Image file opened (28744 bytes in total)
+D	16:20:16.540	[DFU] wait(1000)
+D	16:20:17.544	[DFU] wait(1000)
+V	16:20:18.541	[DFU] Connecting to DFU target...
+D	16:20:18.543	[DFU] gatt = device.connectGatt(autoConnect = false)
+I	16:20:18.916	[DFU] Connected to FD:16:80:77:27:0B
+V	16:20:18.926	[DFU] Discovering services...
+D	16:20:18.926	[DFU] gatt.discoverServices()
+I	16:20:19.457	[DFU] Services discovered
+D	16:20:19.493	[DFU] wait(1000)
+W	16:20:20.495	[DFU] Application with buttonless update found
+V	16:20:20.496	[DFU] Jumping to the DFU Bootloader...
+V	16:20:20.497	[DFU] Enabling notifications for 8e400001-f315-4f60-9fb8-838830daea50
+D	16:20:20.499	[DFU] gatt.setCharacteristicNotification(8e400001-f315-4f60-9fb8-838830daea50, true)
+D	16:20:20.508	[DFU] gatt.writeDescriptor(00002902-0000-1000-8000-00805f9b34fb, value=0x01-00)
+I	16:20:20.584	[DFU] Data written to descr.8e400001-f315-4f60-9fb8-838830daea50, value (0x): 01-00
+V	16:20:20.585	[DFU] Notifications enabled for 8e400001-f315-4f60-9fb8-838830daea50
+A	16:20:20.586	[DFU] Notifications enabled
+D	16:20:20.586	[DFU] wait(1000)
+V	16:20:21.590	[DFU] Writing to characteristic 8e400001-f315-4f60-9fb8-838830daea50
+D	16:20:21.591	[DFU] gatt.writeCharacteristic(8e400001-f315-4f60-9fb8-838830daea50)
+A	16:20:21.658	[DFU] Enter bootloader sent (Op Code = 1)
+I	16:20:21.659	[DFU] Notification received from 8e400001-f315-4f60-9fb8-838830daea50, value (0x): 20-01-01
+A	16:20:21.659	[DFU] Response received (Op Code = 1, Status = 1)
+I	16:20:21.776	[DFU] Disconnected by the remote device
+D	16:20:21.783	[DFU] gatt.refresh() (hidden)
+D	16:20:21.816	[DFU] gatt.close()
+D	16:20:21.817	[DFU] [Broadcast] Action received: android.bluetooth.device.action.ACL_DISCONNECTED
+V	16:20:21.822	[DFU] Scanning for the DFU Bootloader...
+I	16:20:22.084	[DFU] DFU Bootloader found with address FD:16:80:77:27:0C
+V	16:20:22.102	[DFU] DFU service started
+V	16:20:22.102	[DFU] Opening file...
+I	16:20:22.145	[DFU] Image file opened (28744 bytes in total)
+D	16:20:22.145	[DFU] wait(1000)
+D	16:20:23.146	[DFU] wait(1000)
+V	16:20:24.147	[DFU] Connecting to DFU target...
+D	16:20:24.164	[DFU] gatt = device.connectGatt(autoConnect = false)
+I	16:20:24.407	[DFU] Connected to FD:16:80:77:27:0C
+V	16:20:24.410	[DFU] Discovering services...
+D	16:20:24.410	[DFU] gatt.discoverServices()
+I	16:20:25.260	[DFU] Services discovered
+D	16:20:25.269	[DFU] wait(1000)
+V	16:20:26.270	[DFU] Enabling notifications for 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:20:26.270	[DFU] gatt.setCharacteristicNotification(8ec90001-f315-4f60-9fb8-838830daea50, true)
+D	16:20:26.273	[DFU] gatt.writeDescriptor(00002902-0000-1000-8000-00805f9b34fb, value=0x01-00)
+I	16:20:26.323	[DFU] Data written to descr.8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-00
+V	16:20:26.324	[DFU] Notifications enabled for 8ec90001-f315-4f60-9fb8-838830daea50
+A	16:20:26.324	[DFU] Notifications enabled
+D	16:20:26.324	[DFU] wait(1000)
+V	16:20:27.326	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:20:27.331	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:20:27.373	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 06-01
+I	16:20:27.374	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-06-01-00-01-00-00-00-00-00-00-00-00-00-00
+A	16:20:27.375	[DFU] Command object info received (Max size = 256, Offset = 0, CRC = 00000000)
+V	16:20:27.376	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:20:27.376	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:20:27.436	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 02-00-00
+I	16:20:27.436	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-02-01
+A	16:20:27.441	[DFU] Packet Receipt Notif disabled (Op Code = 2, Value = 0)
+V	16:20:27.441	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:20:27.441	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:20:27.495	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-01-87-00-00-00
+I	16:20:27.497	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:20:27.499	[DFU] Command object created
+V	16:20:27.500	[DFU] Writing to characteristic 8ec90002-f315-4f60-9fb8-838830daea50
+D	16:20:27.501	[DFU] gatt.writeCharacteristic(8ec90002-f315-4f60-9fb8-838830daea50)
+I	16:20:27.506	[DFU] Data written to 8ec90002-f315-4f60-9fb8-838830daea50, value (0x): 12-84-01-0A-3E-08-01-12-3A-08-01-10-33-1A-02-87-01-20-00-28
+V	16:20:27.508	[DFU] Writing to characteristic 8ec90002-f315-4f60-9fb8-838830daea50
+D	16:20:27.508	[DFU] gatt.writeCharacteristic(8ec90002-f315-4f60-9fb8-838830daea50)
+I	16:20:27.512	[DFU] Data written to 8ec90002-f315-4f60-9fb8-838830daea50, value (0x): 00-30-00-38-C8-E0-01-42-24-08-03-12-20-2D-D6-3E-1B-01-79-98
+V	16:20:27.514	[DFU] Writing to characteristic 8ec90002-f315-4f60-9fb8-838830daea50
+D	16:20:27.514	[DFU] gatt.writeCharacteristic(8ec90002-f315-4f60-9fb8-838830daea50)
+I	16:20:27.519	[DFU] Data written to 8ec90002-f315-4f60-9fb8-838830daea50, value (0x): 81-23-1D-3D-99-1E-7D-A2-AA-5D-2F-CA-19-89-B5-22-96-23-21-DE
+V	16:20:27.519	[DFU] Writing to characteristic 8ec90002-f315-4f60-9fb8-838830daea50
+D	16:20:27.519	[DFU] gatt.writeCharacteristic(8ec90002-f315-4f60-9fb8-838830daea50)
+I	16:20:27.521	[DFU] Data written to 8ec90002-f315-4f60-9fb8-838830daea50, value (0x): A8-D7-FB-34-22-48-00-10-00-1A-40-90-86-5A-23-21-A5-CD-4D-D8
+V	16:20:27.522	[DFU] Writing to characteristic 8ec90002-f315-4f60-9fb8-838830daea50
+D	16:20:27.522	[DFU] gatt.writeCharacteristic(8ec90002-f315-4f60-9fb8-838830daea50)
+I	16:20:27.525	[DFU] Data written to 8ec90002-f315-4f60-9fb8-838830daea50, value (0x): 02-FB-C5-92-FE-9B-B1-14-15-30-45-FE-1D-3F-E3-56-20-48-A2-AB
+V	16:20:27.528	[DFU] Writing to characteristic 8ec90002-f315-4f60-9fb8-838830daea50
+D	16:20:27.528	[DFU] gatt.writeCharacteristic(8ec90002-f315-4f60-9fb8-838830daea50)
+I	16:20:27.531	[DFU] Data written to 8ec90002-f315-4f60-9fb8-838830daea50, value (0x): 07-02-C8-2D-C6-7A-CE-F2-4D-7F-09-08-21-8B-23-E7-12-64-AA-9F
+V	16:20:27.533	[DFU] Writing to characteristic 8ec90002-f315-4f60-9fb8-838830daea50
+D	16:20:27.534	[DFU] gatt.writeCharacteristic(8ec90002-f315-4f60-9fb8-838830daea50)
+I	16:20:27.536	[DFU] Data written to 8ec90002-f315-4f60-9fb8-838830daea50, value (0x): 24-EC-71-A2-74-97-20-E0-F6-13-D8-61-9C-88-26
+A	16:20:27.537	[DFU] Command object sent (CRC = 5585C2DD)
+V	16:20:27.537	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:20:27.537	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:20:27.583	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:20:27.584	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-87-00-00-00-DD-C2-85-55
+A	16:20:27.584	[DFU] Checksum received (Offset = 135, CRC = 5585C2DD)
+V	16:20:27.585	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:20:27.585	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:20:27.644	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:20:28.825	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:20:28.827	[DFU] Command object executed
+V	16:20:28.829	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:20:28.829	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:20:28.910	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 02-0A-00
+I	16:20:28.913	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-02-01
+A	16:20:28.915	[DFU] Packet Receipt Notif Req (Op Code = 2) sent (Value = 10)
+V	16:20:28.916	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:20:28.920	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:20:28.997	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 06-02
+I	16:20:29.000	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-06-01-00-10-00-00-00-00-00-00-00-00-00-00
+A	16:20:29.003	[DFU] Data object info received (Max size = 4096, Offset = 0, CRC = 00000000)
+V	16:20:29.042	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:20:29.042	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:20:29.086	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-00-10-00-00
+I	16:20:29.089	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:20:29.095	[DFU] Data object (1/8) created
+A	16:20:29.095	[DFU] Uploading firmware...
+V	16:20:29.095	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:20:31.290	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:20:31.290	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:20:31.336	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:20:31.336	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-10-00-00-68-11-81-F6
+A	16:20:31.336	[DFU] Checksum received (Offset = 4096, CRC = F6811168)
+V	16:20:31.338	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:20:31.338	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:20:31.394	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:20:31.394	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:20:31.394	[DFU] Data object executed
+V	16:20:31.395	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:20:31.395	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:20:31.453	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-00-10-00-00
+I	16:20:31.455	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:20:31.455	[DFU] Data object (2/8) created
+A	16:20:31.455	[DFU] Uploading firmware...
+V	16:20:31.456	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:20:33.688	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:20:33.688	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:20:33.734	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:20:33.734	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-20-00-00-B1-75-53-E0
+A	16:20:33.735	[DFU] Checksum received (Offset = 8192, CRC = E05375B1)
+V	16:20:33.735	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:20:33.735	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:20:33.793	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:20:33.794	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:20:33.794	[DFU] Data object executed
+V	16:20:33.795	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:20:33.795	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:20:33.857	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-00-10-00-00
+I	16:20:33.859	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:20:33.860	[DFU] Data object (3/8) created
+A	16:20:33.860	[DFU] Uploading firmware...
+V	16:20:33.861	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:20:36.066	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:20:36.067	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:20:36.104	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:20:36.134	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-30-00-00-47-A4-F3-12
+A	16:20:36.137	[DFU] Checksum received (Offset = 12288, CRC = 12F3A447)
+V	16:20:36.144	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:20:36.144	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:20:36.196	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:20:36.199	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:20:36.200	[DFU] Data object executed
+V	16:20:36.201	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:20:36.201	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:20:36.258	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-00-10-00-00
+I	16:20:36.261	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:20:36.262	[DFU] Data object (4/8) created
+A	16:20:36.262	[DFU] Uploading firmware...
+V	16:20:36.263	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:20:38.393	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:20:38.393	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:20:38.443	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:20:38.444	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-40-00-00-50-B5-28-1F
+A	16:20:38.444	[DFU] Checksum received (Offset = 16384, CRC = 1F28B550)
+V	16:20:38.445	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:20:38.445	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:20:38.504	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:20:38.504	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:20:38.504	[DFU] Data object executed
+V	16:20:38.505	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:20:38.505	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:20:38.563	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-00-10-00-00
+I	16:20:38.564	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:20:38.564	[DFU] Data object (5/8) created
+A	16:20:38.564	[DFU] Uploading firmware...
+V	16:20:38.565	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:20:40.853	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:20:40.853	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:20:40.914	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:20:40.924	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-50-00-00-49-AD-FF-F4
+A	16:20:40.924	[DFU] Checksum received (Offset = 20480, CRC = F4FFAD49)
+V	16:20:40.924	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:20:40.924	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:20:40.999	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:20:41.001	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:20:41.002	[DFU] Data object executed
+V	16:20:41.004	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:20:41.004	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:20:41.058	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-00-10-00-00
+I	16:20:41.088	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:20:41.090	[DFU] Data object (6/8) created
+A	16:20:41.090	[DFU] Uploading firmware...
+V	16:20:41.092	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:20:43.266	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:20:43.266	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:20:43.304	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:20:43.305	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-60-00-00-EA-4A-E8-83
+A	16:20:43.306	[DFU] Checksum received (Offset = 24576, CRC = 83E84AEA)
+V	16:20:43.306	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:20:43.306	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:20:43.366	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:20:43.368	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:20:43.368	[DFU] Data object executed
+V	16:20:43.370	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:20:43.370	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:20:43.426	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-00-10-00-00
+I	16:20:43.428	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:20:43.433	[DFU] Data object (7/8) created
+A	16:20:43.433	[DFU] Uploading firmware...
+V	16:20:43.434	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:20:45.578	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:20:45.579	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:20:45.653	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:20:45.653	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-70-00-00-EB-7D-FC-72
+A	16:20:45.667	[DFU] Checksum received (Offset = 28672, CRC = 72FC7DEB)
+V	16:20:45.687	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:20:45.687	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:20:45.764	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+I	16:20:45.764	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:20:45.766	[DFU] Data object executed
+V	16:20:45.766	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:20:45.766	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:20:45.823	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-48-00-00-00
+I	16:20:45.824	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:20:45.825	[DFU] Data object (8/8) created
+A	16:20:45.825	[DFU] Uploading firmware...
+V	16:20:45.825	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:20:45.848	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:20:45.849	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:20:45.914	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-48-70-00-00-AF-E8-49-44
+I	16:20:45.915	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-48-70-00-00-AF-E8-49-44
+A	16:20:45.916	[DFU] Checksum received (Offset = 28744, CRC = 4449E8AF)
+V	16:20:45.917	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:20:45.917	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:20:45.978	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:20:46.458	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:20:46.459	[DFU] Data object executed
+A	16:20:46.461	[DFU] Upload completed in 17433 ms
+I	16:20:50.595	[DFU] Disconnected by the remote device
+D	16:20:50.613	[DFU] gatt.refresh() (hidden)
+D	16:20:50.613	[DFU] gatt.close()
+D	16:20:50.613	[DFU] [Broadcast] Action received: android.bluetooth.device.action.ACL_DISCONNECTED
+D	16:20:50.617	[DFU] wait(1400)
+A	16:20:52.034	Connecting to target...
+V	16:20:52.074	Connecting to FD:16:80:77:27:0B...
+D	16:20:52.074	gatt = device.connectGatt(autoConnect = false, TRANSPORT_LE)
+D	16:20:53.406	[Callback] Connection state changed with status: 0 and new state: CONNECTED (2)
+I	16:20:53.406	Connected to FD:16:80:77:27:0B
+A	16:20:53.464	Sleep...
+D	16:20:53.483	wait(1600)
+V	16:20:55.106	Wake up!
+A	16:20:55.148	Discovering services...
+V	16:20:55.170	Discovering services...
+D	16:20:55.170	gatt.discoverServices()
+D	16:20:55.178	[Callback] Services discovered with status: 0
+I	16:20:55.181	Services discovered
+V	16:20:55.199	Generic Access (0x1800)
+- Device Name [R W] (0x2A00)
+- Appearance [R] (0x2A01)
+- Peripheral Preferred Connection Parameters [R] (0x2A04)
+Generic Attribute (0x1801)
+Experimental Buttonless DFU Service (8e400001-f315-4f60-9fb8-838830daea50)
+- Experimental Buttonless DFU [N W] (8e400001-f315-4f60-9fb8-838830daea50)
+   Client Characteristic Configuration (0x2902)
+A	16:20:55.220	Checking Generic Access service...
+V	16:20:55.234	Reading services...
+I	16:20:55.234	Service (uuid=00001800-0000-1000-8000-00805F9B34FB, instance-id=0) found
+A	16:20:55.235	Checking Device Name characteristic...
+V	16:20:55.235	Reading characteristics...
+I	16:20:55.235	Characteristic (uuid=00002A00-0000-1000-8000-00805F9B34FB, instance-id=0) found
+V	16:20:55.235	Reading properties...
+I	16:20:55.235	Required property READ found
+I	16:20:55.235	Excluded property WRITE_WITHOUT_RESPONSE not found
+I	16:20:55.235	Excluded property SIGNED_WRITE not found
+I	16:20:55.236	Excluded property NOTIFY not found
+I	16:20:55.236	Excluded property INDICATE not found
+I	16:20:55.236	Excluded property BROADCAST not found
+I	16:20:55.236	Excluded property EXTENDED_PROPERTIES not found
+A	16:20:55.262	Reading Device Name value...
+V	16:20:55.277	Reading characteristic 00002a00-0000-1000-8000-00805f9b34fb
+D	16:20:55.277	gatt.readCharacteristic(00002a00-0000-1000-8000-00805f9b34fb)
+I	16:20:55.408	Read Response received from 00002a00-0000-1000-8000-00805f9b34fb, value: (0x) 44-46-55-31-41-31-32-32, "DFU1A122"
+A	16:20:55.408	"DFU1A122" received
+I	16:20:55.412	Reading characteristic succeeded
+A	16:20:55.446	Check the name...
+V	16:20:55.471	Asserting characteristic value...
+I	16:20:55.492	Value of the characteristic equals 'DFU1A122'
+V	16:20:55.517	Cleaning up...
+V	16:20:57.531	Disconnecting...
+D	16:20:57.531	gatt.disconnect()
+D	16:20:57.538	[Callback] Connection state changed with status: 0 and new state: DISCONNECTED (0)
+I	16:20:57.538	Disconnected
+D	16:20:57.547	gatt.close()
+D	16:20:57.549	wait(200)
+A	16:20:57.772	'Update Application from SDK 12.2' completed
+A	16:20:57.820	Starting 'DFU downgrade test' for 'Downgrade to SDK 11'
+A	16:20:57.841	Scan for target device...
+V	16:20:57.866	Starting scan...
+D	16:20:57.889	scanner.startScan(null, LOW_LATENCY, callback)
+V	16:20:58.589	Stopping scanning...
+D	16:20:58.620	scanner.stopScan(callback)
+I	16:20:58.665	Device found: FD:16:80:77:27:0B
+A	16:20:58.686	SDK 12.2 -> 11 update...
+V	16:20:58.716	[DFU] DFU service started
+V	16:20:58.717	[DFU] Opening file...
+I	16:20:58.739	[DFU] Image file opened (141888 bytes in total)
+D	16:20:58.740	[DFU] wait(1000)
+D	16:20:59.743	[DFU] wait(1000)
+V	16:21:00.744	[DFU] Connecting to DFU target...
+D	16:21:00.745	[DFU] gatt = device.connectGatt(autoConnect = false)
+I	16:21:01.279	[DFU] Connected to FD:16:80:77:27:0B
+V	16:21:01.283	[DFU] Discovering services...
+D	16:21:01.283	[DFU] gatt.discoverServices()
+I	16:21:01.890	[DFU] Services discovered
+W	16:21:01.892	[DFU] Sending system components
+D	16:21:01.930	[DFU] wait(1000)
+W	16:21:02.932	[DFU] Application with buttonless update found
+V	16:21:02.933	[DFU] Jumping to the DFU Bootloader...
+V	16:21:02.933	[DFU] Enabling notifications for 8e400001-f315-4f60-9fb8-838830daea50
+D	16:21:02.934	[DFU] gatt.setCharacteristicNotification(8e400001-f315-4f60-9fb8-838830daea50, true)
+D	16:21:02.936	[DFU] gatt.writeDescriptor(00002902-0000-1000-8000-00805f9b34fb, value=0x01-00)
+I	16:21:03.014	[DFU] Data written to descr.8e400001-f315-4f60-9fb8-838830daea50, value (0x): 01-00
+V	16:21:03.014	[DFU] Notifications enabled for 8e400001-f315-4f60-9fb8-838830daea50
+A	16:21:03.014	[DFU] Notifications enabled
+D	16:21:03.014	[DFU] wait(1000)
+V	16:21:04.026	[DFU] Writing to characteristic 8e400001-f315-4f60-9fb8-838830daea50
+D	16:21:04.027	[DFU] gatt.writeCharacteristic(8e400001-f315-4f60-9fb8-838830daea50)
+A	16:21:04.093	[DFU] Enter bootloader sent (Op Code = 1)
+I	16:21:04.094	[DFU] Notification received from 8e400001-f315-4f60-9fb8-838830daea50, value (0x): 20-01-01
+A	16:21:04.094	[DFU] Response received (Op Code = 1, Status = 1)
+I	16:21:04.191	[DFU] Disconnected by the remote device
+D	16:21:04.192	[DFU] gatt.refresh() (hidden)
+D	16:21:04.195	[DFU] gatt.close()
+D	16:21:04.195	[DFU] [Broadcast] Action received: android.bluetooth.device.action.ACL_DISCONNECTED
+V	16:21:04.197	[DFU] Scanning for the DFU Bootloader...
+I	16:21:04.492	[DFU] DFU Bootloader found with address FD:16:80:77:27:0C
+V	16:21:04.507	[DFU] DFU service started
+V	16:21:04.507	[DFU] Opening file...
+I	16:21:04.555	[DFU] Image file opened (141888 bytes in total)
+D	16:21:04.555	[DFU] wait(1000)
+D	16:21:05.556	[DFU] wait(1000)
+V	16:21:06.557	[DFU] Connecting to DFU target...
+D	16:21:06.568	[DFU] gatt = device.connectGatt(autoConnect = false)
+I	16:21:06.765	[DFU] Connected to FD:16:80:77:27:0C
+V	16:21:06.771	[DFU] Discovering services...
+D	16:21:06.771	[DFU] gatt.discoverServices()
+I	16:21:07.570	[DFU] Services discovered
+W	16:21:07.574	[DFU] Sending system components
+D	16:21:07.588	[DFU] wait(1000)
+V	16:21:08.590	[DFU] Enabling notifications for 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:08.590	[DFU] gatt.setCharacteristicNotification(8ec90001-f315-4f60-9fb8-838830daea50, true)
+D	16:21:08.592	[DFU] gatt.writeDescriptor(00002902-0000-1000-8000-00805f9b34fb, value=0x01-00)
+I	16:21:08.653	[DFU] Data written to descr.8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-00
+V	16:21:08.653	[DFU] Notifications enabled for 8ec90001-f315-4f60-9fb8-838830daea50
+A	16:21:08.653	[DFU] Notifications enabled
+D	16:21:08.653	[DFU] wait(1000)
+V	16:21:09.655	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:09.657	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:09.702	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 06-01
+I	16:21:09.704	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-06-01-00-01-00-00-00-00-00-00-00-00-00-00
+A	16:21:09.705	[DFU] Command object info received (Max size = 256, Offset = 0, CRC = 00000000)
+V	16:21:09.706	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:09.706	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:09.763	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 02-00-00
+I	16:21:09.765	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-02-01
+A	16:21:09.765	[DFU] Packet Receipt Notif disabled (Op Code = 2, Value = 0)
+V	16:21:09.766	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:09.766	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:09.853	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-01-88-00-00-00
+I	16:21:09.855	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:21:09.855	[DFU] Command object created
+V	16:21:09.856	[DFU] Writing to characteristic 8ec90002-f315-4f60-9fb8-838830daea50
+D	16:21:09.856	[DFU] gatt.writeCharacteristic(8ec90002-f315-4f60-9fb8-838830daea50)
+I	16:21:09.859	[DFU] Data written to 8ec90002-f315-4f60-9fb8-838830daea50, value (0x): 12-85-01-0A-3F-08-01-12-3B-08-66-10-33-1A-02-87-01-20-03-28
+V	16:21:09.862	[DFU] Writing to characteristic 8ec90002-f315-4f60-9fb8-838830daea50
+D	16:21:09.863	[DFU] gatt.writeCharacteristic(8ec90002-f315-4f60-9fb8-838830daea50)
+I	16:21:09.870	[DFU] Data written to 8ec90002-f315-4f60-9fb8-838830daea50, value (0x): F4-BF-06-30-90-68-38-00-42-24-08-03-12-20-30-71-2B-40-8E-97
+V	16:21:09.872	[DFU] Writing to characteristic 8ec90002-f315-4f60-9fb8-838830daea50
+D	16:21:09.872	[DFU] gatt.writeCharacteristic(8ec90002-f315-4f60-9fb8-838830daea50)
+I	16:21:09.875	[DFU] Data written to 8ec90002-f315-4f60-9fb8-838830daea50, value (0x): 66-BE-64-63-20-0D-06-66-39-5D-58-FA-D2-34-74-F3-88-4A-1A-B9
+V	16:21:09.877	[DFU] Writing to characteristic 8ec90002-f315-4f60-9fb8-838830daea50
+D	16:21:09.877	[DFU] gatt.writeCharacteristic(8ec90002-f315-4f60-9fb8-838830daea50)
+I	16:21:09.879	[DFU] Data written to 8ec90002-f315-4f60-9fb8-838830daea50, value (0x): 55-28-B0-0A-81-A3-48-00-10-00-1A-40-EC-29-A9-AA-06-27-F7-29
+V	16:21:09.881	[DFU] Writing to characteristic 8ec90002-f315-4f60-9fb8-838830daea50
+D	16:21:09.883	[DFU] gatt.writeCharacteristic(8ec90002-f315-4f60-9fb8-838830daea50)
+I	16:21:09.887	[DFU] Data written to 8ec90002-f315-4f60-9fb8-838830daea50, value (0x): A2-A6-1A-BF-5B-CB-BA-55-AC-78-EC-34-17-80-0E-C1-02-D8-EB-4F
+V	16:21:09.888	[DFU] Writing to characteristic 8ec90002-f315-4f60-9fb8-838830daea50
+D	16:21:09.888	[DFU] gatt.writeCharacteristic(8ec90002-f315-4f60-9fb8-838830daea50)
+I	16:21:09.891	[DFU] Data written to 8ec90002-f315-4f60-9fb8-838830daea50, value (0x): D3-A2-08-24-2A-20-30-CB-94-EA-F2-62-FC-AC-BA-99-62-6D-AD-91
+V	16:21:09.891	[DFU] Writing to characteristic 8ec90002-f315-4f60-9fb8-838830daea50
+D	16:21:09.891	[DFU] gatt.writeCharacteristic(8ec90002-f315-4f60-9fb8-838830daea50)
+I	16:21:09.894	[DFU] Data written to 8ec90002-f315-4f60-9fb8-838830daea50, value (0x): E7-96-8D-0C-9C-D4-7D-3C-9A-1C-CD-35-91-1D-67-0A
+A	16:21:09.895	[DFU] Command object sent (CRC = C2180C47)
+V	16:21:09.895	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:09.895	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:09.943	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:21:09.944	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-88-00-00-00-47-0C-18-C2
+A	16:21:09.945	[DFU] Checksum received (Offset = 136, CRC = C2180C47)
+V	16:21:09.946	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:09.946	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:10.004	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:21:11.176	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:21:11.176	[DFU] Command object executed
+V	16:21:11.177	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:11.177	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:11.233	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 02-0A-00
+I	16:21:11.233	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-02-01
+A	16:21:11.234	[DFU] Packet Receipt Notif Req (Op Code = 2) sent (Value = 10)
+V	16:21:11.234	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:11.235	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:11.298	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 06-02
+I	16:21:11.300	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-06-01-00-10-00-00-00-00-00-00-00-00-00-00
+A	16:21:11.301	[DFU] Data object info received (Max size = 4096, Offset = 0, CRC = 00000000)
+V	16:21:11.317	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:11.317	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:11.382	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-00-10-00-00
+I	16:21:11.384	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:21:11.384	[DFU] Data object (1/30) created
+A	16:21:11.384	[DFU] Uploading firmware...
+V	16:21:11.385	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:21:13.473	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:13.474	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:13.516	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:21:13.518	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-10-00-00-0E-49-78-5F
+A	16:21:13.520	[DFU] Checksum received (Offset = 4096, CRC = 5F78490E)
+V	16:21:13.521	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:13.521	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:13.576	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:21:13.584	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:21:13.584	[DFU] Data object executed
+V	16:21:13.584	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:13.584	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:13.636	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-00-10-00-00
+I	16:21:13.638	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:21:13.639	[DFU] Data object (2/30) created
+A	16:21:13.639	[DFU] Uploading firmware...
+V	16:21:13.641	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:21:15.779	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:15.780	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:15.827	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:21:15.829	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-20-00-00-42-BC-62-E1
+A	16:21:15.831	[DFU] Checksum received (Offset = 8192, CRC = E162BC42)
+V	16:21:15.832	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:15.832	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:15.919	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:21:15.928	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:21:15.929	[DFU] Data object executed
+V	16:21:15.930	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:15.931	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:15.977	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-00-10-00-00
+I	16:21:15.979	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:21:15.980	[DFU] Data object (3/30) created
+A	16:21:15.980	[DFU] Uploading firmware...
+V	16:21:15.981	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:21:18.116	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:18.117	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:18.168	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:21:18.173	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-30-00-00-04-36-BF-8E
+A	16:21:18.185	[DFU] Checksum received (Offset = 12288, CRC = 8EBF3604)
+V	16:21:18.187	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:18.191	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:18.257	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:21:18.259	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:21:18.260	[DFU] Data object executed
+V	16:21:18.261	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:18.261	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:18.316	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-00-10-00-00
+I	16:21:18.318	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:21:18.319	[DFU] Data object (4/30) created
+A	16:21:18.320	[DFU] Uploading firmware...
+V	16:21:18.321	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:21:20.432	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:20.434	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:20.475	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:21:20.477	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-40-00-00-2E-44-E0-50
+A	16:21:20.478	[DFU] Checksum received (Offset = 16384, CRC = 50E0442E)
+V	16:21:20.480	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:20.480	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:20.538	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:21:20.540	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:21:20.541	[DFU] Data object executed
+V	16:21:20.543	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:20.543	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:20.597	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-00-10-00-00
+I	16:21:20.598	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:21:20.600	[DFU] Data object (5/30) created
+A	16:21:20.600	[DFU] Uploading firmware...
+V	16:21:20.601	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:21:22.877	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:22.877	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:22.932	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:21:22.933	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-50-00-00-EB-B9-22-09
+A	16:21:22.934	[DFU] Checksum received (Offset = 20480, CRC = 0922B9EB)
+V	16:21:22.935	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:22.935	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:22.992	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:21:22.993	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:21:22.993	[DFU] Data object executed
+V	16:21:22.994	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:22.994	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:23.054	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-00-10-00-00
+I	16:21:23.056	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:21:23.056	[DFU] Data object (6/30) created
+A	16:21:23.056	[DFU] Uploading firmware...
+V	16:21:23.057	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:21:25.192	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:25.192	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:25.244	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:21:25.245	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-60-00-00-29-A6-00-C8
+A	16:21:25.246	[DFU] Checksum received (Offset = 24576, CRC = C800A629)
+V	16:21:25.247	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:25.247	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:25.303	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:21:25.304	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:21:25.305	[DFU] Data object executed
+V	16:21:25.305	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:25.306	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:25.366	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-00-10-00-00
+I	16:21:25.370	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:21:25.372	[DFU] Data object (7/30) created
+A	16:21:25.372	[DFU] Uploading firmware...
+V	16:21:25.373	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:21:27.629	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:27.630	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:27.676	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-70-00-00-0E-5C-99-09
+I	16:21:27.678	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-70-00-00-0E-5C-99-09
+A	16:21:27.683	[DFU] Checksum received (Offset = 28672, CRC = 09995C0E)
+V	16:21:27.685	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:27.686	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:27.735	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:21:27.737	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:21:27.738	[DFU] Data object executed
+V	16:21:27.739	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:27.739	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:27.797	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-00-10-00-00
+I	16:21:27.800	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:21:27.801	[DFU] Data object (8/30) created
+A	16:21:27.801	[DFU] Uploading firmware...
+V	16:21:27.802	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:21:30.204	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:30.204	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:30.253	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:21:30.254	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-80-00-00-96-9E-36-5E
+A	16:21:30.255	[DFU] Checksum received (Offset = 32768, CRC = 5E369E96)
+V	16:21:30.257	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:30.257	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:30.315	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:21:30.318	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:21:30.319	[DFU] Data object executed
+V	16:21:30.322	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:30.322	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:30.374	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-00-10-00-00
+I	16:21:30.375	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:21:30.375	[DFU] Data object (9/30) created
+A	16:21:30.375	[DFU] Uploading firmware...
+V	16:21:30.376	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:21:32.538	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:32.539	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:32.593	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:21:32.593	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-90-00-00-49-49-11-9F
+A	16:21:32.594	[DFU] Checksum received (Offset = 36864, CRC = 9F114949)
+V	16:21:32.594	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:32.594	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:32.655	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:21:32.658	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:21:32.659	[DFU] Data object executed
+V	16:21:32.661	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:32.661	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:32.716	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-00-10-00-00
+I	16:21:32.718	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:21:32.719	[DFU] Data object (10/30) created
+A	16:21:32.719	[DFU] Uploading firmware...
+V	16:21:32.719	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:21:34.908	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:34.908	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:34.993	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:21:34.993	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-A0-00-00-65-EE-FB-C1
+A	16:21:34.994	[DFU] Checksum received (Offset = 40960, CRC = C1FBEE65)
+V	16:21:34.994	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:34.994	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:35.056	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:21:35.058	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:21:35.059	[DFU] Data object executed
+V	16:21:35.059	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:35.060	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:35.117	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-00-10-00-00
+I	16:21:35.120	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:21:35.121	[DFU] Data object (11/30) created
+A	16:21:35.121	[DFU] Uploading firmware...
+V	16:21:35.122	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:21:37.211	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:37.213	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:37.278	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:21:37.280	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-B0-00-00-B6-4F-C2-27
+A	16:21:37.282	[DFU] Checksum received (Offset = 45056, CRC = 27C24FB6)
+V	16:21:37.284	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:37.285	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:37.337	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:21:37.339	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:21:37.340	[DFU] Data object executed
+V	16:21:37.342	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:37.342	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:37.395	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-00-10-00-00
+I	16:21:37.397	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:21:37.398	[DFU] Data object (12/30) created
+A	16:21:37.398	[DFU] Uploading firmware...
+V	16:21:37.399	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:21:39.742	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:39.743	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:39.793	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:21:39.799	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-C0-00-00-65-1E-04-02
+A	16:21:39.799	[DFU] Checksum received (Offset = 49152, CRC = 02041E65)
+V	16:21:39.799	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:39.799	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:39.852	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:21:39.853	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:21:39.853	[DFU] Data object executed
+V	16:21:39.854	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:39.854	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:39.917	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+I	16:21:39.921	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:21:39.921	[DFU] Data object (13/30) created
+A	16:21:39.921	[DFU] Uploading firmware...
+V	16:21:39.921	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:21:42.090	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:42.091	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:42.132	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:21:42.133	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-D0-00-00-82-9A-DE-A6
+A	16:21:42.133	[DFU] Checksum received (Offset = 53248, CRC = A6DE9A82)
+V	16:21:42.134	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:42.134	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:42.200	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:21:42.200	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:21:42.200	[DFU] Data object executed
+V	16:21:42.200	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:42.200	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:42.256	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-00-10-00-00
+I	16:21:42.258	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:21:42.259	[DFU] Data object (14/30) created
+A	16:21:42.259	[DFU] Uploading firmware...
+V	16:21:42.260	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:21:44.361	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:44.361	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:44.414	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:21:44.415	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-E0-00-00-3F-A3-50-4A
+A	16:21:44.417	[DFU] Checksum received (Offset = 57344, CRC = 4A50A33F)
+V	16:21:44.419	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:44.419	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:44.476	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:21:44.477	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:21:44.478	[DFU] Data object executed
+V	16:21:44.479	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:44.480	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:44.536	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-00-10-00-00
+I	16:21:44.537	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:21:44.538	[DFU] Data object (15/30) created
+A	16:21:44.539	[DFU] Uploading firmware...
+V	16:21:44.541	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:21:46.608	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:46.608	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:46.663	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:21:46.664	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-F0-00-00-F8-3E-50-8C
+A	16:21:46.665	[DFU] Checksum received (Offset = 61440, CRC = 8C503EF8)
+V	16:21:46.666	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:46.666	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:46.725	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:21:46.727	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:21:46.735	[DFU] Data object executed
+V	16:21:46.735	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:46.735	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:46.786	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-00-10-00-00
+I	16:21:46.788	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:21:46.790	[DFU] Data object (16/30) created
+A	16:21:46.790	[DFU] Uploading firmware...
+V	16:21:46.792	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:21:48.941	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:48.945	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:49.006	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:21:49.038	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-00-01-00-0F-21-76-7C
+A	16:21:49.039	[DFU] Checksum received (Offset = 65536, CRC = 7C76210F)
+V	16:21:49.041	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:49.041	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:49.098	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:21:49.101	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:21:49.101	[DFU] Data object executed
+V	16:21:49.103	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:49.103	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:49.157	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-00-10-00-00
+I	16:21:49.159	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:21:49.160	[DFU] Data object (17/30) created
+A	16:21:49.160	[DFU] Uploading firmware...
+V	16:21:49.175	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:21:51.472	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:51.473	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:51.522	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:21:51.523	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-10-01-00-0D-FE-8D-8A
+A	16:21:51.524	[DFU] Checksum received (Offset = 69632, CRC = 8A8DFE0D)
+V	16:21:51.526	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:51.527	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:51.582	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:21:51.585	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:21:51.585	[DFU] Data object executed
+V	16:21:51.585	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:51.585	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:51.643	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-00-10-00-00
+I	16:21:51.644	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:21:51.645	[DFU] Data object (18/30) created
+A	16:21:51.645	[DFU] Uploading firmware...
+V	16:21:51.645	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:21:53.864	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:53.865	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:53.927	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:21:53.930	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-20-01-00-85-0F-A0-26
+A	16:21:53.933	[DFU] Checksum received (Offset = 73728, CRC = 26A00F85)
+V	16:21:53.936	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:53.936	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:53.995	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:21:53.997	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:21:53.998	[DFU] Data object executed
+V	16:21:54.000	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:54.001	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:54.046	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-00-10-00-00
+I	16:21:54.046	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:21:54.048	[DFU] Data object (19/30) created
+A	16:21:54.048	[DFU] Uploading firmware...
+V	16:21:54.049	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:21:56.265	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:56.266	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:56.326	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:21:56.328	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-30-01-00-D5-B9-D3-82
+A	16:21:56.330	[DFU] Checksum received (Offset = 77824, CRC = 82D3B9D5)
+V	16:21:56.334	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:56.334	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:56.385	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:21:56.387	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:21:56.389	[DFU] Data object executed
+V	16:21:56.390	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:56.391	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:56.443	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-00-10-00-00
+I	16:21:56.443	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:21:56.444	[DFU] Data object (20/30) created
+A	16:21:56.444	[DFU] Uploading firmware...
+V	16:21:56.444	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:21:58.705	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:58.706	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:58.752	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:21:58.752	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-40-01-00-BA-A8-AE-E1
+A	16:21:58.753	[DFU] Checksum received (Offset = 81920, CRC = E1AEA8BA)
+V	16:21:58.754	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:58.754	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:58.821	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:21:58.827	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:21:58.828	[DFU] Data object executed
+V	16:21:58.829	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:21:58.829	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:21:58.876	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-00-10-00-00
+I	16:21:58.877	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:21:58.878	[DFU] Data object (21/30) created
+A	16:21:58.878	[DFU] Uploading firmware...
+V	16:21:58.880	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:22:01.402	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:22:01.404	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:22:01.460	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:22:01.464	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-50-01-00-3D-33-52-53
+A	16:22:01.464	[DFU] Checksum received (Offset = 86016, CRC = 5352333D)
+V	16:22:01.467	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:22:01.470	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:22:01.513	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:22:01.542	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:22:01.543	[DFU] Data object executed
+V	16:22:01.543	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:22:01.543	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:22:01.604	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-00-10-00-00
+I	16:22:01.604	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:22:01.605	[DFU] Data object (22/30) created
+A	16:22:01.605	[DFU] Uploading firmware...
+V	16:22:01.605	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:22:03.861	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:22:03.862	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:22:03.915	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:22:03.916	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-60-01-00-0F-CB-A2-B1
+A	16:22:03.917	[DFU] Checksum received (Offset = 90112, CRC = B1A2CB0F)
+V	16:22:03.917	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:22:03.917	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:22:03.975	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:22:03.976	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:22:03.977	[DFU] Data object executed
+V	16:22:03.978	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:22:03.978	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:22:04.034	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-00-10-00-00
+I	16:22:04.035	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:22:04.037	[DFU] Data object (23/30) created
+A	16:22:04.037	[DFU] Uploading firmware...
+V	16:22:04.038	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:22:06.169	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:22:06.170	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:22:06.253	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:22:06.254	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-70-01-00-F9-F0-DA-8F
+A	16:22:06.255	[DFU] Checksum received (Offset = 94208, CRC = 8FDAF0F9)
+V	16:22:06.256	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:22:06.256	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:22:06.314	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:22:06.314	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:22:06.314	[DFU] Data object executed
+V	16:22:06.315	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:22:06.315	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:22:06.375	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-00-10-00-00
+I	16:22:06.375	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:22:06.375	[DFU] Data object (24/30) created
+A	16:22:06.375	[DFU] Uploading firmware...
+V	16:22:06.375	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:22:08.451	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:22:08.452	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:22:08.503	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:22:08.504	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-80-01-00-9A-95-7E-A4
+A	16:22:08.505	[DFU] Checksum received (Offset = 98304, CRC = A47E959A)
+V	16:22:08.506	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:22:08.506	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:22:08.563	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:22:08.563	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:22:08.564	[DFU] Data object executed
+V	16:22:08.564	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:22:08.564	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:22:08.622	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-00-10-00-00
+I	16:22:08.623	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:22:08.623	[DFU] Data object (25/30) created
+A	16:22:08.623	[DFU] Uploading firmware...
+V	16:22:08.623	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:22:10.820	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:22:10.822	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:22:10.877	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:22:10.881	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-90-01-00-09-97-36-CB
+A	16:22:10.883	[DFU] Checksum received (Offset = 102400, CRC = CB369709)
+V	16:22:10.885	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:22:10.885	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:22:10.938	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:22:10.940	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:22:10.940	[DFU] Data object executed
+V	16:22:10.941	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:22:10.941	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:22:10.996	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-00-10-00-00
+I	16:22:10.998	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:22:10.999	[DFU] Data object (26/30) created
+A	16:22:10.999	[DFU] Uploading firmware...
+V	16:22:11.000	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:22:13.188	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:22:13.189	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:22:13.247	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:22:13.249	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-A0-01-00-11-B5-90-77
+A	16:22:13.251	[DFU] Checksum received (Offset = 106496, CRC = 7790B511)
+V	16:22:13.253	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:22:13.253	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:22:13.308	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:22:13.310	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:22:13.311	[DFU] Data object executed
+V	16:22:13.312	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:22:13.312	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:22:13.373	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-00-10-00-00
+I	16:22:13.373	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:22:13.373	[DFU] Data object (27/30) created
+A	16:22:13.374	[DFU] Uploading firmware...
+V	16:22:13.374	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:22:15.513	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:22:15.514	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:22:15.559	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:22:15.565	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-B0-01-00-37-D2-7A-03
+A	16:22:15.568	[DFU] Checksum received (Offset = 110592, CRC = 037AD237)
+V	16:22:15.570	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:22:15.570	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:22:15.616	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:22:15.619	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:22:15.619	[DFU] Data object executed
+V	16:22:15.620	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:22:15.620	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:22:15.678	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-00-10-00-00
+I	16:22:15.679	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:22:15.679	[DFU] Data object (28/30) created
+A	16:22:15.679	[DFU] Uploading firmware...
+V	16:22:15.680	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:22:17.939	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:22:17.957	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:22:18.012	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:22:18.013	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-C0-01-00-54-FC-57-AE
+A	16:22:18.014	[DFU] Checksum received (Offset = 114688, CRC = AE57FC54)
+V	16:22:18.014	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:22:18.014	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:22:18.072	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:22:18.072	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:22:18.072	[DFU] Data object executed
+V	16:22:18.073	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:22:18.073	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:22:18.134	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-00-10-00-00
+I	16:22:18.134	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:22:18.136	[DFU] Data object (29/30) created
+A	16:22:18.136	[DFU] Uploading firmware...
+V	16:22:18.136	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:22:20.253	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:22:20.254	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:22:20.294	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:22:20.294	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-00-D0-01-00-F1-B1-FC-BE
+A	16:22:20.295	[DFU] Checksum received (Offset = 118784, CRC = BEFCB1F1)
+V	16:22:20.296	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:22:20.296	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:22:20.352	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:22:20.353	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:22:20.353	[DFU] Data object executed
+V	16:22:20.354	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:22:20.354	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:22:20.415	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 01-02-04-04-00-00
+I	16:22:20.415	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-01-01
+A	16:22:20.415	[DFU] Data object (30/30) created
+A	16:22:20.415	[DFU] Uploading firmware...
+V	16:22:20.415	[DFU] Sending firmware to characteristic 8ec90002-f315-4f60-9fb8-838830daea50...
+V	16:22:20.946	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:22:20.946	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:22:21.013	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 03
+I	16:22:21.018	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-03-01-04-D4-01-00-91-D6-87-18
+A	16:22:21.020	[DFU] Checksum received (Offset = 119812, CRC = 1887D691)
+V	16:22:21.024	[DFU] Writing to characteristic 8ec90001-f315-4f60-9fb8-838830daea50
+D	16:22:21.025	[DFU] gatt.writeCharacteristic(8ec90001-f315-4f60-9fb8-838830daea50)
+I	16:22:21.072	[DFU] Data written to 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 04
+I	16:22:22.461	[DFU] Notification received from 8ec90001-f315-4f60-9fb8-838830daea50, value (0x): 60-04-01
+A	16:22:22.462	[DFU] Data object executed
+A	16:22:22.462	[DFU] Upload completed in 71145 ms
+I	16:22:26.616	[DFU] Disconnected by the remote device
+D	16:22:26.624	[DFU] gatt.refresh() (hidden)
+D	16:22:26.624	[DFU] gatt.close()
+D	16:22:26.626	[DFU] [Broadcast] Action received: android.bluetooth.device.action.ACL_DISCONNECTED
+V	16:22:26.633	[DFU] Scanning for the DFU Bootloader...
+I	16:22:27.082	[DFU] DFU Bootloader found with address FD:16:80:77:27:0C
+V	16:22:27.095	[DFU] DFU service started
+V	16:22:27.095	[DFU] Opening file...
+I	16:22:27.136	[DFU] Image file opened (22076 bytes in total)
+D	16:22:27.136	[DFU] wait(1000)
+D	16:22:28.137	[DFU] wait(1000)
+V	16:22:29.138	[DFU] Connecting to DFU target...
+D	16:22:29.159	[DFU] gatt = device.connectGatt(autoConnect = false)
+I	16:22:29.461	[DFU] Connected to FD:16:80:77:27:0C
+V	16:22:29.464	[DFU] Discovering services...
+D	16:22:29.464	[DFU] gatt.discoverServices()
+I	16:22:30.106	[DFU] Services discovered
+D	16:22:30.115	[DFU] wait(1000)
+V	16:22:31.117	[DFU] Reading DFU version number...
+D	16:22:31.118	[DFU] gatt.readCharacteristic(00001534-1212-efde-1523-785feabcd123)
+I	16:22:31.185	[DFU] Read Response received from 00001534-1212-efde-1523-785feabcd123, value (0x): 08-00
+A	16:22:31.186	[DFU] Version number read: 0.8
+W	16:22:31.187	[DFU] Sending application
+D	16:22:31.187	[DFU] wait(1000)
+V	16:22:32.187	[DFU] Enabling notifications for 00001531-1212-efde-1523-785feabcd123
+D	16:22:32.188	[DFU] gatt.setCharacteristicNotification(00001531-1212-efde-1523-785feabcd123, true)
+D	16:22:32.190	[DFU] gatt.writeDescriptor(00002902-0000-1000-8000-00805f9b34fb, value=0x01-00)
+I	16:22:32.232	[DFU] Data written to descr.00001531-1212-efde-1523-785feabcd123, value (0x): 01-00
+V	16:22:32.232	[DFU] Notifications enabled for 00001531-1212-efde-1523-785feabcd123
+A	16:22:32.233	[DFU] Notifications enabled
+D	16:22:32.233	[DFU] wait(1000)
+V	16:22:33.233	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:22:33.234	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:22:33.281	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 01-04
+A	16:22:33.281	[DFU] DFU Start sent (Op Code = 1, Upload Mode = 4)
+V	16:22:33.282	[DFU] Writing to characteristic 00001532-1212-efde-1523-785feabcd123
+D	16:22:33.282	[DFU] gatt.writeCharacteristic(00001532-1212-efde-1523-785feabcd123)
+I	16:22:33.284	[DFU] Data written to 00001532-1212-efde-1523-785feabcd123, value (0x): 00-00-00-00-00-00-00-00-3C-56-00-00
+A	16:22:33.284	[DFU] Firmware image size sent (0b, 0b, 22076b)
+I	16:22:35.177	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-01-01
+A	16:22:35.178	[DFU] Response received (Op Code = 1 Status = 1)
+A	16:22:35.178	[DFU] Writing Initialize DFU Parameters...
+V	16:22:35.178	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:22:35.178	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:22:35.233	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 02-00
+V	16:22:35.234	[DFU] Writing to characteristic 00001532-1212-efde-1523-785feabcd123
+D	16:22:35.234	[DFU] gatt.writeCharacteristic(00001532-1212-efde-1523-785feabcd123)
+I	16:22:35.237	[DFU] Data written to 00001532-1212-efde-1523-785feabcd123, value (0x): FF-FF-FF-FF-FF-FF-FF-FF-01-00-80-00-5C-3E
+V	16:22:35.240	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:22:35.240	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:22:35.293	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 02-01
+A	16:22:35.293	[DFU] Initialize DFU Parameters completed
+I	16:22:35.293	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-02-01
+A	16:22:35.294	[DFU] Response received (Op Code = 2, Status = 1)
+V	16:22:35.294	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:22:35.294	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:22:35.353	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 08-0A-00
+A	16:22:35.353	[DFU] Packet Receipt Notif Req (Op Code = 8) sent (Value = 10)
+V	16:22:35.353	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:22:35.353	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:22:35.413	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 03
+A	16:22:35.413	[DFU] Receive Firmware Image request sent
+A	16:22:35.425	[DFU] Uploading firmware...
+V	16:22:35.425	[DFU] Sending firmware to characteristic 00001532-1212-efde-1523-785feabcd123...
+I	16:22:47.810	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-03-01
+A	16:22:47.812	[DFU] Response received (Op Code = 3, Status = 1)
+A	16:22:47.813	[DFU] Upload completed in 12389 ms
+V	16:22:47.813	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:22:47.814	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:22:47.869	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 04
+I	16:22:47.870	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-04-01
+A	16:22:47.870	[DFU] Validate request sent
+A	16:22:47.871	[DFU] Response received (Op Code = 4, Status = 1)
+V	16:22:47.871	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:22:47.871	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:22:47.923	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 05
+A	16:22:47.925	[DFU] Activate and Reset request sent
+I	16:22:47.998	[DFU] Disconnected by the remote device
+D	16:22:48.005	[DFU] gatt.refresh() (hidden)
+D	16:22:48.008	[DFU] [Broadcast] Action received: android.bluetooth.device.action.ACL_DISCONNECTED
+D	16:22:48.011	[DFU] gatt.close()
+D	16:22:48.020	[DFU] wait(1400)
+A	16:22:49.459	Connecting to target...
+V	16:22:49.548	Connecting to FD:16:80:77:27:0B...
+D	16:22:49.548	gatt = device.connectGatt(autoConnect = false, TRANSPORT_LE)
+D	16:22:49.850	[Callback] Connection state changed with status: 0 and new state: CONNECTED (2)
+I	16:22:49.850	Connected to FD:16:80:77:27:0B
+A	16:22:49.913	Sleep...
+D	16:22:49.933	wait(1600)
+V	16:22:51.541	Wake up!
+A	16:22:51.571	Discovering services...
+V	16:22:51.580	Discovering services...
+D	16:22:51.580	gatt.discoverServices()
+D	16:22:51.589	[Callback] Services discovered with status: 0
+I	16:22:51.599	Services discovered
+V	16:22:51.634	Generic Access (0x1800)
+- Device Name [R W] (0x2A00)
+- Appearance [R] (0x2A01)
+- Peripheral Preferred Connection Parameters [R] (0x2A04)
+Generic Attribute (0x1801)
+- Service Changed [I] (0x2A05)
+   Client Characteristic Configuration (0x2902)
+Heart Rate (0x180D)
+- Heart Rate Measurement [N] (0x2A37)
+   Client Characteristic Configuration (0x2902)
+- Body Sensor Location [R] (0x2A38)
+Battery Service (0x180F)
+- Battery Level [N R] (0x2A19)
+   Client Characteristic Configuration (0x2902)
+Device Information (0x180A)
+- Manufacturer Name String [R] (0x2A29)
+Device Firmware Update Service (00001530-1212-efde-1523-785feabcd123)
+- DFU Packet [WNR] (00001532-1212-efde-1523-785feabcd123)
+- DFU Control Point [N W] (00001531-1212-efde-1523-785feabcd123)
+   Client Characteristic Configuration (0x2902)
+- DFU Version [R] (00001534-1212-efde-1523-785feabcd123)
+A	16:22:51.650	Checking Generic Access service...
+V	16:22:51.666	Reading services...
+I	16:22:51.666	Service (uuid=00001800-0000-1000-8000-00805F9B34FB, instance-id=0) found
+A	16:22:51.667	Checking Device Name characteristic...
+V	16:22:51.668	Reading characteristics...
+I	16:22:51.668	Characteristic (uuid=00002A00-0000-1000-8000-00805F9B34FB, instance-id=0) found
+V	16:22:51.668	Reading properties...
+I	16:22:51.668	Required property READ found
+I	16:22:51.668	Excluded property WRITE_WITHOUT_RESPONSE not found
+I	16:22:51.668	Excluded property SIGNED_WRITE not found
+I	16:22:51.668	Excluded property NOTIFY not found
+I	16:22:51.668	Excluded property INDICATE not found
+I	16:22:51.668	Excluded property BROADCAST not found
+I	16:22:51.668	Excluded property EXTENDED_PROPERTIES not found
+A	16:22:51.701	Reading Device Name value...
+V	16:22:51.713	Reading characteristic 00002a00-0000-1000-8000-00805f9b34fb
+D	16:22:51.713	gatt.readCharacteristic(00002a00-0000-1000-8000-00805f9b34fb)
+I	16:22:51.778	Read Response received from 00002a00-0000-1000-8000-00805f9b34fb, value: (0x) 44-46-55-31-41-31-31, "DFU1A11"
+A	16:22:51.778	"DFU1A11" received
+I	16:22:51.782	Reading characteristic succeeded
+A	16:22:51.811	Check the name...
+V	16:22:51.833	Asserting characteristic value...
+I	16:22:51.846	Value of the characteristic equals 'DFU1A11'
+V	16:22:51.866	Cleaning up...
+V	16:22:53.876	Disconnecting...
+D	16:22:53.876	gatt.disconnect()
+D	16:22:53.892	[Callback] Connection state changed with status: 0 and new state: DISCONNECTED (0)
+I	16:22:53.892	Disconnected
+D	16:22:53.894	gatt.close()
+D	16:22:53.895	wait(200)
+A	16:22:54.103	'Downgrade to SDK 11' completed
+A	16:22:54.134	Starting 'Bond' for 'Connect, bond and enable HRM notifications'
+A	16:22:54.147	Scan for target device...
+V	16:22:54.159	Starting scan...
+D	16:22:54.182	scanner.startScan(null, LOW_LATENCY, callback)
+V	16:22:55.344	Stopping scanning...
+D	16:22:55.367	scanner.stopScan(callback)
+I	16:22:55.386	Device found: FD:16:80:77:27:0B
+A	16:22:55.409	Connecting to target...
+V	16:22:55.441	Connecting to FD:16:80:77:27:0B...
+D	16:22:55.441	gatt = device.connectGatt(autoConnect = false, TRANSPORT_LE)
+D	16:22:56.236	[Callback] Connection state changed with status: 0 and new state: CONNECTED (2)
+I	16:22:56.236	Connected to FD:16:80:77:27:0B
+A	16:22:56.266	Discovering services...
+V	16:22:56.278	Discovering services...
+D	16:22:56.278	gatt.discoverServices()
+D	16:22:57.045	[Callback] Services discovered with status: 0
+I	16:22:57.052	Services discovered
+V	16:22:57.102	Generic Access (0x1800)
+- Device Name [R W] (0x2A00)
+- Appearance [R] (0x2A01)
+- Peripheral Preferred Connection Parameters [R] (0x2A04)
+Generic Attribute (0x1801)
+- Service Changed [I] (0x2A05)
+   Client Characteristic Configuration (0x2902)
+Heart Rate (0x180D)
+- Heart Rate Measurement [N] (0x2A37)
+   Client Characteristic Configuration (0x2902)
+- Body Sensor Location [R] (0x2A38)
+Battery Service (0x180F)
+- Battery Level [N R] (0x2A19)
+   Client Characteristic Configuration (0x2902)
+Device Information (0x180A)
+- Manufacturer Name String [R] (0x2A29)
+Device Firmware Update Service (00001530-1212-efde-1523-785feabcd123)
+- DFU Packet [WNR] (00001532-1212-efde-1523-785feabcd123)
+- DFU Control Point [N W] (00001531-1212-efde-1523-785feabcd123)
+   Client Characteristic Configuration (0x2902)
+- DFU Version [R] (00001534-1212-efde-1523-785feabcd123)
+A	16:22:57.107	Checking Generic Attribute service...
+V	16:22:57.123	Reading services...
+I	16:22:57.123	Service (uuid=00001801-0000-1000-8000-00805F9B34FB, instance-id=0) found
+A	16:22:57.123	Checking Device Name characteristic...
+V	16:22:57.124	Reading characteristics...
+I	16:22:57.124	Characteristic (uuid=00002A05-0000-1000-8000-00805F9B34FB, instance-id=0) found
+V	16:22:57.124	Reading properties...
+I	16:22:57.124	Excluded property WRITE not found
+I	16:22:57.124	Excluded property WRITE_WITHOUT_RESPONSE not found
+I	16:22:57.124	Excluded property SIGNED_WRITE not found
+I	16:22:57.124	Excluded property NOTIFY not found
+I	16:22:57.125	Required property INDICATE found
+I	16:22:57.125	Excluded property BROADCAST not found
+I	16:22:57.125	Excluded property EXTENDED_PROPERTIES not found
+A	16:22:57.161	Checking HR service...
+V	16:22:57.172	Reading services...
+I	16:22:57.172	Service (uuid=0000180D-0000-1000-8000-00805F9B34FB, instance-id=0) found
+A	16:22:57.172	Checking HRM characteristic...
+V	16:22:57.172	Reading characteristics...
+I	16:22:57.172	Characteristic (uuid=00002A37-0000-1000-8000-00805F9B34FB, instance-id=0) found
+V	16:22:57.172	Reading properties...
+I	16:22:57.173	Excluded property READ not found
+I	16:22:57.173	Excluded property WRITE not found
+I	16:22:57.173	Excluded property WRITE_WITHOUT_RESPONSE not found
+I	16:22:57.173	Excluded property SIGNED_WRITE not found
+I	16:22:57.173	Required property NOTIFY found
+I	16:22:57.173	Excluded property INDICATE not found
+I	16:22:57.173	Excluded property BROADCAST not found
+I	16:22:57.173	Excluded property EXTENDED_PROPERTIES not found
+A	16:22:57.173	Assert-CCCD...
+V	16:22:57.173	Reading descriptors...
+I	16:22:57.173	Descriptor (uuid=00002902-0000-1000-8000-00805f9b34fb, instance-id=0) found
+A	16:22:57.173	Checking Sensor Location characteristic...
+V	16:22:57.173	Reading characteristics...
+I	16:22:57.173	Characteristic (uuid=00002A38-0000-1000-8000-00805F9B34FB, instance-id=0) found
+V	16:22:57.173	Reading properties...
+I	16:22:57.173	Required property READ found
+I	16:22:57.173	Excluded property WRITE not found
+I	16:22:57.173	Excluded property WRITE_WITHOUT_RESPONSE not found
+I	16:22:57.173	Excluded property SIGNED_WRITE not found
+I	16:22:57.173	Excluded property NOTIFY not found
+I	16:22:57.173	Excluded property INDICATE not found
+I	16:22:57.174	Excluded property BROADCAST not found
+I	16:22:57.174	Excluded property EXTENDED_PROPERTIES not found
+A	16:22:57.197	Bond...
+V	16:22:57.207	Starting pairing...
+D	16:22:57.207	device.createBond()
+D	16:22:57.215	[Broadcast] Action received: android.bluetooth.device.action.BOND_STATE_CHANGED, bond state changed to: BOND_BONDING (11)
+D	16:22:58.228	[Broadcast] Action received: android.bluetooth.device.action.BOND_STATE_CHANGED, bond state changed to: BOND_BONDED (12)
+I	16:22:58.228	Device bonded
+A	16:22:58.253	Enable notifications...
+V	16:22:58.265	Writing to descriptor 00002902-0000-1000-8000-00805f9b34fb
+D	16:22:58.265	gatt.writeDescriptor(00002902-0000-1000-8000-00805f9b34fb, value=0x0200)
+I	16:22:58.676	Data written to descr. 00002902-0000-1000-8000-00805f9b34fb, value: (0x) 02-00
+A	16:22:58.676	"Indications enabled" sent
+D	16:22:58.696	gatt.setCharacteristicNotification(00002a05-0000-1000-8000-00805f9b34fb, true)
+V	16:22:58.709	Indications enabled for 00002a05-0000-1000-8000-00805f9b34fb
+I	16:22:58.729	Writing descriptor succeeded
+A	16:22:58.757	Reading Device Name value...
+V	16:22:58.772	Reading characteristic 00002a00-0000-1000-8000-00805f9b34fb
+D	16:22:58.772	gatt.readCharacteristic(00002a00-0000-1000-8000-00805f9b34fb)
+I	16:22:58.846	Read Response received from 00002a00-0000-1000-8000-00805f9b34fb, value: (0x) 44-46-55-31-41-31-31, "DFU1A11"
+A	16:22:58.846	"DFU1A11" received
+I	16:22:58.874	Reading characteristic succeeded
+A	16:22:58.900	Check the name...
+V	16:22:58.923	Asserting characteristic value...
+I	16:22:58.942	Value of the characteristic equals 'DFU1A11'
+A	16:22:58.964	Check the HRM notifications...
+V	16:22:58.983	Writing to descriptor 00002902-0000-1000-8000-00805f9b34fb
+D	16:22:58.983	gatt.writeDescriptor(00002902-0000-1000-8000-00805f9b34fb, value=0x0100)
+I	16:22:59.066	Data written to descr. 00002902-0000-1000-8000-00805f9b34fb, value: (0x) 01-00
+A	16:22:59.066	"Notifications enabled" sent
+D	16:22:59.081	gatt.setCharacteristicNotification(00002a37-0000-1000-8000-00805f9b34fb, true)
+V	16:22:59.083	Notifications enabled for 00002a37-0000-1000-8000-00805f9b34fb
+I	16:22:59.089	Writing descriptor succeeded
+I	16:22:59.743	Notification received from 00002a37-0000-1000-8000-00805f9b34fb, value: (0x) 14-FA-7D-00-7E-00-7F-00
+A	16:22:59.743	"Heart Rate Measurement: 250 bpm,
+Contact is NOT Detected,
+RR Interval: 123.05 ms, 124.02 ms" received
+I	16:22:59.747	Notification received
+A	16:22:59.780	Disconnect...
+V	16:22:59.797	Disconnecting...
+D	16:22:59.797	gatt.disconnect()
+D	16:22:59.806	[Callback] Connection state changed with status: 0 and new state: DISCONNECTED (0)
+I	16:22:59.806	Disconnected
+V	16:22:59.811	Cleaning up...
+D	16:23:00.735	[Callback] Connection state changed with status: 0 and new state: CONNECTED (2)
+I	16:23:00.735	Connected to FD:16:80:77:27:0B
+I	16:23:00.738	Notification received from 00002a37-0000-1000-8000-00805f9b34fb, value: (0x) 15-04-01-80-00-81-00-82-00-83-00
+A	16:23:00.738	"Heart Rate Measurement: 260 bpm,
+Contact is NOT Detected,
+RR Interval: 125.98 ms, 126.95 ms, 127.93 ms" received
+D	16:23:00.874	[Callback] Connection state changed with status: 22 and new state: DISCONNECTED (0)
+E	16:23:00.874	Error 22 (0x16): GATT CONN TERMINATE LOCAL HOST
+I	16:23:00.874	Disconnected
+D	16:23:01.834	gatt.close()
+D	16:23:01.836	wait(200)
+A	16:23:02.045	'Connect, bond and enable HRM notifications' completed
+A	16:23:02.077	Starting 'DFU test' for 'Update SD+BL+App from SDK 11'
+A	16:23:02.097	Scan for target device...
+V	16:23:02.114	Starting scan...
+D	16:23:02.148	scanner.startScan(null, LOW_LATENCY, callback)
+V	16:23:02.364	Stopping scanning...
+D	16:23:02.376	scanner.stopScan(callback)
+I	16:23:02.403	Device found: FD:16:80:77:27:0B
+A	16:23:02.423	SDK 11 update...
+V	16:23:02.464	[DFU] DFU service started
+V	16:23:02.465	[DFU] Opening file...
+I	16:23:02.491	[DFU] Image file opened (141888 bytes in total)
+D	16:23:02.492	[DFU] wait(1000)
+D	16:23:03.492	[DFU] wait(1000)
+V	16:23:04.493	[DFU] Connecting to DFU target...
+D	16:23:04.495	[DFU] gatt = device.connectGatt(autoConnect = false)
+I	16:23:04.787	[DFU] Connected to FD:16:80:77:27:0B
+D	16:23:04.790	[DFU] wait(1600)
+V	16:23:06.390	[DFU] Discovering services...
+D	16:23:06.391	[DFU] gatt.discoverServices()
+I	16:23:06.407	[DFU] Services discovered
+D	16:23:06.419	[DFU] wait(1000)
+V	16:23:07.417	[DFU] Reading DFU version number...
+D	16:23:07.418	[DFU] gatt.readCharacteristic(00001534-1212-efde-1523-785feabcd123)
+I	16:23:07.482	[DFU] Read Response received from 00001534-1212-efde-1523-785feabcd123, value (0x): 01-00
+A	16:23:07.482	[DFU] Version number read: 0.1
+W	16:23:07.483	[DFU] Sending system components
+W	16:23:07.483	[DFU] Application with buttonless update found
+V	16:23:07.483	[DFU] Jumping to the DFU Bootloader...
+V	16:23:07.483	[DFU] Enabling notifications for 00001531-1212-efde-1523-785feabcd123
+D	16:23:07.483	[DFU] gatt.setCharacteristicNotification(00001531-1212-efde-1523-785feabcd123, true)
+D	16:23:07.485	[DFU] gatt.writeDescriptor(00002902-0000-1000-8000-00805f9b34fb, value=0x01-00)
+I	16:23:07.572	[DFU] Data written to descr.00001531-1212-efde-1523-785feabcd123, value (0x): 01-00
+V	16:23:07.572	[DFU] Notifications enabled for 00001531-1212-efde-1523-785feabcd123
+A	16:23:07.572	[DFU] Notifications enabled
+D	16:23:07.572	[DFU] wait(1000)
+V	16:23:08.579	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:23:08.580	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+A	16:23:08.655	[DFU] Jump to bootloader sent (Op Code = 1, Upload Mode = 4)
+I	16:23:08.749	[DFU] Disconnected by the remote device
+D	16:23:08.754	[DFU] gatt.close()
+D	16:23:08.756	[DFU] [Broadcast] Action received: android.bluetooth.device.action.ACL_DISCONNECTED
+V	16:23:08.763	[DFU] DFU service started
+V	16:23:08.763	[DFU] Opening file...
+I	16:23:08.797	[DFU] Image file opened (141888 bytes in total)
+D	16:23:08.797	[DFU] wait(1000)
+D	16:23:09.798	[DFU] wait(1000)
+V	16:23:10.799	[DFU] Connecting to DFU target...
+D	16:23:10.827	[DFU] gatt = device.connectGatt(autoConnect = false)
+I	16:23:11.000	[DFU] Connected to FD:16:80:77:27:0B
+D	16:23:11.002	[DFU] wait(1600)
+V	16:23:12.603	[DFU] Discovering services...
+D	16:23:12.603	[DFU] gatt.discoverServices()
+I	16:23:12.609	[DFU] Services discovered
+D	16:23:12.614	[DFU] wait(1000)
+V	16:23:13.615	[DFU] Reading DFU version number...
+D	16:23:13.615	[DFU] gatt.readCharacteristic(00001534-1212-efde-1523-785feabcd123)
+I	16:23:13.661	[DFU] Read Response received from 00001534-1212-efde-1523-785feabcd123, value (0x): 08-00
+A	16:23:13.662	[DFU] Version number read: 0.8
+W	16:23:13.662	[DFU] Sending system components
+D	16:23:13.663	[DFU] wait(1000)
+V	16:23:14.663	[DFU] Enabling notifications for 00001531-1212-efde-1523-785feabcd123
+D	16:23:14.663	[DFU] gatt.setCharacteristicNotification(00001531-1212-efde-1523-785feabcd123, true)
+D	16:23:14.665	[DFU] gatt.writeDescriptor(00002902-0000-1000-8000-00805f9b34fb, value=0x01-00)
+I	16:23:14.742	[DFU] Data written to descr.00001531-1212-efde-1523-785feabcd123, value (0x): 01-00
+V	16:23:14.742	[DFU] Notifications enabled for 00001531-1212-efde-1523-785feabcd123
+A	16:23:14.742	[DFU] Notifications enabled
+D	16:23:14.742	[DFU] wait(1000)
+V	16:23:15.742	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:23:15.743	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:23:15.792	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 01-03
+A	16:23:15.792	[DFU] DFU Start sent (Op Code = 1, Upload Mode = 3)
+V	16:23:15.792	[DFU] Writing to characteristic 00001532-1212-efde-1523-785feabcd123
+D	16:23:15.792	[DFU] gatt.writeCharacteristic(00001532-1212-efde-1523-785feabcd123)
+I	16:23:15.799	[DFU] Data written to 00001532-1212-efde-1523-785feabcd123, value (0x): F4-9F-01-00-10-34-00-00-00-00-00-00
+A	16:23:15.802	[DFU] Firmware image size sent (106484b, 13328b, 0b)
+I	16:23:19.368	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-01-01
+A	16:23:19.368	[DFU] Response received (Op Code = 1 Status = 1)
+A	16:23:19.368	[DFU] Writing Initialize DFU Parameters...
+V	16:23:19.368	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:23:19.368	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:23:19.425	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 02-00
+V	16:23:19.427	[DFU] Writing to characteristic 00001532-1212-efde-1523-785feabcd123
+D	16:23:19.427	[DFU] gatt.writeCharacteristic(00001532-1212-efde-1523-785feabcd123)
+I	16:23:19.439	[DFU] Data written to 00001532-1212-efde-1523-785feabcd123, value (0x): FF-FF-FF-FF-FF-FF-FF-FF-01-00-FE-FF-9B-35
+V	16:23:19.441	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:23:19.441	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:23:19.484	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 02-01
+A	16:23:19.485	[DFU] Initialize DFU Parameters completed
+I	16:23:19.485	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-02-01
+A	16:23:19.486	[DFU] Response received (Op Code = 2, Status = 1)
+V	16:23:19.486	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:23:19.486	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:23:19.542	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 08-0A-00
+A	16:23:19.542	[DFU] Packet Receipt Notif Req (Op Code = 8) sent (Value = 10)
+V	16:23:19.546	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:23:19.547	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:23:19.602	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 03
+A	16:23:19.602	[DFU] Receive Firmware Image request sent
+A	16:23:19.615	[DFU] Uploading firmware...
+V	16:23:19.615	[DFU] Sending firmware to characteristic 00001532-1212-efde-1523-785feabcd123...
+I	16:24:25.001	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-03-01
+A	16:24:25.004	[DFU] Response received (Op Code = 3, Status = 1)
+A	16:24:25.004	[DFU] Upload completed in 65376 ms
+V	16:24:25.004	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:24:25.004	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:24:25.061	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 04
+A	16:24:25.061	[DFU] Validate request sent
+I	16:24:25.216	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-04-01
+A	16:24:25.232	[DFU] Response received (Op Code = 4, Status = 1)
+V	16:24:25.242	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:24:25.242	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+A	16:24:29.281	[DFU] Activate and Reset request sent
+I	16:24:29.302	[DFU] Disconnected by the remote device
+D	16:24:29.305	[DFU] [Broadcast] Action received: android.bluetooth.device.action.ACL_DISCONNECTED
+D	16:24:29.307	[DFU] gatt.close()
+V	16:24:29.310	[DFU] Scanning for the DFU Bootloader...
+I	16:24:29.392	[DFU] DFU Bootloader found with address FD:16:80:77:27:0C
+V	16:24:29.398	[DFU] DFU service started
+V	16:24:29.398	[DFU] Opening file...
+I	16:24:29.449	[DFU] Image file opened (22076 bytes in total)
+D	16:24:29.450	[DFU] wait(1000)
+D	16:24:30.450	[DFU] wait(1000)
+V	16:24:31.453	[DFU] Connecting to DFU target...
+D	16:24:31.480	[DFU] gatt = device.connectGatt(autoConnect = false)
+I	16:24:31.647	[DFU] Connected to FD:16:80:77:27:0C
+V	16:24:31.670	[DFU] Discovering services...
+D	16:24:31.670	[DFU] gatt.discoverServices()
+I	16:24:32.558	[DFU] Services discovered
+D	16:24:32.564	[DFU] wait(1000)
+V	16:24:33.565	[DFU] Reading DFU version number...
+D	16:24:33.565	[DFU] gatt.readCharacteristic(00001534-1212-efde-1523-785feabcd123)
+I	16:24:33.611	[DFU] Read Response received from 00001534-1212-efde-1523-785feabcd123, value (0x): 08-00
+A	16:24:33.620	[DFU] Version number read: 0.8
+W	16:24:33.620	[DFU] Sending application
+D	16:24:33.620	[DFU] wait(1000)
+V	16:24:34.621	[DFU] Enabling notifications for 00001531-1212-efde-1523-785feabcd123
+D	16:24:34.621	[DFU] gatt.setCharacteristicNotification(00001531-1212-efde-1523-785feabcd123, true)
+D	16:24:34.625	[DFU] gatt.writeDescriptor(00002902-0000-1000-8000-00805f9b34fb, value=0x01-00)
+I	16:24:34.660	[DFU] Data written to descr.00001531-1212-efde-1523-785feabcd123, value (0x): 01-00
+V	16:24:34.660	[DFU] Notifications enabled for 00001531-1212-efde-1523-785feabcd123
+A	16:24:34.661	[DFU] Notifications enabled
+D	16:24:34.661	[DFU] wait(1000)
+V	16:24:35.661	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:24:35.662	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:24:35.711	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 01-04
+A	16:24:35.714	[DFU] DFU Start sent (Op Code = 1, Upload Mode = 4)
+V	16:24:35.714	[DFU] Writing to characteristic 00001532-1212-efde-1523-785feabcd123
+D	16:24:35.714	[DFU] gatt.writeCharacteristic(00001532-1212-efde-1523-785feabcd123)
+I	16:24:35.721	[DFU] Data written to 00001532-1212-efde-1523-785feabcd123, value (0x): 00-00-00-00-00-00-00-00-3C-56-00-00
+A	16:24:35.722	[DFU] Firmware image size sent (0b, 0b, 22076b)
+I	16:24:37.605	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-01-01
+A	16:24:37.606	[DFU] Response received (Op Code = 1 Status = 1)
+A	16:24:37.606	[DFU] Writing Initialize DFU Parameters...
+V	16:24:37.606	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:24:37.606	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:24:37.662	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 02-00
+V	16:24:37.663	[DFU] Writing to characteristic 00001532-1212-efde-1523-785feabcd123
+D	16:24:37.663	[DFU] gatt.writeCharacteristic(00001532-1212-efde-1523-785feabcd123)
+I	16:24:37.674	[DFU] Data written to 00001532-1212-efde-1523-785feabcd123, value (0x): FF-FF-FF-FF-FF-FF-FF-FF-01-00-FE-FF-5C-3E
+V	16:24:37.684	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:24:37.684	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:24:37.722	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 02-01
+A	16:24:37.722	[DFU] Initialize DFU Parameters completed
+I	16:24:37.723	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-02-01
+A	16:24:37.723	[DFU] Response received (Op Code = 2, Status = 1)
+V	16:24:37.724	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:24:37.724	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:24:37.782	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 08-0A-00
+A	16:24:37.782	[DFU] Packet Receipt Notif Req (Op Code = 8) sent (Value = 10)
+V	16:24:37.782	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:24:37.782	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:24:37.840	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 03
+A	16:24:37.841	[DFU] Receive Firmware Image request sent
+A	16:24:37.845	[DFU] Uploading firmware...
+V	16:24:37.845	[DFU] Sending firmware to characteristic 00001532-1212-efde-1523-785feabcd123...
+I	16:24:50.351	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-03-01
+A	16:24:50.352	[DFU] Response received (Op Code = 3, Status = 1)
+A	16:24:50.353	[DFU] Upload completed in 12466 ms
+V	16:24:50.353	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:24:50.353	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:24:50.411	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 04
+A	16:24:50.412	[DFU] Validate request sent
+I	16:24:50.412	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-04-01
+A	16:24:50.413	[DFU] Response received (Op Code = 4, Status = 1)
+V	16:24:50.440	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:24:50.440	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+A	16:24:50.543	[DFU] Activate and Reset request sent
+I	16:24:50.548	[DFU] Disconnected by the remote device
+D	16:24:50.550	[DFU] gatt.refresh() (hidden)
+D	16:24:50.550	[DFU] [Broadcast] Action received: android.bluetooth.device.action.ACL_DISCONNECTED
+D	16:24:50.554	[DFU] gatt.close()
+D	16:24:50.559	[DFU] wait(1400)
+A	16:24:51.967	Connecting to target...
+V	16:24:52.044	Connecting to FD:16:80:77:27:0B...
+D	16:24:52.044	gatt = device.connectGatt(autoConnect = false, TRANSPORT_LE)
+D	16:24:52.746	[Callback] Connection state changed with status: 0 and new state: CONNECTED (2)
+I	16:24:52.746	Connected to FD:16:80:77:27:0B
+A	16:24:52.798	Sleep...
+D	16:24:52.824	wait(1600)
+V	16:24:54.428	Wake up!
+A	16:24:54.480	Discovering services...
+V	16:24:54.508	Discovering services...
+D	16:24:54.508	gatt.discoverServices()
+D	16:24:54.516	[Callback] Services discovered with status: 0
+I	16:24:54.533	Services discovered
+V	16:24:54.571	Generic Access (0x1800)
+- Device Name [R W] (0x2A00)
+- Appearance [R] (0x2A01)
+- Peripheral Preferred Connection Parameters [R] (0x2A04)
+Generic Attribute (0x1801)
+- Service Changed [I] (0x2A05)
+   Client Characteristic Configuration (0x2902)
+Heart Rate (0x180D)
+- Heart Rate Measurement [N] (0x2A37)
+   Client Characteristic Configuration (0x2902)
+- Body Sensor Location [R] (0x2A38)
+Battery Service (0x180F)
+- Battery Level [N R] (0x2A19)
+   Client Characteristic Configuration (0x2902)
+Device Information (0x180A)
+- Manufacturer Name String [R] (0x2A29)
+Device Firmware Update Service (00001530-1212-efde-1523-785feabcd123)
+- DFU Packet [WNR] (00001532-1212-efde-1523-785feabcd123)
+- DFU Control Point [N W] (00001531-1212-efde-1523-785feabcd123)
+   Client Characteristic Configuration (0x2902)
+- DFU Version [R] (00001534-1212-efde-1523-785feabcd123)
+A	16:24:54.603	Checking Generic Access service...
+V	16:24:54.616	Reading services...
+I	16:24:54.616	Service (uuid=00001800-0000-1000-8000-00805F9B34FB, instance-id=0) found
+A	16:24:54.616	Checking Device Name characteristic...
+V	16:24:54.617	Reading characteristics...
+I	16:24:54.617	Characteristic (uuid=00002A00-0000-1000-8000-00805F9B34FB, instance-id=0) found
+V	16:24:54.617	Reading properties...
+I	16:24:54.617	Required property READ found
+I	16:24:54.617	Excluded property WRITE_WITHOUT_RESPONSE not found
+I	16:24:54.617	Excluded property SIGNED_WRITE not found
+I	16:24:54.617	Excluded property NOTIFY not found
+I	16:24:54.617	Excluded property INDICATE not found
+I	16:24:54.617	Excluded property BROADCAST not found
+I	16:24:54.617	Excluded property EXTENDED_PROPERTIES not found
+A	16:24:54.639	Reading Device Name value...
+V	16:24:54.653	Reading characteristic 00002a00-0000-1000-8000-00805f9b34fb
+D	16:24:54.653	gatt.readCharacteristic(00002a00-0000-1000-8000-00805f9b34fb)
+I	16:24:54.716	Read Response received from 00002a00-0000-1000-8000-00805f9b34fb, value: (0x) 44-46-55-31-41-31-31, "DFU1A11"
+A	16:24:54.716	"DFU1A11" received
+I	16:24:54.738	Reading characteristic succeeded
+A	16:24:54.768	Check the name...
+V	16:24:54.790	Asserting characteristic value...
+I	16:24:54.815	Notification received from 00002a37-0000-1000-8000-00805f9b34fb, value: (0x) 14-13-6B-00-6C-00-6D-00-6E-00
+A	16:24:54.815	"Heart Rate Measurement: 19 bpm,
+Contact is NOT Detected,
+RR Interval: 105.47 ms, 106.45 ms, 107.42 ms" received
+I	16:24:54.818	Value of the characteristic equals 'DFU1A11'
+V	16:24:54.835	Cleaning up...
+I	16:24:55.806	Notification received from 00002a37-0000-1000-8000-00805f9b34fb, value: (0x) 04-1D
+A	16:24:55.806	"Heart Rate Measurement: 29 bpm,
+Contact is NOT Detected" received
+I	16:24:56.832	Notification received from 00002a37-0000-1000-8000-00805f9b34fb, value: (0x) 14-27-6F-00-70-00-71-00
+A	16:24:56.833	"Heart Rate Measurement: 39 bpm,
+Contact is NOT Detected,
+RR Interval: 109.38 ms, 110.35 ms" received
+V	16:24:56.846	Disconnecting...
+D	16:24:56.846	gatt.disconnect()
+D	16:24:56.850	[Callback] Connection state changed with status: 0 and new state: DISCONNECTED (0)
+I	16:24:56.850	Disconnected
+D	16:24:56.859	gatt.close()
+D	16:24:56.869	wait(200)
+A	16:24:57.077	'Update SD+BL+App from SDK 11' completed
+A	16:24:57.107	Starting 'Check bonding' for 'Check if bonding is preserved'
+A	16:24:57.125	Scan for target device...
+V	16:24:57.139	Starting scan...
+D	16:24:57.153	scanner.startScan(null, LOW_LATENCY, callback)
+V	16:24:57.948	Stopping scanning...
+D	16:24:57.962	scanner.stopScan(callback)
+I	16:24:57.982	Device found: FD:16:80:77:27:0B
+A	16:24:58.014	Connecting to target...
+V	16:24:58.036	Connecting to FD:16:80:77:27:0B...
+D	16:24:58.036	gatt = device.connectGatt(autoConnect = false, TRANSPORT_LE)
+D	16:24:58.411	[Callback] Connection state changed with status: 0 and new state: CONNECTED (2)
+I	16:24:58.411	Connected to FD:16:80:77:27:0B
+A	16:24:58.418	Sleep...
+D	16:24:58.459	wait(1600)
+V	16:25:00.053	Wake up!
+A	16:25:00.078	Discovering services...
+V	16:25:00.087	Discovering services...
+D	16:25:00.087	gatt.discoverServices()
+D	16:25:00.092	[Callback] Services discovered with status: 0
+I	16:25:00.102	Services discovered
+V	16:25:00.140	Generic Access (0x1800)
+- Device Name [R W] (0x2A00)
+- Appearance [R] (0x2A01)
+- Peripheral Preferred Connection Parameters [R] (0x2A04)
+Generic Attribute (0x1801)
+- Service Changed [I] (0x2A05)
+   Client Characteristic Configuration (0x2902)
+Heart Rate (0x180D)
+- Heart Rate Measurement [N] (0x2A37)
+   Client Characteristic Configuration (0x2902)
+- Body Sensor Location [R] (0x2A38)
+Battery Service (0x180F)
+- Battery Level [N R] (0x2A19)
+   Client Characteristic Configuration (0x2902)
+Device Information (0x180A)
+- Manufacturer Name String [R] (0x2A29)
+Device Firmware Update Service (00001530-1212-efde-1523-785feabcd123)
+- DFU Packet [WNR] (00001532-1212-efde-1523-785feabcd123)
+- DFU Control Point [N W] (00001531-1212-efde-1523-785feabcd123)
+   Client Characteristic Configuration (0x2902)
+- DFU Version [R] (00001534-1212-efde-1523-785feabcd123)
+A	16:25:00.157	Checking HR service...
+V	16:25:00.165	Reading services...
+I	16:25:00.166	Service (uuid=0000180D-0000-1000-8000-00805F9B34FB, instance-id=0) found
+A	16:25:00.166	Checking HRM characteristic...
+V	16:25:00.166	Reading characteristics...
+I	16:25:00.166	Characteristic (uuid=00002A37-0000-1000-8000-00805F9B34FB, instance-id=0) found
+V	16:25:00.166	Reading properties...
+I	16:25:00.166	Excluded property READ not found
+I	16:25:00.166	Excluded property WRITE not found
+I	16:25:00.166	Excluded property WRITE_WITHOUT_RESPONSE not found
+I	16:25:00.166	Excluded property SIGNED_WRITE not found
+I	16:25:00.166	Required property NOTIFY found
+I	16:25:00.166	Excluded property INDICATE not found
+I	16:25:00.166	Excluded property BROADCAST not found
+I	16:25:00.166	Excluded property EXTENDED_PROPERTIES not found
+A	16:25:00.166	Assert-CCCD...
+V	16:25:00.166	Reading descriptors...
+I	16:25:00.166	Descriptor (uuid=00002902-0000-1000-8000-00805f9b34fb, instance-id=0) found
+A	16:25:00.167	Checking Sensor Location characteristic...
+V	16:25:00.167	Reading characteristics...
+I	16:25:00.167	Characteristic (uuid=00002A38-0000-1000-8000-00805F9B34FB, instance-id=0) found
+V	16:25:00.167	Reading properties...
+I	16:25:00.167	Required property READ found
+I	16:25:00.167	Excluded property WRITE not found
+I	16:25:00.167	Excluded property WRITE_WITHOUT_RESPONSE not found
+I	16:25:00.167	Excluded property SIGNED_WRITE not found
+I	16:25:00.167	Excluded property NOTIFY not found
+I	16:25:00.167	Excluded property INDICATE not found
+I	16:25:00.167	Excluded property BROADCAST not found
+I	16:25:00.167	Excluded property EXTENDED_PROPERTIES not found
+A	16:25:00.202	Check notifications enabled...
+I	16:25:00.840	Notification received from 00002a37-0000-1000-8000-00805f9b34fb, value: (0x) 16-4F-79-00-7A-00-7B-00-7C-00
+A	16:25:00.840	"Heart Rate Measurement: 79 bpm,
+Contact is Detected,
+RR Interval: 119.14 ms, 120.12 ms, 121.09 ms" received
+I	16:25:00.850	Notification received
+A	16:25:00.891	Disconnect...
+V	16:25:00.901	Disconnecting...
+D	16:25:00.901	gatt.disconnect()
+D	16:25:00.904	[Callback] Connection state changed with status: 0 and new state: DISCONNECTED (0)
+I	16:25:00.904	Disconnected
+V	16:25:00.908	Cleaning up...
+D	16:25:01.837	[Callback] Connection state changed with status: 0 and new state: CONNECTED (2)
+I	16:25:01.837	Connected to FD:16:80:77:27:0B
+I	16:25:01.840	Notification received from 00002a37-0000-1000-8000-00805f9b34fb, value: (0x) 06-59
+A	16:25:01.840	"Heart Rate Measurement: 89 bpm,
+Contact is Detected" received
+D	16:25:01.923	[Callback] Connection state changed with status: 22 and new state: DISCONNECTED (0)
+E	16:25:01.923	Error 22 (0x16): GATT CONN TERMINATE LOCAL HOST
+I	16:25:01.923	Disconnected
+D	16:25:02.921	gatt.close()
+D	16:25:02.947	wait(200)
+A	16:25:03.168	'Check if bonding is preserved' completed
+A	16:25:03.203	Starting 'Delete bond information' for 'Clean up'
+A	16:25:03.232	Unbond...
+V	16:25:03.255	Removing bond information...
+D	16:25:03.255	device.removeBond() (hidden)
+D	16:25:03.274	[Broadcast] Action received: android.bluetooth.device.action.BOND_STATE_CHANGED, bond state changed to: BOND_NONE (10)
+I	16:25:03.274	Bond information deleted
+V	16:25:03.280	Cleaning up...
+A	16:25:05.297	'Clean up' completed
+A	16:25:05.325	Starting 'DFU downgrade test' for 'Downgrade to SDK 8'
+A	16:25:05.337	Scan for target device...
+V	16:25:05.351	Starting scan...
+D	16:25:05.375	scanner.startScan(null, LOW_LATENCY, callback)
+V	16:25:05.589	Stopping scanning...
+D	16:25:05.614	scanner.stopScan(callback)
+I	16:25:05.624	Device found: FD:16:80:77:27:0B
+A	16:25:05.636	SDK 11 -> 8 update...
+V	16:25:05.669	[DFU] DFU service started
+V	16:25:05.670	[DFU] Opening file...
+I	16:25:05.703	[DFU] Image file opened (122980 bytes in total)
+D	16:25:05.704	[DFU] wait(1000)
+D	16:25:06.704	[DFU] wait(1000)
+V	16:25:07.705	[DFU] Connecting to DFU target...
+D	16:25:07.707	[DFU] gatt = device.connectGatt(autoConnect = false)
+I	16:25:08.221	[DFU] Connected to FD:16:80:77:27:0B
+V	16:25:08.232	[DFU] Discovering services...
+D	16:25:08.232	[DFU] gatt.discoverServices()
+I	16:25:09.038	[DFU] Services discovered
+D	16:25:09.060	[DFU] wait(1000)
+V	16:25:10.061	[DFU] Reading DFU version number...
+D	16:25:10.061	[DFU] gatt.readCharacteristic(00001534-1212-efde-1523-785feabcd123)
+I	16:25:10.151	[DFU] Read Response received from 00001534-1212-efde-1523-785feabcd123, value (0x): 01-00
+A	16:25:10.152	[DFU] Version number read: 0.1
+W	16:25:10.152	[DFU] Sending system components
+W	16:25:10.153	[DFU] Application with buttonless update found
+V	16:25:10.153	[DFU] Jumping to the DFU Bootloader...
+V	16:25:10.153	[DFU] Enabling notifications for 00001531-1212-efde-1523-785feabcd123
+D	16:25:10.153	[DFU] gatt.setCharacteristicNotification(00001531-1212-efde-1523-785feabcd123, true)
+D	16:25:10.156	[DFU] gatt.writeDescriptor(00002902-0000-1000-8000-00805f9b34fb, value=0x01-00)
+I	16:25:10.241	[DFU] Data written to descr.00001531-1212-efde-1523-785feabcd123, value (0x): 01-00
+V	16:25:10.241	[DFU] Notifications enabled for 00001531-1212-efde-1523-785feabcd123
+A	16:25:10.242	[DFU] Notifications enabled
+D	16:25:10.242	[DFU] wait(1000)
+V	16:25:11.249	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:25:11.250	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+A	16:25:11.366	[DFU] Jump to bootloader sent (Op Code = 1, Upload Mode = 4)
+I	16:25:11.463	[DFU] Disconnected by the remote device
+D	16:25:11.464	[DFU] gatt.refresh() (hidden)
+D	16:25:11.479	[DFU] gatt.close()
+D	16:25:11.480	[DFU] [Broadcast] Action received: android.bluetooth.device.action.ACL_DISCONNECTED
+V	16:25:11.483	[DFU] DFU service started
+V	16:25:11.483	[DFU] Opening file...
+I	16:25:11.510	[DFU] Image file opened (122980 bytes in total)
+D	16:25:11.510	[DFU] wait(1000)
+D	16:25:12.512	[DFU] wait(1000)
+V	16:25:13.512	[DFU] Connecting to DFU target...
+D	16:25:13.521	[DFU] gatt = device.connectGatt(autoConnect = false)
+I	16:25:13.665	[DFU] Connected to FD:16:80:77:27:0B
+V	16:25:13.666	[DFU] Discovering services...
+D	16:25:13.666	[DFU] gatt.discoverServices()
+I	16:25:14.587	[DFU] Services discovered
+D	16:25:14.598	[DFU] wait(1000)
+V	16:25:15.601	[DFU] Reading DFU version number...
+D	16:25:15.601	[DFU] gatt.readCharacteristic(00001534-1212-efde-1523-785feabcd123)
+I	16:25:15.642	[DFU] Read Response received from 00001534-1212-efde-1523-785feabcd123, value (0x): 08-00
+A	16:25:15.643	[DFU] Version number read: 0.8
+W	16:25:15.644	[DFU] Sending system components
+D	16:25:15.644	[DFU] wait(1000)
+V	16:25:16.646	[DFU] Enabling notifications for 00001531-1212-efde-1523-785feabcd123
+D	16:25:16.647	[DFU] gatt.setCharacteristicNotification(00001531-1212-efde-1523-785feabcd123, true)
+D	16:25:16.649	[DFU] gatt.writeDescriptor(00002902-0000-1000-8000-00805f9b34fb, value=0x01-00)
+I	16:25:16.691	[DFU] Data written to descr.00001531-1212-efde-1523-785feabcd123, value (0x): 01-00
+V	16:25:16.691	[DFU] Notifications enabled for 00001531-1212-efde-1523-785feabcd123
+A	16:25:16.691	[DFU] Notifications enabled
+D	16:25:16.691	[DFU] wait(1000)
+V	16:25:17.693	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:25:17.694	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:25:17.741	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 01-03
+A	16:25:17.742	[DFU] DFU Start sent (Op Code = 1, Upload Mode = 3)
+V	16:25:17.742	[DFU] Writing to characteristic 00001532-1212-efde-1523-785feabcd123
+D	16:25:17.742	[DFU] gatt.writeCharacteristic(00001532-1212-efde-1523-785feabcd123)
+I	16:25:17.745	[DFU] Data written to 00001532-1212-efde-1523-785feabcd123, value (0x): 18-59-01-00-FC-39-00-00-00-00-00-00
+A	16:25:17.745	[DFU] Firmware image size sent (88344b, 14844b, 0b)
+I	16:25:20.812	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-01-01
+A	16:25:20.817	[DFU] Response received (Op Code = 1 Status = 1)
+A	16:25:20.817	[DFU] Writing Initialize DFU Parameters...
+V	16:25:20.817	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:25:20.817	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:25:20.864	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 02-00
+V	16:25:20.865	[DFU] Writing to characteristic 00001532-1212-efde-1523-785feabcd123
+D	16:25:20.865	[DFU] gatt.writeCharacteristic(00001532-1212-efde-1523-785feabcd123)
+I	16:25:20.872	[DFU] Data written to 00001532-1212-efde-1523-785feabcd123, value (0x): FF-FF-FF-FF-FF-FF-FF-FF-01-00-FE-FF-6E-9B
+V	16:25:20.874	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:25:20.874	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:25:20.924	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 02-01
+A	16:25:20.925	[DFU] Initialize DFU Parameters completed
+I	16:25:20.926	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-02-01
+A	16:25:20.927	[DFU] Response received (Op Code = 2, Status = 1)
+V	16:25:20.928	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:25:20.928	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:25:20.985	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 08-0A-00
+A	16:25:20.985	[DFU] Packet Receipt Notif Req (Op Code = 8) sent (Value = 10)
+V	16:25:20.986	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:25:20.986	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:25:21.044	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 03
+A	16:25:21.045	[DFU] Receive Firmware Image request sent
+A	16:25:21.074	[DFU] Uploading firmware...
+V	16:25:21.074	[DFU] Sending firmware to characteristic 00001532-1212-efde-1523-785feabcd123...
+I	16:26:15.884	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-03-01
+A	16:26:15.886	[DFU] Response received (Op Code = 3, Status = 1)
+A	16:26:15.887	[DFU] Upload completed in 54839 ms
+V	16:26:15.887	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:26:15.887	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:26:15.941	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 04
+A	16:26:15.941	[DFU] Validate request sent
+I	16:26:16.065	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-04-01
+A	16:26:16.068	[DFU] Response received (Op Code = 4, Status = 1)
+V	16:26:16.069	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:26:16.069	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+A	16:26:20.101	[DFU] Activate and Reset request sent
+I	16:26:20.101	[DFU] Disconnected by the remote device
+D	16:26:20.103	[DFU] gatt.refresh() (hidden)
+D	16:26:20.114	[DFU] [Broadcast] Action received: android.bluetooth.device.action.ACL_DISCONNECTED
+D	16:26:20.120	[DFU] gatt.close()
+V	16:26:20.121	[DFU] Scanning for the DFU Bootloader...
+I	16:26:20.331	[DFU] DFU Bootloader found with address FD:16:80:77:27:0C
+V	16:26:20.353	[DFU] DFU service started
+V	16:26:20.354	[DFU] Opening file...
+I	16:26:20.436	[DFU] Image file opened (19792 bytes in total)
+D	16:26:20.436	[DFU] wait(1000)
+D	16:26:21.438	[DFU] wait(1000)
+V	16:26:22.438	[DFU] Connecting to DFU target...
+D	16:26:22.456	[DFU] gatt = device.connectGatt(autoConnect = false)
+I	16:26:22.665	[DFU] Connected to FD:16:80:77:27:0C
+V	16:26:22.675	[DFU] Discovering services...
+D	16:26:22.675	[DFU] gatt.discoverServices()
+I	16:26:23.598	[DFU] Services discovered
+D	16:26:23.607	[DFU] wait(1000)
+V	16:26:24.610	[DFU] Reading DFU version number...
+D	16:26:24.610	[DFU] gatt.readCharacteristic(00001534-1212-efde-1523-785feabcd123)
+I	16:26:24.670	[DFU] Read Response received from 00001534-1212-efde-1523-785feabcd123, value (0x): 06-00
+A	16:26:24.671	[DFU] Version number read: 0.6
+W	16:26:24.672	[DFU] Sending application
+D	16:26:24.672	[DFU] wait(1000)
+V	16:26:25.673	[DFU] Enabling notifications for 00001531-1212-efde-1523-785feabcd123
+D	16:26:25.674	[DFU] gatt.setCharacteristicNotification(00001531-1212-efde-1523-785feabcd123, true)
+D	16:26:25.675	[DFU] gatt.writeDescriptor(00002902-0000-1000-8000-00805f9b34fb, value=0x01-00)
+I	16:26:25.720	[DFU] Data written to descr.00001531-1212-efde-1523-785feabcd123, value (0x): 01-00
+V	16:26:25.720	[DFU] Notifications enabled for 00001531-1212-efde-1523-785feabcd123
+A	16:26:25.720	[DFU] Notifications enabled
+D	16:26:25.720	[DFU] wait(1000)
+V	16:26:26.722	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:26:26.722	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:26:26.770	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 01-04
+A	16:26:26.771	[DFU] DFU Start sent (Op Code = 1, Upload Mode = 4)
+V	16:26:26.771	[DFU] Writing to characteristic 00001532-1212-efde-1523-785feabcd123
+D	16:26:26.771	[DFU] gatt.writeCharacteristic(00001532-1212-efde-1523-785feabcd123)
+I	16:26:26.775	[DFU] Data written to 00001532-1212-efde-1523-785feabcd123, value (0x): 00-00-00-00-00-00-00-00-50-4D-00-00
+A	16:26:26.776	[DFU] Firmware image size sent (0b, 0b, 19792b)
+I	16:26:28.850	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-01-01
+A	16:26:28.851	[DFU] Response received (Op Code = 1 Status = 1)
+A	16:26:28.851	[DFU] Writing Initialize DFU Parameters...
+V	16:26:28.852	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:26:28.852	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:26:28.905	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 02-00
+V	16:26:28.908	[DFU] Writing to characteristic 00001532-1212-efde-1523-785feabcd123
+D	16:26:28.908	[DFU] gatt.writeCharacteristic(00001532-1212-efde-1523-785feabcd123)
+I	16:26:28.914	[DFU] Data written to 00001532-1212-efde-1523-785feabcd123, value (0x): FF-FF-FF-FF-FF-FF-FF-FF-01-00-64-00-91-BB
+V	16:26:28.917	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:26:28.917	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:26:28.963	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 02-01
+A	16:26:28.964	[DFU] Initialize DFU Parameters completed
+I	16:26:28.965	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-02-01
+A	16:26:28.967	[DFU] Response received (Op Code = 2, Status = 1)
+V	16:26:28.968	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:26:28.968	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:26:29.023	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 08-0A-00
+A	16:26:29.024	[DFU] Packet Receipt Notif Req (Op Code = 8) sent (Value = 10)
+V	16:26:29.025	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:26:29.025	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:26:29.084	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 03
+A	16:26:29.085	[DFU] Receive Firmware Image request sent
+A	16:26:29.110	[DFU] Uploading firmware...
+V	16:26:29.110	[DFU] Sending firmware to characteristic 00001532-1212-efde-1523-785feabcd123...
+I	16:26:39.400	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-03-01
+A	16:26:39.401	[DFU] Response received (Op Code = 3, Status = 1)
+A	16:26:39.401	[DFU] Upload completed in 10315 ms
+V	16:26:39.401	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:26:39.401	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:26:39.489	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 04
+A	16:26:39.490	[DFU] Validate request sent
+I	16:26:39.490	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-04-01
+A	16:26:39.491	[DFU] Response received (Op Code = 4, Status = 1)
+V	16:26:39.498	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:26:39.498	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:26:39.551	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 05
+A	16:26:39.551	[DFU] Activate and Reset request sent
+D	16:26:39.622	[DFU] [Broadcast] Action received: android.bluetooth.device.action.ACL_DISCONNECTED
+I	16:26:39.626	[DFU] Disconnected by the remote device
+D	16:26:39.627	[DFU] gatt.refresh() (hidden)
+D	16:26:39.627	[DFU] gatt.close()
+D	16:26:39.629	[DFU] wait(1400)
+A	16:26:41.037	Connecting to target...
+V	16:26:41.083	Connecting to FD:16:80:77:27:0B...
+D	16:26:41.083	gatt = device.connectGatt(autoConnect = false, TRANSPORT_LE)
+D	16:26:41.774	[Callback] Connection state changed with status: 0 and new state: CONNECTED (2)
+I	16:26:41.774	Connected to FD:16:80:77:27:0B
+A	16:26:41.782	Sleep...
+D	16:26:41.827	wait(1600)
+V	16:26:43.424	Wake up!
+A	16:26:43.460	Discovering services...
+V	16:26:43.474	Discovering services...
+D	16:26:43.474	gatt.discoverServices()
+D	16:26:43.491	[Callback] Services discovered with status: 0
+I	16:26:43.501	Services discovered
+V	16:26:43.548	Generic Access (0x1800)
+- Device Name [R W] (0x2A00)
+- Appearance [R] (0x2A01)
+- Peripheral Preferred Connection Parameters [R] (0x2A04)
+Generic Attribute (0x1801)
+- Service Changed [I] (0x2A05)
+   Client Characteristic Configuration (0x2902)
+Heart Rate (0x180D)
+- Heart Rate Measurement [N] (0x2A37)
+   Client Characteristic Configuration (0x2902)
+- Body Sensor Location [R] (0x2A38)
+Battery Service (0x180F)
+- Battery Level [N R] (0x2A19)
+   Client Characteristic Configuration (0x2902)
+Device Information (0x180A)
+- Manufacturer Name String [R] (0x2A29)
+Device Firmware Update Service (00001530-1212-efde-1523-785feabcd123)
+- DFU Packet [WNR] (00001532-1212-efde-1523-785feabcd123)
+- DFU Control Point [N W] (00001531-1212-efde-1523-785feabcd123)
+   Client Characteristic Configuration (0x2902)
+- DFU Version [R] (00001534-1212-efde-1523-785feabcd123)
+A	16:26:43.551	Checking Generic Access service...
+V	16:26:43.565	Reading services...
+I	16:26:43.565	Service (uuid=00001800-0000-1000-8000-00805F9B34FB, instance-id=0) found
+A	16:26:43.565	Checking Device Name characteristic...
+V	16:26:43.565	Reading characteristics...
+I	16:26:43.566	Characteristic (uuid=00002A00-0000-1000-8000-00805F9B34FB, instance-id=0) found
+V	16:26:43.566	Reading properties...
+I	16:26:43.566	Required property READ found
+I	16:26:43.566	Excluded property WRITE_WITHOUT_RESPONSE not found
+I	16:26:43.566	Excluded property SIGNED_WRITE not found
+I	16:26:43.566	Excluded property NOTIFY not found
+I	16:26:43.566	Excluded property INDICATE not found
+I	16:26:43.566	Excluded property BROADCAST not found
+I	16:26:43.566	Excluded property EXTENDED_PROPERTIES not found
+A	16:26:43.602	Reading Device Name value...
+V	16:26:43.614	Reading characteristic 00002a00-0000-1000-8000-00805f9b34fb
+D	16:26:43.614	gatt.readCharacteristic(00002a00-0000-1000-8000-00805f9b34fb)
+I	16:26:43.705	Read Response received from 00002a00-0000-1000-8000-00805f9b34fb, value: (0x) 44-46-55-31-41-30-38, "DFU1A08"
+A	16:26:43.705	"DFU1A08" received
+I	16:26:43.707	Reading characteristic succeeded
+A	16:26:43.733	Check the name...
+V	16:26:43.746	Asserting characteristic value...
+I	16:26:43.760	Value of the characteristic equals 'DFU1A08'
+V	16:26:43.801	Cleaning up...
+V	16:26:45.814	Disconnecting...
+D	16:26:45.814	gatt.disconnect()
+D	16:26:45.819	[Callback] Connection state changed with status: 0 and new state: DISCONNECTED (0)
+I	16:26:45.821	Disconnected
+D	16:26:45.826	gatt.close()
+D	16:26:45.834	wait(200)
+A	16:26:46.039	'Downgrade to SDK 8' completed
+A	16:26:46.077	Starting 'DFU downgrade test' for 'Downgrade to SDK 6.1'
+A	16:26:46.092	Scan for target device...
+V	16:26:46.105	Starting scan...
+D	16:26:46.140	scanner.startScan(null, LOW_LATENCY, callback)
+V	16:26:47.112	Stopping scanning...
+D	16:26:47.140	scanner.stopScan(callback)
+I	16:26:47.158	Device found: FD:16:80:77:27:0B
+A	16:26:47.198	SDK 8 -> 6.1 update...
+V	16:26:47.237	[DFU] DFU service started
+V	16:26:47.238	[DFU] Opening file...
+I	16:26:47.278	[DFU] Image file opened (121908 bytes in total)
+D	16:26:47.279	[DFU] wait(1000)
+D	16:26:48.279	[DFU] wait(1000)
+V	16:26:49.280	[DFU] Connecting to DFU target...
+D	16:26:49.291	[DFU] gatt = device.connectGatt(autoConnect = false)
+I	16:26:49.559	[DFU] Connected to FD:16:80:77:27:0B
+V	16:26:49.572	[DFU] Discovering services...
+D	16:26:49.576	[DFU] gatt.discoverServices()
+I	16:26:50.377	[DFU] Services discovered
+D	16:26:50.385	[DFU] wait(1000)
+V	16:26:51.384	[DFU] Reading DFU version number...
+D	16:26:51.384	[DFU] gatt.readCharacteristic(00001534-1212-efde-1523-785feabcd123)
+I	16:26:51.445	[DFU] Read Response received from 00001534-1212-efde-1523-785feabcd123, value (0x): 01-00
+A	16:26:51.445	[DFU] Version number read: 0.1
+W	16:26:51.445	[DFU] Sending system components
+W	16:26:51.446	[DFU] Application with buttonless update found
+V	16:26:51.446	[DFU] Jumping to the DFU Bootloader...
+V	16:26:51.446	[DFU] Enabling notifications for 00001531-1212-efde-1523-785feabcd123
+D	16:26:51.446	[DFU] gatt.setCharacteristicNotification(00001531-1212-efde-1523-785feabcd123, true)
+D	16:26:51.447	[DFU] gatt.writeDescriptor(00002902-0000-1000-8000-00805f9b34fb, value=0x01-00)
+I	16:26:51.536	[DFU] Data written to descr.00001531-1212-efde-1523-785feabcd123, value (0x): 01-00
+V	16:26:51.536	[DFU] Notifications enabled for 00001531-1212-efde-1523-785feabcd123
+A	16:26:51.536	[DFU] Notifications enabled
+D	16:26:51.536	[DFU] wait(1000)
+V	16:26:52.542	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:26:52.542	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+A	16:26:52.615	[DFU] Jump to bootloader sent (Op Code = 1, Upload Mode = 4)
+I	16:26:52.714	[DFU] Disconnected by the remote device
+D	16:26:52.715	[DFU] gatt.refresh() (hidden)
+D	16:26:52.716	[DFU] gatt.close()
+D	16:26:52.716	[DFU] [Broadcast] Action received: android.bluetooth.device.action.ACL_DISCONNECTED
+V	16:26:52.722	[DFU] DFU service started
+V	16:26:52.722	[DFU] Opening file...
+I	16:26:52.759	[DFU] Image file opened (121908 bytes in total)
+D	16:26:52.759	[DFU] wait(1000)
+D	16:26:53.760	[DFU] wait(1000)
+V	16:26:54.761	[DFU] Connecting to DFU target...
+D	16:26:54.767	[DFU] gatt = device.connectGatt(autoConnect = false)
+I	16:26:54.914	[DFU] Connected to FD:16:80:77:27:0B
+V	16:26:54.916	[DFU] Discovering services...
+D	16:26:54.916	[DFU] gatt.discoverServices()
+I	16:26:55.831	[DFU] Services discovered
+D	16:26:55.834	[DFU] wait(1000)
+V	16:26:56.835	[DFU] Reading DFU version number...
+D	16:26:56.835	[DFU] gatt.readCharacteristic(00001534-1212-efde-1523-785feabcd123)
+I	16:26:56.890	[DFU] Read Response received from 00001534-1212-efde-1523-785feabcd123, value (0x): 06-00
+A	16:26:56.891	[DFU] Version number read: 0.6
+W	16:26:56.891	[DFU] Sending system components
+D	16:26:56.892	[DFU] wait(1000)
+V	16:26:57.893	[DFU] Enabling notifications for 00001531-1212-efde-1523-785feabcd123
+D	16:26:57.893	[DFU] gatt.setCharacteristicNotification(00001531-1212-efde-1523-785feabcd123, true)
+D	16:26:57.895	[DFU] gatt.writeDescriptor(00002902-0000-1000-8000-00805f9b34fb, value=0x01-00)
+I	16:26:57.940	[DFU] Data written to descr.00001531-1212-efde-1523-785feabcd123, value (0x): 01-00
+V	16:26:57.940	[DFU] Notifications enabled for 00001531-1212-efde-1523-785feabcd123
+A	16:26:57.940	[DFU] Notifications enabled
+D	16:26:57.940	[DFU] wait(1000)
+V	16:26:58.941	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:26:58.941	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:26:58.990	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 01-03
+A	16:26:58.990	[DFU] DFU Start sent (Op Code = 1, Upload Mode = 3)
+V	16:26:58.990	[DFU] Writing to characteristic 00001532-1212-efde-1523-785feabcd123
+D	16:26:58.990	[DFU] gatt.writeCharacteristic(00001532-1212-efde-1523-785feabcd123)
+I	16:26:58.992	[DFU] Data written to 00001532-1212-efde-1523-785feabcd123, value (0x): 0C-42-01-00-A4-39-00-00-00-00-00-00
+A	16:26:58.993	[DFU] Firmware image size sent (82444b, 14756b, 0b)
+I	16:27:01.873	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-01-01
+A	16:27:01.873	[DFU] Response received (Op Code = 1 Status = 1)
+A	16:27:01.873	[DFU] Writing Initialize DFU Parameters...
+V	16:27:01.873	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:27:01.873	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:27:01.929	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 02-00
+V	16:27:01.930	[DFU] Writing to characteristic 00001532-1212-efde-1523-785feabcd123
+D	16:27:01.930	[DFU] gatt.writeCharacteristic(00001532-1212-efde-1523-785feabcd123)
+I	16:27:01.931	[DFU] Data written to 00001532-1212-efde-1523-785feabcd123, value (0x): FF-FF-FF-FF-FF-FF-FF-FF-01-00-FE-FF-93-0F
+V	16:27:01.932	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:27:01.932	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:27:01.990	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 02-01
+A	16:27:01.990	[DFU] Initialize DFU Parameters completed
+I	16:27:01.990	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-02-01
+A	16:27:01.990	[DFU] Response received (Op Code = 2, Status = 1)
+V	16:27:01.991	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:27:01.991	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:27:02.050	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 08-0A-00
+A	16:27:02.050	[DFU] Packet Receipt Notif Req (Op Code = 8) sent (Value = 10)
+V	16:27:02.050	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:27:02.050	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:27:02.110	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 03
+A	16:27:02.110	[DFU] Receive Firmware Image request sent
+A	16:27:02.114	[DFU] Uploading firmware...
+V	16:27:02.114	[DFU] Sending firmware to characteristic 00001532-1212-efde-1523-785feabcd123...
+I	16:27:54.970	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-03-01
+A	16:27:54.970	[DFU] Response received (Op Code = 3, Status = 1)
+A	16:27:54.970	[DFU] Upload completed in 52859 ms
+V	16:27:54.970	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:27:54.970	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:27:55.032	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 04
+A	16:27:55.032	[DFU] Validate request sent
+I	16:27:55.151	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-04-01
+A	16:27:55.153	[DFU] Response received (Op Code = 4, Status = 1)
+V	16:27:55.164	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:27:55.164	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+A	16:27:59.192	[DFU] Activate and Reset request sent
+I	16:27:59.192	[DFU] Disconnected by the remote device
+D	16:27:59.198	[DFU] gatt.refresh() (hidden)
+D	16:27:59.201	[DFU] [Broadcast] Action received: android.bluetooth.device.action.ACL_DISCONNECTED
+D	16:27:59.203	[DFU] gatt.close()
+V	16:27:59.208	[DFU] Scanning for the DFU Bootloader...
+I	16:28:00.778	[DFU] DFU Bootloader found with address FD:16:80:77:27:0B
+V	16:28:00.787	[DFU] DFU service started
+V	16:28:00.787	[DFU] Opening file...
+I	16:28:00.822	[DFU] Image file opened (24708 bytes in total)
+D	16:28:00.822	[DFU] wait(1000)
+D	16:28:01.823	[DFU] wait(1000)
+V	16:28:02.824	[DFU] Connecting to DFU target...
+D	16:28:02.858	[DFU] gatt = device.connectGatt(autoConnect = false)
+I	16:28:03.231	[DFU] Connected to FD:16:80:77:27:0B
+V	16:28:03.246	[DFU] Discovering services...
+D	16:28:03.247	[DFU] gatt.discoverServices()
+I	16:28:03.823	[DFU] Services discovered
+D	16:28:03.832	[DFU] wait(1000)
+A	16:28:04.834	[DFU] DFU Version characteristic not found
+W	16:28:04.835	[DFU] Sending application
+D	16:28:04.835	[DFU] wait(1000)
+V	16:28:05.835	[DFU] Enabling notifications for 00001531-1212-efde-1523-785feabcd123
+D	16:28:05.835	[DFU] gatt.setCharacteristicNotification(00001531-1212-efde-1523-785feabcd123, true)
+D	16:28:05.837	[DFU] gatt.writeDescriptor(00002902-0000-1000-8000-00805f9b34fb, value=0x01-00)
+I	16:28:05.889	[DFU] Data written to descr.00001531-1212-efde-1523-785feabcd123, value (0x): 01-00
+V	16:28:05.889	[DFU] Notifications enabled for 00001531-1212-efde-1523-785feabcd123
+A	16:28:05.890	[DFU] Notifications enabled
+D	16:28:05.890	[DFU] wait(1000)
+V	16:28:06.890	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:28:06.890	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:28:06.939	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 01-04
+A	16:28:06.939	[DFU] DFU Start sent (Op Code = 1, Upload Mode = 4)
+V	16:28:06.939	[DFU] Writing to characteristic 00001532-1212-efde-1523-785feabcd123
+D	16:28:06.939	[DFU] gatt.writeCharacteristic(00001532-1212-efde-1523-785feabcd123)
+I	16:28:06.941	[DFU] Data written to 00001532-1212-efde-1523-785feabcd123, value (0x): 00-00-00-00-00-00-00-00-84-60-00-00
+A	16:28:06.941	[DFU] Firmware image size sent (0b, 0b, 24708b)
+I	16:28:07.005	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-01-01
+A	16:28:07.005	[DFU] Response received (Op Code = 1 Status = 1)
+A	16:28:07.005	[DFU] Writing Initialize DFU Parameters...
+V	16:28:07.005	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:28:07.006	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:28:07.060	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 02-00
+V	16:28:07.061	[DFU] Writing to characteristic 00001532-1212-efde-1523-785feabcd123
+D	16:28:07.061	[DFU] gatt.writeCharacteristic(00001532-1212-efde-1523-785feabcd123)
+I	16:28:07.065	[DFU] Data written to 00001532-1212-efde-1523-785feabcd123, value (0x): FF-FF-FF-FF-FF-FF-FF-FF-01-00-5A-00-E1-7E
+V	16:28:07.067	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:28:07.067	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:28:07.119	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-02-01
+I	16:28:07.119	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 10-02-01
+A	16:28:07.120	[DFU] Initialize DFU Parameters completed
+A	16:28:07.120	[DFU] Response received (Op Code = 2, Status = 1)
+V	16:28:07.120	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:28:07.120	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:28:07.179	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 08-0A-00
+A	16:28:07.179	[DFU] Packet Receipt Notif Req (Op Code = 8) sent (Value = 10)
+V	16:28:07.179	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:28:07.179	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:28:07.240	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 03
+A	16:28:07.240	[DFU] Receive Firmware Image request sent
+A	16:28:07.246	[DFU] Uploading firmware...
+V	16:28:07.246	[DFU] Sending firmware to characteristic 00001532-1212-efde-1523-785feabcd123...
+I	16:28:21.166	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-03-01
+A	16:28:21.190	[DFU] Response received (Op Code = 3, Status = 1)
+A	16:28:21.190	[DFU] Upload completed in 13899 ms
+V	16:28:21.191	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:28:21.191	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:28:21.250	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 04
+I	16:28:21.250	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-04-01
+A	16:28:21.250	[DFU] Validate request sent
+A	16:28:21.251	[DFU] Response received (Op Code = 4, Status = 1)
+V	16:28:21.251	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:28:21.251	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:28:21.310	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 05
+A	16:28:21.311	[DFU] Activate and Reset request sent
+I	16:28:21.386	[DFU] Disconnected by the remote device
+D	16:28:21.388	[DFU] gatt.refresh() (hidden)
+D	16:28:21.395	[DFU] gatt.close()
+D	16:28:21.412	[DFU] wait(1400)
+D	16:28:21.412	[DFU] [Broadcast] Action received: android.bluetooth.device.action.ACL_DISCONNECTED
+A	16:28:21.447	Connecting to target...
+V	16:28:21.480	Connecting to FD:16:80:77:27:0B...
+D	16:28:21.480	gatt = device.connectGatt(autoConnect = false, TRANSPORT_LE)
+D	16:28:22.470	[Callback] Connection state changed with status: 0 and new state: CONNECTED (2)
+I	16:28:22.470	Connected to FD:16:80:77:27:0B
+A	16:28:22.568	Sleep...
+D	16:28:22.596	wait(1600)
+V	16:28:24.188	Wake up!
+A	16:28:24.214	Discovering services...
+V	16:28:24.230	Discovering services...
+D	16:28:24.230	gatt.discoverServices()
+D	16:28:24.236	[Callback] Services discovered with status: 0
+I	16:28:24.238	Services discovered
+V	16:28:24.278	Generic Access (0x1800)
+- Device Name [R W] (0x2A00)
+- Appearance [R] (0x2A01)
+- Peripheral Preferred Connection Parameters [R] (0x2A04)
+Generic Attribute (0x1801)
+Heart Rate (0x180D)
+- Heart Rate Measurement [N] (0x2A37)
+   Client Characteristic Configuration (0x2902)
+- Body Sensor Location [R] (0x2A38)
+Battery Service (0x180F)
+- Battery Level [N R] (0x2A19)
+   Client Characteristic Configuration (0x2902)
+Device Information (0x180A)
+- Manufacturer Name String [R] (0x2A29)
+Device Firmware Update Service (00001530-1212-efde-1523-785feabcd123)
+- DFU Packet [WNR] (00001532-1212-efde-1523-785feabcd123)
+- DFU Control Point [N W] (00001531-1212-efde-1523-785feabcd123)
+   Client Characteristic Configuration (0x2902)
+A	16:28:24.297	Checking Generic Access service...
+V	16:28:24.314	Reading services...
+I	16:28:24.314	Service (uuid=00001800-0000-1000-8000-00805F9B34FB, instance-id=0) found
+A	16:28:24.314	Checking Device Name characteristic...
+V	16:28:24.315	Reading characteristics...
+I	16:28:24.315	Characteristic (uuid=00002A00-0000-1000-8000-00805F9B34FB, instance-id=0) found
+V	16:28:24.315	Reading properties...
+I	16:28:24.315	Required property READ found
+I	16:28:24.315	Excluded property WRITE_WITHOUT_RESPONSE not found
+I	16:28:24.315	Excluded property SIGNED_WRITE not found
+I	16:28:24.315	Excluded property NOTIFY not found
+I	16:28:24.315	Excluded property INDICATE not found
+I	16:28:24.315	Excluded property BROADCAST not found
+I	16:28:24.315	Excluded property EXTENDED_PROPERTIES not found
+A	16:28:24.345	Reading Device Name value...
+V	16:28:24.353	Reading characteristic 00002a00-0000-1000-8000-00805f9b34fb
+D	16:28:24.353	gatt.readCharacteristic(00002a00-0000-1000-8000-00805f9b34fb)
+I	16:28:24.414	Read Response received from 00002a00-0000-1000-8000-00805f9b34fb, value: (0x) 44-46-55-31-41-30-36-31, "DFU1A061"
+A	16:28:24.414	"DFU1A061" received
+I	16:28:24.417	Reading characteristic succeeded
+A	16:28:24.466	Check the name...
+V	16:28:24.484	Asserting characteristic value...
+I	16:28:24.502	Value of the characteristic equals 'DFU1A061'
+V	16:28:24.558	Cleaning up...
+V	16:28:26.568	Disconnecting...
+D	16:28:26.568	gatt.disconnect()
+D	16:28:26.574	[Callback] Connection state changed with status: 0 and new state: DISCONNECTED (0)
+I	16:28:26.574	Disconnected
+D	16:28:26.576	gatt.close()
+D	16:28:26.578	wait(200)
+A	16:28:26.785	'Downgrade to SDK 6.1' completed
+A	16:28:26.812	Starting 'DFU test' for 'Update App from SDK 6.1'
+A	16:28:26.824	Scan for target device...
+V	16:28:26.838	Starting scan...
+D	16:28:26.860	scanner.startScan(null, LOW_LATENCY, callback)
+V	16:28:27.635	Stopping scanning...
+D	16:28:27.656	scanner.stopScan(callback)
+I	16:28:27.679	Device found: FD:16:80:77:27:0B
+A	16:28:27.699	SDK 6.1 update...
+V	16:28:27.743	[DFU] DFU service started
+V	16:28:27.743	[DFU] Opening file...
+I	16:28:27.757	[DFU] Image file opened (24708 bytes in total)
+D	16:28:27.758	[DFU] wait(1000)
+D	16:28:28.758	[DFU] wait(1000)
+V	16:28:29.759	[DFU] Connecting to DFU target...
+D	16:28:29.760	[DFU] gatt = device.connectGatt(autoConnect = false)
+I	16:28:30.000	[DFU] Connected to FD:16:80:77:27:0B
+V	16:28:30.006	[DFU] Discovering services...
+D	16:28:30.006	[DFU] gatt.discoverServices()
+I	16:28:30.778	[DFU] Services discovered
+D	16:28:30.790	[DFU] wait(1000)
+A	16:28:31.790	[DFU] DFU Version characteristic not found
+W	16:28:31.791	[DFU] Application with buttonless update found
+V	16:28:31.791	[DFU] Jumping to the DFU Bootloader...
+V	16:28:31.792	[DFU] Enabling notifications for 00001531-1212-efde-1523-785feabcd123
+D	16:28:31.792	[DFU] gatt.setCharacteristicNotification(00001531-1212-efde-1523-785feabcd123, true)
+D	16:28:31.794	[DFU] gatt.writeDescriptor(00002902-0000-1000-8000-00805f9b34fb, value=0x01-00)
+I	16:28:31.885	[DFU] Data written to descr.00001531-1212-efde-1523-785feabcd123, value (0x): 01-00
+V	16:28:31.885	[DFU] Notifications enabled for 00001531-1212-efde-1523-785feabcd123
+A	16:28:31.885	[DFU] Notifications enabled
+D	16:28:31.885	[DFU] wait(1000)
+V	16:28:32.892	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:28:32.892	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+A	16:28:37.937	[DFU] Jump to bootloader sent (Op Code = 1, Upload Mode = 4)
+I	16:28:37.937	[DFU] Disconnected by the remote device
+D	16:28:37.937	[DFU] gatt.refresh() (hidden)
+D	16:28:37.939	[DFU] gatt.close()
+V	16:28:37.950	[DFU] Scanning for the DFU Bootloader...
+D	16:28:37.950	[DFU] [Broadcast] Action received: android.bluetooth.device.action.ACL_DISCONNECTED
+I	16:28:38.101	[DFU] DFU Bootloader found with address FD:16:80:77:27:0B
+V	16:28:38.107	[DFU] DFU service started
+V	16:28:38.107	[DFU] Opening file...
+I	16:28:38.126	[DFU] Image file opened (24708 bytes in total)
+D	16:28:38.126	[DFU] wait(1000)
+D	16:28:39.128	[DFU] wait(1000)
+V	16:28:40.128	[DFU] Connecting to DFU target...
+D	16:28:40.134	[DFU] gatt = device.connectGatt(autoConnect = false)
+I	16:28:41.614	[DFU] Connected to FD:16:80:77:27:0B
+V	16:28:41.621	[DFU] Discovering services...
+D	16:28:41.621	[DFU] gatt.discoverServices()
+I	16:28:42.206	[DFU] Services discovered
+D	16:28:42.231	[DFU] wait(1000)
+A	16:28:43.229	[DFU] DFU Version characteristic not found
+D	16:28:43.230	[DFU] wait(1000)
+V	16:28:44.231	[DFU] Enabling notifications for 00001531-1212-efde-1523-785feabcd123
+D	16:28:44.232	[DFU] gatt.setCharacteristicNotification(00001531-1212-efde-1523-785feabcd123, true)
+D	16:28:44.234	[DFU] gatt.writeDescriptor(00002902-0000-1000-8000-00805f9b34fb, value=0x01-00)
+I	16:28:44.292	[DFU] Data written to descr.00001531-1212-efde-1523-785feabcd123, value (0x): 01-00
+V	16:28:44.292	[DFU] Notifications enabled for 00001531-1212-efde-1523-785feabcd123
+A	16:28:44.292	[DFU] Notifications enabled
+D	16:28:44.292	[DFU] wait(1000)
+V	16:28:45.298	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:28:45.299	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:28:45.339	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 01-04
+A	16:28:45.339	[DFU] DFU Start sent (Op Code = 1, Upload Mode = 4)
+V	16:28:45.339	[DFU] Writing to characteristic 00001532-1212-efde-1523-785feabcd123
+D	16:28:45.339	[DFU] gatt.writeCharacteristic(00001532-1212-efde-1523-785feabcd123)
+I	16:28:45.340	[DFU] Data written to 00001532-1212-efde-1523-785feabcd123, value (0x): 00-00-00-00-00-00-00-00-84-60-00-00
+A	16:28:45.340	[DFU] Firmware image size sent (0b, 0b, 24708b)
+I	16:28:45.401	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-01-01
+A	16:28:45.401	[DFU] Response received (Op Code = 1 Status = 1)
+A	16:28:45.401	[DFU] Writing Initialize DFU Parameters...
+V	16:28:45.402	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:28:45.402	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:28:45.459	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 02-00
+V	16:28:45.460	[DFU] Writing to characteristic 00001532-1212-efde-1523-785feabcd123
+D	16:28:45.460	[DFU] gatt.writeCharacteristic(00001532-1212-efde-1523-785feabcd123)
+I	16:28:45.468	[DFU] Data written to 00001532-1212-efde-1523-785feabcd123, value (0x): FF-FF-FF-FF-FF-FF-FF-FF-01-00-5A-00-E1-7E
+V	16:28:45.475	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:28:45.476	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:28:45.519	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-02-01
+I	16:28:45.520	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 10-02-01
+A	16:28:45.520	[DFU] Initialize DFU Parameters completed
+A	16:28:45.520	[DFU] Response received (Op Code = 2, Status = 1)
+V	16:28:45.520	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:28:45.520	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:28:45.581	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 08-0A-00
+A	16:28:45.581	[DFU] Packet Receipt Notif Req (Op Code = 8) sent (Value = 10)
+V	16:28:45.582	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:28:45.582	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:28:45.638	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 03
+A	16:28:45.639	[DFU] Receive Firmware Image request sent
+A	16:28:45.646	[DFU] Uploading firmware...
+V	16:28:45.646	[DFU] Sending firmware to characteristic 00001532-1212-efde-1523-785feabcd123...
+I	16:28:58.990	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-03-01
+A	16:28:58.991	[DFU] Response received (Op Code = 3, Status = 1)
+A	16:28:58.991	[DFU] Upload completed in 13299 ms
+V	16:28:58.992	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:28:58.992	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:28:59.052	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 04
+A	16:28:59.058	[DFU] Validate request sent
+I	16:28:59.058	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-04-01
+A	16:28:59.058	[DFU] Response received (Op Code = 4, Status = 1)
+V	16:28:59.062	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:28:59.062	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:28:59.108	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 05
+A	16:28:59.108	[DFU] Activate and Reset request sent
+I	16:28:59.181	[DFU] Disconnected by the remote device
+D	16:28:59.192	[DFU] gatt.refresh() (hidden)
+D	16:28:59.193	[DFU] [Broadcast] Action received: android.bluetooth.device.action.ACL_DISCONNECTED
+D	16:28:59.198	[DFU] gatt.close()
+D	16:28:59.205	[DFU] wait(1400)
+A	16:29:00.617	Connecting to target...
+V	16:29:00.687	Connecting to FD:16:80:77:27:0B...
+D	16:29:00.687	gatt = device.connectGatt(autoConnect = false, TRANSPORT_LE)
+D	16:29:00.934	[Callback] Connection state changed with status: 0 and new state: CONNECTED (2)
+I	16:29:00.934	Connected to FD:16:80:77:27:0B
+A	16:29:00.950	Sleep...
+D	16:29:00.995	wait(1600)
+V	16:29:02.601	Wake up!
+A	16:29:02.629	Discovering services...
+V	16:29:02.639	Discovering services...
+D	16:29:02.639	gatt.discoverServices()
+D	16:29:02.657	[Callback] Services discovered with status: 0
+I	16:29:02.664	Services discovered
+V	16:29:02.704	Generic Access (0x1800)
+- Device Name [R W] (0x2A00)
+- Appearance [R] (0x2A01)
+- Peripheral Preferred Connection Parameters [R] (0x2A04)
+Generic Attribute (0x1801)
+Heart Rate (0x180D)
+- Heart Rate Measurement [N] (0x2A37)
+   Client Characteristic Configuration (0x2902)
+- Body Sensor Location [R] (0x2A38)
+Battery Service (0x180F)
+- Battery Level [N R] (0x2A19)
+   Client Characteristic Configuration (0x2902)
+Device Information (0x180A)
+- Manufacturer Name String [R] (0x2A29)
+Device Firmware Update Service (00001530-1212-efde-1523-785feabcd123)
+- DFU Packet [WNR] (00001532-1212-efde-1523-785feabcd123)
+- DFU Control Point [N W] (00001531-1212-efde-1523-785feabcd123)
+   Client Characteristic Configuration (0x2902)
+A	16:29:02.712	Checking Generic Access service...
+V	16:29:02.737	Reading services...
+I	16:29:02.738	Service (uuid=00001800-0000-1000-8000-00805F9B34FB, instance-id=0) found
+A	16:29:02.738	Checking Device Name characteristic...
+V	16:29:02.738	Reading characteristics...
+I	16:29:02.738	Characteristic (uuid=00002A00-0000-1000-8000-00805F9B34FB, instance-id=0) found
+V	16:29:02.738	Reading properties...
+I	16:29:02.738	Required property READ found
+I	16:29:02.738	Excluded property WRITE_WITHOUT_RESPONSE not found
+I	16:29:02.738	Excluded property SIGNED_WRITE not found
+I	16:29:02.739	Excluded property NOTIFY not found
+I	16:29:02.739	Excluded property INDICATE not found
+I	16:29:02.739	Excluded property BROADCAST not found
+I	16:29:02.739	Excluded property EXTENDED_PROPERTIES not found
+A	16:29:02.768	Reading Device Name value...
+V	16:29:02.779	Reading characteristic 00002a00-0000-1000-8000-00805f9b34fb
+D	16:29:02.779	gatt.readCharacteristic(00002a00-0000-1000-8000-00805f9b34fb)
+I	16:29:02.843	Read Response received from 00002a00-0000-1000-8000-00805f9b34fb, value: (0x) 44-46-55-31-41-30-36-31, "DFU1A061"
+A	16:29:02.843	"DFU1A061" received
+I	16:29:02.858	Reading characteristic succeeded
+A	16:29:02.885	Check the name...
+V	16:29:02.897	Asserting characteristic value...
+I	16:29:02.916	Value of the characteristic equals 'DFU1A061'
+V	16:29:02.934	Cleaning up...
+V	16:29:04.941	Disconnecting...
+D	16:29:04.941	gatt.disconnect()
+I	16:29:04.951	Disconnected
+D	16:29:04.962	gatt.close()
+D	16:29:04.964	wait(200)
+A	16:29:05.171	'Update App from SDK 6.1' completed
+A	16:29:05.192	Starting 'DFU downgrade test' for 'Downgrade to SDK 6.0'
+A	16:29:05.214	Scan for target device...
+V	16:29:05.259	Starting scan...
+D	16:29:05.275	scanner.startScan(null, LOW_LATENCY, callback)
+V	16:29:06.020	Stopping scanning...
+D	16:29:06.041	scanner.stopScan(callback)
+I	16:29:06.061	Device found: FD:16:80:77:27:0B
+A	16:29:06.083	SDK 6.1 -> 6.0 update...
+V	16:29:06.126	[DFU] DFU service started
+V	16:29:06.126	[DFU] Opening file...
+I	16:29:06.153	[DFU] Image file opened (117528 bytes in total)
+D	16:29:06.153	[DFU] wait(1000)
+D	16:29:07.154	[DFU] wait(1000)
+V	16:29:08.154	[DFU] Connecting to DFU target...
+D	16:29:08.155	[DFU] gatt = device.connectGatt(autoConnect = false)
+I	16:29:08.340	[DFU] Connected to FD:16:80:77:27:0B
+V	16:29:08.341	[DFU] Discovering services...
+D	16:29:08.341	[DFU] gatt.discoverServices()
+I	16:29:09.104	[DFU] Services discovered
+D	16:29:09.113	[DFU] wait(1000)
+A	16:29:10.114	[DFU] DFU Version characteristic not found
+W	16:29:10.114	[DFU] Sending system components
+W	16:29:10.114	[DFU] Application with buttonless update found
+V	16:29:10.114	[DFU] Jumping to the DFU Bootloader...
+V	16:29:10.114	[DFU] Enabling notifications for 00001531-1212-efde-1523-785feabcd123
+D	16:29:10.114	[DFU] gatt.setCharacteristicNotification(00001531-1212-efde-1523-785feabcd123, true)
+D	16:29:10.117	[DFU] gatt.writeDescriptor(00002902-0000-1000-8000-00805f9b34fb, value=0x01-00)
+I	16:29:10.179	[DFU] Data written to descr.00001531-1212-efde-1523-785feabcd123, value (0x): 01-00
+V	16:29:10.179	[DFU] Notifications enabled for 00001531-1212-efde-1523-785feabcd123
+A	16:29:10.180	[DFU] Notifications enabled
+D	16:29:10.180	[DFU] wait(1000)
+V	16:29:11.185	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:29:11.186	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+A	16:29:16.228	[DFU] Jump to bootloader sent (Op Code = 1, Upload Mode = 4)
+I	16:29:16.233	[DFU] Disconnected by the remote device
+D	16:29:16.233	[DFU] gatt.refresh() (hidden)
+D	16:29:16.238	[DFU] gatt.close()
+D	16:29:16.241	[DFU] [Broadcast] Action received: android.bluetooth.device.action.ACL_DISCONNECTED
+V	16:29:16.244	[DFU] Scanning for the DFU Bootloader...
+I	16:29:16.362	[DFU] DFU Bootloader found with address FD:16:80:77:27:0B
+V	16:29:16.364	[DFU] DFU service started
+V	16:29:16.364	[DFU] Opening file...
+I	16:29:16.387	[DFU] Image file opened (117528 bytes in total)
+D	16:29:16.387	[DFU] wait(1000)
+D	16:29:17.388	[DFU] wait(1000)
+V	16:29:18.389	[DFU] Connecting to DFU target...
+D	16:29:18.419	[DFU] gatt = device.connectGatt(autoConnect = false)
+I	16:29:18.874	[DFU] Connected to FD:16:80:77:27:0B
+V	16:29:18.877	[DFU] Discovering services...
+D	16:29:18.877	[DFU] gatt.discoverServices()
+I	16:29:19.474	[DFU] Services discovered
+D	16:29:19.510	[DFU] wait(1000)
+A	16:29:20.510	[DFU] DFU Version characteristic not found
+W	16:29:20.511	[DFU] Sending system components
+D	16:29:20.511	[DFU] wait(1000)
+V	16:29:21.513	[DFU] Enabling notifications for 00001531-1212-efde-1523-785feabcd123
+D	16:29:21.514	[DFU] gatt.setCharacteristicNotification(00001531-1212-efde-1523-785feabcd123, true)
+D	16:29:21.524	[DFU] gatt.writeDescriptor(00002902-0000-1000-8000-00805f9b34fb, value=0x01-00)
+I	16:29:21.579	[DFU] Data written to descr.00001531-1212-efde-1523-785feabcd123, value (0x): 01-00
+V	16:29:21.579	[DFU] Notifications enabled for 00001531-1212-efde-1523-785feabcd123
+A	16:29:21.580	[DFU] Notifications enabled
+D	16:29:21.580	[DFU] wait(1000)
+V	16:29:22.581	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:29:22.581	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:29:22.631	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 01-03
+A	16:29:22.631	[DFU] DFU Start sent (Op Code = 1, Upload Mode = 3)
+V	16:29:22.637	[DFU] Writing to characteristic 00001532-1212-efde-1523-785feabcd123
+D	16:29:22.637	[DFU] gatt.writeCharacteristic(00001532-1212-efde-1523-785feabcd123)
+I	16:29:22.637	[DFU] Data written to 00001532-1212-efde-1523-785feabcd123, value (0x): 0C-42-01-00-90-32-00-00-00-00-00-00
+A	16:29:22.637	[DFU] Firmware image size sent (82444b, 12944b, 0b)
+I	16:29:25.486	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-01-01
+A	16:29:25.486	[DFU] Response received (Op Code = 1 Status = 1)
+A	16:29:25.486	[DFU] Writing Initialize DFU Parameters...
+V	16:29:25.486	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:29:25.487	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:29:25.538	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 02-00
+V	16:29:25.539	[DFU] Writing to characteristic 00001532-1212-efde-1523-785feabcd123
+D	16:29:25.539	[DFU] gatt.writeCharacteristic(00001532-1212-efde-1523-785feabcd123)
+I	16:29:25.542	[DFU] Data written to 00001532-1212-efde-1523-785feabcd123, value (0x): FF-FF-FF-FF-FF-FF-FF-FF-01-00-FE-FF-24-98
+V	16:29:25.542	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:29:25.542	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:29:25.600	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-02-01
+I	16:29:25.600	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 10-02-01
+A	16:29:25.601	[DFU] Initialize DFU Parameters completed
+A	16:29:25.601	[DFU] Response received (Op Code = 2, Status = 1)
+V	16:29:25.601	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:29:25.601	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:29:25.664	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 08-0A-00
+A	16:29:25.664	[DFU] Packet Receipt Notif Req (Op Code = 8) sent (Value = 10)
+V	16:29:25.665	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:29:25.665	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:29:25.722	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 03
+A	16:29:25.722	[DFU] Receive Firmware Image request sent
+A	16:29:25.747	[DFU] Uploading firmware...
+V	16:29:25.747	[DFU] Sending firmware to characteristic 00001532-1212-efde-1523-785feabcd123...
+I	16:30:16.718	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-03-01
+A	16:30:16.718	[DFU] Response received (Op Code = 3, Status = 1)
+A	16:30:16.719	[DFU] Upload completed in 50996 ms
+V	16:30:16.719	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:30:16.719	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:30:16.778	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 04
+A	16:30:16.778	[DFU] Validate request sent
+I	16:30:16.778	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-04-01
+A	16:30:16.779	[DFU] Response received (Op Code = 4, Status = 1)
+V	16:30:16.779	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:30:16.780	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+A	16:30:20.823	[DFU] Activate and Reset request sent
+I	16:30:20.824	[DFU] Disconnected by the remote device
+D	16:30:20.824	[DFU] gatt.refresh() (hidden)
+D	16:30:20.825	[DFU] gatt.close()
+V	16:30:20.828	[DFU] Scanning for the DFU Bootloader...
+D	16:30:20.829	[DFU] [Broadcast] Action received: android.bluetooth.device.action.ACL_DISCONNECTED
+I	16:30:20.884	[DFU] DFU Bootloader found with address FD:16:80:77:27:0B
+V	16:30:20.890	[DFU] DFU service started
+V	16:30:20.890	[DFU] Opening file...
+I	16:30:20.911	[DFU] Image file opened (22140 bytes in total)
+D	16:30:20.911	[DFU] wait(1000)
+D	16:30:21.912	[DFU] wait(1000)
+V	16:30:22.914	[DFU] Connecting to DFU target...
+D	16:30:22.961	[DFU] gatt = device.connectGatt(autoConnect = false)
+I	16:30:23.172	[DFU] Connected to FD:16:80:77:27:0B
+V	16:30:23.178	[DFU] Discovering services...
+D	16:30:23.178	[DFU] gatt.discoverServices()
+I	16:30:23.775	[DFU] Services discovered
+D	16:30:23.791	[DFU] wait(1000)
+A	16:30:24.792	[DFU] DFU Version characteristic not found
+W	16:30:24.795	[DFU] Sending application
+D	16:30:24.797	[DFU] wait(1000)
+V	16:30:25.799	[DFU] Enabling notifications for 00001531-1212-efde-1523-785feabcd123
+D	16:30:25.800	[DFU] gatt.setCharacteristicNotification(00001531-1212-efde-1523-785feabcd123, true)
+D	16:30:25.808	[DFU] gatt.writeDescriptor(00002902-0000-1000-8000-00805f9b34fb, value=0x01-00)
+I	16:30:25.838	[DFU] Data written to descr.00001531-1212-efde-1523-785feabcd123, value (0x): 01-00
+V	16:30:25.838	[DFU] Notifications enabled for 00001531-1212-efde-1523-785feabcd123
+A	16:30:25.839	[DFU] Notifications enabled
+D	16:30:25.839	[DFU] wait(1000)
+V	16:30:26.841	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:30:26.842	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:30:26.877	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 01-04
+A	16:30:26.877	[DFU] DFU Start sent (Op Code = 1, Upload Mode = 4)
+V	16:30:26.877	[DFU] Writing to characteristic 00001532-1212-efde-1523-785feabcd123
+D	16:30:26.877	[DFU] gatt.writeCharacteristic(00001532-1212-efde-1523-785feabcd123)
+I	16:30:26.878	[DFU] Data written to 00001532-1212-efde-1523-785feabcd123, value (0x): 00-00-00-00-00-00-00-00-7C-56-00-00
+A	16:30:26.878	[DFU] Firmware image size sent (0b, 0b, 22140b)
+I	16:30:26.902	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-01-03
+A	16:30:26.903	[DFU] Response received (Op Code = 1 Status = 3)
+W	16:30:26.903	[DFU] DFU target does not support DFU v.2
+V	16:30:26.903	[DFU] Switching to DFU v.1
+V	16:30:26.903	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:30:26.903	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:30:26.950	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 01-04
+A	16:30:26.953	[DFU] DFU Start sent (Op Code = 1)
+V	16:30:26.953	[DFU] Writing to characteristic 00001532-1212-efde-1523-785feabcd123
+D	16:30:26.953	[DFU] gatt.writeCharacteristic(00001532-1212-efde-1523-785feabcd123)
+I	16:30:26.955	[DFU] Data written to 00001532-1212-efde-1523-785feabcd123, value (0x): 7C-56-00-00
+A	16:30:26.955	[DFU] Firmware image size sent (22140 bytes)
+I	16:30:26.979	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-01-01
+A	16:30:26.980	[DFU] Response received (Op Code = 1, Status = 1)
+A	16:30:26.980	[DFU] Writing Initialize DFU Parameters...
+V	16:30:26.981	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:30:26.981	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:30:27.008	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 02
+V	16:30:27.009	[DFU] Writing to characteristic 00001532-1212-efde-1523-785feabcd123
+D	16:30:27.009	[DFU] gatt.writeCharacteristic(00001532-1212-efde-1523-785feabcd123)
+I	16:30:27.012	[DFU] Data written to 00001532-1212-efde-1523-785feabcd123, value (0x): 9B-A6
+I	16:30:27.056	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-02-01
+A	16:30:27.057	[DFU] Response received (Op Code = 2, Status = 1)
+V	16:30:27.057	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:30:27.057	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:30:27.085	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 08-0A-00
+A	16:30:27.086	[DFU] Packet Receipt Notif Req (Op Code = 8) sent (Value = 10)
+V	16:30:27.086	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:30:27.086	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:30:27.114	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 03
+A	16:30:27.114	[DFU] Receive Firmware Image request sent
+A	16:30:27.130	[DFU] Uploading firmware...
+V	16:30:27.130	[DFU] Sending firmware to characteristic 00001532-1212-efde-1523-785feabcd123...
+I	16:30:34.168	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-03-01
+A	16:30:34.169	[DFU] Response received (Op Code = 3, Status = 1)
+A	16:30:34.169	[DFU] Upload completed in 7052 ms
+V	16:30:34.169	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:30:34.169	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:30:34.209	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 04
+A	16:30:34.209	[DFU] Validate request sent
+I	16:30:34.238	[DFU] Notification received from 00001531-1212-efde-1523-785feabcd123, value (0x): 10-04-01
+A	16:30:34.239	[DFU] Response received (Op Code = 4, Status = 1)
+V	16:30:34.239	[DFU] Writing to characteristic 00001531-1212-efde-1523-785feabcd123
+D	16:30:34.239	[DFU] gatt.writeCharacteristic(00001531-1212-efde-1523-785feabcd123)
+I	16:30:34.268	[DFU] Data written to 00001531-1212-efde-1523-785feabcd123, value (0x): 05
+A	16:30:34.268	[DFU] Activate and Reset request sent
+I	16:30:34.312	[DFU] Disconnected by the remote device
+D	16:30:34.313	[DFU] [Broadcast] Action received: android.bluetooth.device.action.ACL_DISCONNECTED
+D	16:30:34.314	[DFU] gatt.refresh() (hidden)
+D	16:30:34.317	[DFU] gatt.close()
+D	16:30:34.321	[DFU] wait(1400)
+A	16:30:35.738	Connecting to target...
+V	16:30:35.794	Connecting to FD:16:80:77:27:0B...
+D	16:30:35.794	gatt = device.connectGatt(autoConnect = false, TRANSPORT_LE)
+D	16:30:36.080	[Callback] Connection state changed with status: 0 and new state: CONNECTED (2)
+I	16:30:36.080	Connected to FD:16:80:77:27:0B
+A	16:30:36.087	Sleep...
+D	16:30:36.148	wait(1600)
+V	16:30:37.752	Wake up!
+A	16:30:37.822	Discovering services...
+V	16:30:37.834	Discovering services...
+D	16:30:37.834	gatt.discoverServices()
+D	16:30:37.856	[Callback] Services discovered with status: 0
+I	16:30:37.858	Services discovered
+V	16:30:37.890	Generic Access (0x1800)
+- Device Name [R W] (0x2A00)
+- Appearance [R] (0x2A01)
+- Peripheral Preferred Connection Parameters [R] (0x2A04)
+Generic Attribute (0x1801)
+Heart Rate (0x180D)
+- Heart Rate Measurement [N] (0x2A37)
+   Client Characteristic Configuration (0x2902)
+- Body Sensor Location [R] (0x2A38)
+Battery Service (0x180F)
+- Battery Level [N R] (0x2A19)
+   Client Characteristic Configuration (0x2902)
+Device Information (0x180A)
+- Manufacturer Name String [R] (0x2A29)
+A	16:30:37.894	Checking Generic Access service...
+V	16:30:37.904	Reading services...
+I	16:30:37.904	Service (uuid=00001800-0000-1000-8000-00805F9B34FB, instance-id=0) found
+A	16:30:37.904	Checking Device Name characteristic...
+V	16:30:37.904	Reading characteristics...
+I	16:30:37.905	Characteristic (uuid=00002A00-0000-1000-8000-00805F9B34FB, instance-id=0) found
+V	16:30:37.905	Reading properties...
+I	16:30:37.905	Required property READ found
+I	16:30:37.905	Excluded property WRITE_WITHOUT_RESPONSE not found
+I	16:30:37.905	Excluded property SIGNED_WRITE not found
+I	16:30:37.905	Excluded property NOTIFY not found
+I	16:30:37.905	Excluded property INDICATE not found
+I	16:30:37.905	Excluded property BROADCAST not found
+I	16:30:37.905	Excluded property EXTENDED_PROPERTIES not found
+A	16:30:37.930	Reading Device Name value...
+V	16:30:37.939	Reading characteristic 00002a00-0000-1000-8000-00805f9b34fb
+D	16:30:37.939	gatt.readCharacteristic(00002a00-0000-1000-8000-00805f9b34fb)
+I	16:30:38.018	Read Response received from 00002a00-0000-1000-8000-00805f9b34fb, value: (0x) 44-46-55-31-41-30-36, "DFU1A06"
+A	16:30:38.018	"DFU1A06" received
+I	16:30:38.023	Reading characteristic succeeded
+A	16:30:38.049	Check the name...
+V	16:30:38.065	Asserting characteristic value...
+I	16:30:38.086	Value of the characteristic equals 'DFU1A06'
+V	16:30:38.117	Cleaning up...
+V	16:30:40.127	Disconnecting...
+D	16:30:40.127	gatt.disconnect()
+D	16:30:40.135	[Callback] Connection state changed with status: 0 and new state: DISCONNECTED (0)
+I	16:30:40.135	Disconnected
+D	16:30:40.149	gatt.close()
+D	16:30:40.160	wait(200)
+A	16:30:40.366	'Downgrade to SDK 6.0' completed
+I	16:30:40.403	Output file saved (test_nRF51422_result.txt):
+
+06-04-2017 16:20:15
+Version: Instant Run
+Device: Pixel, Android version: O (OPP1.170223.012)
+
+Starting 'DFU test' for 'Update Application from SDK 12.2'
+   Scan for target device...
+16:20:16.400 FD:16:80:77:27:0B -31 0319000002010603030A1809094446553141313232
+   OK
+   SDK 12.2 update...OK
+   Connecting to target...OK
+   Sleep...OK
+   Discovering services...OK
+   Checking Generic Access service...OK
+   Reading Device Name value...OK
+Starting 'DFU downgrade test' for 'Downgrade to SDK 11'
+   Scan for target device...
+16:20:58.573 FD:16:80:77:27:0B -42 0319000002010603030A1809094446553141313232
+   OK
+   SDK 12.2 -> 11 update...OK
+   Connecting to target...OK
+   Sleep...OK
+   Discovering services...OK
+   Checking Generic Access service...OK
+   Reading Device Name value...OK
+Starting 'Bond' for 'Connect, bond and enable HRM notifications'
+   Scan for target device...
+16:22:55.329 FD:16:80:77:27:0B -24 0319410302010607030D180F180A18080944465531413131
+   OK
+   Connecting to target...OK
+   Discovering services...OK
+   Checking Generic Attribute service...OK
+   Checking HR service...OK
+   Bond...OK
+   Enable notifications...OK
+   Reading Device Name value...OK
+   Check the HRM notifications...   
+   |- Enable notifications...OK
+   OK
+   Disconnect...OK
+Starting 'DFU test' for 'Update SD+BL+App from SDK 11'
+   Scan for target device...
+16:23:02.348 FD:16:80:77:27:0B -27 0319410302010607030D180F180A18080944465531413131
+   OK
+   SDK 11 update...OK
+   Connecting to target...OK
+   Sleep...OK
+   Discovering services...OK
+   Checking Generic Access service...OK
+   Reading Device Name value...OK
+Starting 'Check bonding' for 'Check if bonding is preserved'
+   Scan for target device...
+16:24:57.933 FD:16:80:77:27:0B -25 0319410302010607030D180F180A18080944465531413131
+   OK
+   Connecting to target...OK
+   Sleep...OK
+   Discovering services...OK
+   Checking HR service...OK
+   Check notifications enabled...OK
+   Disconnect...OK
+Starting 'Delete bond information' for 'Clean up'
+   Unbond...OK
+Starting 'DFU downgrade test' for 'Downgrade to SDK 8'
+   Scan for target device...
+16:25:05.575 FD:16:80:77:27:0B -28 0319410302010607030D180F180A18080944465531413131
+   OK
+   SDK 11 -> 8 update...OK
+   Connecting to target...OK
+   Sleep...OK
+   Discovering services...OK
+   Checking Generic Access service...OK
+   Reading Device Name value...OK
+Starting 'DFU downgrade test' for 'Downgrade to SDK 6.1'
+   Scan for target device...
+16:26:47.105 FD:16:80:77:27:0B -26 0809444655314130380319410302010607030D180F180A18
+   OK
+   SDK 8 -> 6.1 update...OK
+   Connecting to target...OK
+   Sleep...OK
+   Discovering services...OK
+   Checking Generic Access service...OK
+   Reading Device Name value...OK
+Starting 'DFU test' for 'Update App from SDK 6.1'
+   Scan for target device...
+16:28:27.623 FD:16:80:77:27:0B -26 090944465531413036310319410302010607030D180F180A18
+   OK
+   SDK 6.1 update...OK
+   Connecting to target...OK
+   Sleep...OK
+   Discovering services...OK
+   Checking Generic Access service...OK
+   Reading Device Name value...OK
+Starting 'DFU downgrade test' for 'Downgrade to SDK 6.0'
+   Scan for target device...
+16:29:06.005 FD:16:80:77:27:0B -25 090944465531413036310319410302010607030D180F180A18
+   OK
+   SDK 6.1 -> 6.0 update...OK
+   Connecting to target...OK
+   Sleep...OK
+   Discovering services...OK
+   Checking Generic Access service...OK
+   Reading Device Name value...OK
+

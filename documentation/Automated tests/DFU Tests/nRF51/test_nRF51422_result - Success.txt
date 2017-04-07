@@ -1,0 +1,101 @@
+06-04-2017 16:20:15
+Version: Instant Run
+Device: Pixel, Android version: O (OPP1.170223.012)
+
+Starting 'DFU test' for 'Update Application from SDK 12.2'
+   Scan for target device...
+16:20:16.400 FD:16:80:77:27:0B -31 0319000002010603030A1809094446553141313232
+   OK
+   SDK 12.2 update...OK
+   Connecting to target...OK
+   Sleep...OK
+   Discovering services...OK
+   Checking Generic Access service...OK
+   Reading Device Name value...OK
+Starting 'DFU downgrade test' for 'Downgrade to SDK 11'
+   Scan for target device...
+16:20:58.573 FD:16:80:77:27:0B -42 0319000002010603030A1809094446553141313232
+   OK
+   SDK 12.2 -> 11 update...OK
+   Connecting to target...OK
+   Sleep...OK
+   Discovering services...OK
+   Checking Generic Access service...OK
+   Reading Device Name value...OK
+Starting 'Bond' for 'Connect, bond and enable HRM notifications'
+   Scan for target device...
+16:22:55.329 FD:16:80:77:27:0B -24 0319410302010607030D180F180A18080944465531413131
+   OK
+   Connecting to target...OK
+   Discovering services...OK
+   Checking Generic Attribute service...OK
+   Checking HR service...OK
+   Bond...OK
+   Enable notifications...OK
+   Reading Device Name value...OK
+   Check the HRM notifications...   
+   |- Enable notifications...OK
+   OK
+   Disconnect...OK
+Starting 'DFU test' for 'Update SD+BL+App from SDK 11'
+   Scan for target device...
+16:23:02.348 FD:16:80:77:27:0B -27 0319410302010607030D180F180A18080944465531413131
+   OK
+   SDK 11 update...OK
+   Connecting to target...OK
+   Sleep...OK
+   Discovering services...OK
+   Checking Generic Access service...OK
+   Reading Device Name value...OK
+Starting 'Check bonding' for 'Check if bonding is preserved'
+   Scan for target device...
+16:24:57.933 FD:16:80:77:27:0B -25 0319410302010607030D180F180A18080944465531413131
+   OK
+   Connecting to target...OK
+   Sleep...OK
+   Discovering services...OK
+   Checking HR service...OK
+   Check notifications enabled...OK
+   Disconnect...OK
+Starting 'Delete bond information' for 'Clean up'
+   Unbond...OK
+Starting 'DFU downgrade test' for 'Downgrade to SDK 8'
+   Scan for target device...
+16:25:05.575 FD:16:80:77:27:0B -28 0319410302010607030D180F180A18080944465531413131
+   OK
+   SDK 11 -> 8 update...OK
+   Connecting to target...OK
+   Sleep...OK
+   Discovering services...OK
+   Checking Generic Access service...OK
+   Reading Device Name value...OK
+Starting 'DFU downgrade test' for 'Downgrade to SDK 6.1'
+   Scan for target device...
+16:26:47.105 FD:16:80:77:27:0B -26 0809444655314130380319410302010607030D180F180A18
+   OK
+   SDK 8 -> 6.1 update...OK
+   Connecting to target...OK
+   Sleep...OK
+   Discovering services...OK
+   Checking Generic Access service...OK
+   Reading Device Name value...OK
+Starting 'DFU test' for 'Update App from SDK 6.1'
+   Scan for target device...
+16:28:27.623 FD:16:80:77:27:0B -26 090944465531413036310319410302010607030D180F180A18
+   OK
+   SDK 6.1 update...OK
+   Connecting to target...OK
+   Sleep...OK
+   Discovering services...OK
+   Checking Generic Access service...OK
+   Reading Device Name value...OK
+Starting 'DFU downgrade test' for 'Downgrade to SDK 6.0'
+   Scan for target device...
+16:29:06.005 FD:16:80:77:27:0B -25 090944465531413036310319410302010607030D180F180A18
+   OK
+   SDK 6.1 -> 6.0 update...OK
+   Connecting to target...OK
+   Sleep...OK
+   Discovering services...OK
+   Checking Generic Access service...OK
+   Reading Device Name value...OK
