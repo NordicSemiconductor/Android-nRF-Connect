@@ -1,0 +1,24 @@
+<macro name="Thingy plasmagun" icon="FLASH">
+   <assert-service description="Ensure Thingy Sound Service" uuid="ef680500-9b35-4933-9b10-52ffa9740042">
+      <assert-characteristic description="Ensure Thingy Sound Configuration Characteristic" uuid="ef680501-9b35-4933-9b10-52ffa9740042">
+         <property name="WRITE" requirement="MANDATORY"/>
+      </assert-characteristic>
+      <assert-characteristic description="Ensure Thingy Speaker Data Characteristic" uuid="ef680502-9b35-4933-9b10-52ffa9740042">
+         <property name="WRITE_WITHOUT_RESPONSE" requirement="MANDATORY"/>
+      </assert-characteristic>
+   </assert-service>
+   <assert-service description="Ensure Thingy User Interface Service" uuid="ef680300-9b35-4933-9b10-52ffa9740042">
+      <assert-characteristic description="Ensure Thingy LED Characteristic" uuid="ef680301-9b35-4933-9b10-52ffa9740042">
+         <property name="WRITE" requirement="MANDATORY"/>
+      </assert-characteristic>
+      <assert-characteristic description="Ensure Thingy Button Characteristic" uuid="ef680302-9b35-4933-9b10-52ffa9740042">
+         <assert-cccd description="Ensure CCCD"/>
+      </assert-characteristic>
+   </assert-service>
+   <write-descriptor description="Enable button notifications" characteristic-uuid="ef680302-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" uuid="00002902-0000-1000-8000-00805f9b34fb" value="0100"/>
+   <write description="Set speaker mode to Sample" characteristic-uuid="ef680501-9b35-4933-9b10-52ffa9740042" service-uuid="ef680500-9b35-4933-9b10-52ffa9740042" value="0301" type="WRITE_REQUEST"/>
+   <sleep-until description="Wait until button pressed" characteristic-uuid="ef680302-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" server="false" timeout="0" value="01"/>
+   <write description="LED on" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="0100FF00" type="WRITE_REQUEST"/>
+   <write description="Play Hit_00" characteristic-uuid="ef680502-9b35-4933-9b10-52ffa9740042" service-uuid="ef680500-9b35-4933-9b10-52ffa9740042" value="04" type="WRITE_COMMAND"/>
+   <write description="LED off" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="00" type="WRITE_REQUEST"/>
+</macro>

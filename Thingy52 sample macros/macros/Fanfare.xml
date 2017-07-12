@@ -1,0 +1,35 @@
+<macro name="Fanfare" icon="ALARM">
+   <assert-service description="Ensure Thingy Sound Service" uuid="ef680500-9b35-4933-9b10-52ffa9740042">
+      <assert-characteristic description="Ensure Thingy Sound Configuration Characteristic" uuid="ef680501-9b35-4933-9b10-52ffa9740042">
+         <property name="WRITE" requirement="MANDATORY"/>
+      </assert-characteristic>
+      <assert-characteristic description="Ensure Thingy Speaker Data Characteristic" uuid="ef680502-9b35-4933-9b10-52ffa9740042">
+         <property name="WRITE_WITHOUT_RESPONSE" requirement="MANDATORY"/>
+      </assert-characteristic>
+   </assert-service>
+   <assert-service description="Ensure Thingy User Interface Service" uuid="ef680300-9b35-4933-9b10-52ffa9740042">
+      <assert-characteristic description="Ensure Thingy LED Characteristic" uuid="ef680301-9b35-4933-9b10-52ffa9740042">
+         <property name="WRITE" requirement="MANDATORY"/>
+      </assert-characteristic>
+   </assert-service>
+   <write description="Set speaker mode to Frequency and Duration" characteristic-uuid="ef680501-9b35-4933-9b10-52ffa9740042" service-uuid="ef680500-9b35-4933-9b10-52ffa9740042" value="0101" type="WRITE_REQUEST"/>
+   <write description="Blink G4" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="01240000" type="WRITE_REQUEST"/>
+   <write description="Play G4" characteristic-uuid="ef680502-9b35-4933-9b10-52ffa9740042" service-uuid="ef680500-9b35-4933-9b10-52ffa9740042" value="8801E8033C" type="WRITE_COMMAND"/>
+   <sleep description="Sleep 250 ms" timeout="250"/>
+   <write description="Blink C5" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="01380000" type="WRITE_REQUEST"/>
+   <write description="Play C5" characteristic-uuid="ef680502-9b35-4933-9b10-52ffa9740042" service-uuid="ef680500-9b35-4933-9b10-52ffa9740042" value="0B02E8033C" type="WRITE_COMMAND"/>
+   <sleep description="Sleep 250 ms" timeout="250"/>
+   <write description="Blink E5" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="014E0000" type="WRITE_REQUEST"/>
+   <write description="Play E5" characteristic-uuid="ef680502-9b35-4933-9b10-52ffa9740042" service-uuid="ef680500-9b35-4933-9b10-52ffa9740042" value="9302E8033C" type="WRITE_COMMAND"/>
+   <sleep description="Sleep 250 ms" timeout="250"/>
+   <write description="Blink G5" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="01640000" type="WRITE_REQUEST"/>
+   <write description="Play G5" characteristic-uuid="ef680502-9b35-4933-9b10-52ffa9740042" service-uuid="ef680500-9b35-4933-9b10-52ffa9740042" value="1003E8033C" type="WRITE_COMMAND"/>
+   <sleep description="Sleep 375 ms" timeout="375"/>
+   <write description="Blink E5" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="014E0000" type="WRITE_REQUEST"/>
+   <write description="Play E5" characteristic-uuid="ef680502-9b35-4933-9b10-52ffa9740042" service-uuid="ef680500-9b35-4933-9b10-52ffa9740042" value="9302E8033C" type="WRITE_COMMAND"/>
+   <sleep description="Sleep 125 ms" timeout="125"/>
+   <write description="Blink G5" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="01640000" type="WRITE_REQUEST"/>
+   <write description="Play G5" characteristic-uuid="ef680502-9b35-4933-9b10-52ffa9740042" service-uuid="ef680500-9b35-4933-9b10-52ffa9740042" value="1003E8033C" type="WRITE_COMMAND"/>
+   <sleep description="Sleep 1000 ms" timeout="1000"/>
+   <write description="LED off" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="00" type="WRITE_REQUEST"/>
+</macro>

@@ -1,0 +1,13 @@
+<macro name="Blinky" icon="LED_ON">
+   <assert-service description="Ensure Thingy User Interface Service" uuid="ef680300-9b35-4933-9b10-52ffa9740042">
+      <assert-characteristic description="Ensure Thingy LED Characteristic" uuid="ef680301-9b35-4933-9b10-52ffa9740042">
+         <property name="WRITE" requirement="MANDATORY"/>
+      </assert-characteristic>
+   </assert-service>
+   <write description="Write 0x01FF0000 to Thingy LED Characteristic" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="01FF0000" type="WRITE_REQUEST"/>
+   <sleep description="Sleep 200 ms" timeout="200"/>
+   <write description="Write 0x0100FF00 to Thingy LED Characteristic" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="0100FF00" type="WRITE_REQUEST"/>
+   <sleep description="Sleep 200 ms" timeout="200"/>
+   <write description="Write 0x010000FF to Thingy LED Characteristic" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="010000FF" type="WRITE_REQUEST"/>
+   <sleep description="Sleep 200 ms" timeout="200"/>
+</macro>

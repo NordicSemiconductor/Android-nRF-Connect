@@ -1,0 +1,76 @@
+<macro name="Thingy bomb" icon="BRIGHTNESS_HIGH">
+   <assert-service description="Ensure Thingy Sound Service" uuid="ef680500-9b35-4933-9b10-52ffa9740042">
+      <assert-characteristic description="Ensure Thingy Sound Configuration Characteristic" uuid="ef680501-9b35-4933-9b10-52ffa9740042">
+         <property name="WRITE" requirement="MANDATORY"/>
+      </assert-characteristic>
+      <assert-characteristic description="Ensure Thingy Speaker Data Characteristic" uuid="ef680502-9b35-4933-9b10-52ffa9740042">
+         <property name="WRITE_WITHOUT_RESPONSE" requirement="MANDATORY"/>
+      </assert-characteristic>
+   </assert-service>
+   <assert-service description="Ensure Thingy User Interface Service" uuid="ef680300-9b35-4933-9b10-52ffa9740042">
+      <assert-characteristic description="Ensure Thingy LED Characteristic" uuid="ef680301-9b35-4933-9b10-52ffa9740042">
+         <property name="WRITE" requirement="MANDATORY"/>
+      </assert-characteristic>
+      <assert-characteristic description="Ensure Thingy Button Characteristic" uuid="ef680302-9b35-4933-9b10-52ffa9740042">
+         <assert-cccd description="Ensure CCCD"/>
+      </assert-characteristic>
+   </assert-service>
+   <write-descriptor description="Enable button notifications" characteristic-uuid="ef680302-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" uuid="00002902-0000-1000-8000-00805f9b34fb" value="0100"/>
+   <write description="Set speaker mode to Frequency and Duration" characteristic-uuid="ef680501-9b35-4933-9b10-52ffa9740042" service-uuid="ef680500-9b35-4933-9b10-52ffa9740042" value="0101" type="WRITE_REQUEST"/>
+   <sleep-until description="Wait until button pressed" characteristic-uuid="ef680302-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" server="false" timeout="0" value="01"/>
+   <write description="LED on" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="01FF0000" type="WRITE_REQUEST"/>
+   <write description="Play sound" characteristic-uuid="ef680502-9b35-4933-9b10-52ffa9740042" service-uuid="ef680500-9b35-4933-9b10-52ffa9740042" value="BC0264003C" type="WRITE_COMMAND"/>
+   <write description="LED off" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="00" type="WRITE_REQUEST"/>
+   <sleep description="Sleep 1 s" timeout="1000"/>
+   <write description="LED on" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="01FF0000" type="WRITE_REQUEST"/>
+   <write description="Play sound" characteristic-uuid="ef680502-9b35-4933-9b10-52ffa9740042" service-uuid="ef680500-9b35-4933-9b10-52ffa9740042" value="BC0264003C" type="WRITE_COMMAND"/>
+   <write description="LED off" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="00" type="WRITE_REQUEST"/>
+   <sleep description="Sleep 1 s" timeout="1000"/>
+   <write description="LED on" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="01FF0000" type="WRITE_REQUEST"/>
+   <write description="Play sound" characteristic-uuid="ef680502-9b35-4933-9b10-52ffa9740042" service-uuid="ef680500-9b35-4933-9b10-52ffa9740042" value="BC0264003C" type="WRITE_COMMAND"/>
+   <write description="LED off" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="00" type="WRITE_REQUEST"/>
+   <sleep description="Sleep 900 ms" timeout="900"/>
+   <write description="LED on" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="01FF0000" type="WRITE_REQUEST"/>
+   <write description="Play sound" characteristic-uuid="ef680502-9b35-4933-9b10-52ffa9740042" service-uuid="ef680500-9b35-4933-9b10-52ffa9740042" value="BC0264003C" type="WRITE_COMMAND"/>
+   <write description="LED off" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="00" type="WRITE_REQUEST"/>
+   <sleep description="Sleep 800 ms" timeout="800"/>
+   <write description="LED on" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="01FF0000" type="WRITE_REQUEST"/>
+   <write description="Play sound" characteristic-uuid="ef680502-9b35-4933-9b10-52ffa9740042" service-uuid="ef680500-9b35-4933-9b10-52ffa9740042" value="BC0264003C" type="WRITE_COMMAND"/>
+   <write description="LED off" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="00" type="WRITE_REQUEST"/>
+   <sleep description="Sleep 700 ms" timeout="700"/>
+   <write description="LED on" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="01FF0000" type="WRITE_REQUEST"/>
+   <write description="Play sound" characteristic-uuid="ef680502-9b35-4933-9b10-52ffa9740042" service-uuid="ef680500-9b35-4933-9b10-52ffa9740042" value="BC0264003C" type="WRITE_COMMAND"/>
+   <write description="LED off" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="00" type="WRITE_REQUEST"/>
+   <sleep description="Sleep 600 ms" timeout="600"/>
+   <write description="LED on" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="01FF0000" type="WRITE_REQUEST"/>
+   <write description="Play sound" characteristic-uuid="ef680502-9b35-4933-9b10-52ffa9740042" service-uuid="ef680500-9b35-4933-9b10-52ffa9740042" value="BC0264003C" type="WRITE_COMMAND"/>
+   <write description="LED off" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="00" type="WRITE_REQUEST"/>
+   <sleep description="Sleep 500 ms" timeout="500"/>
+   <write description="LED on" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="01FF0000" type="WRITE_REQUEST"/>
+   <write description="Play sound" characteristic-uuid="ef680502-9b35-4933-9b10-52ffa9740042" service-uuid="ef680500-9b35-4933-9b10-52ffa9740042" value="BC0264003C" type="WRITE_COMMAND"/>
+   <write description="LED off" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="00" type="WRITE_REQUEST"/>
+   <sleep description="Sleep 400 ms" timeout="400"/>
+   <write description="LED on" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="01FF0000" type="WRITE_REQUEST"/>
+   <write description="Play sound" characteristic-uuid="ef680502-9b35-4933-9b10-52ffa9740042" service-uuid="ef680500-9b35-4933-9b10-52ffa9740042" value="BC0264003C" type="WRITE_COMMAND"/>
+   <write description="LED off" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="00" type="WRITE_REQUEST"/>
+   <sleep description="Sleep 300 ms" timeout="300"/>
+   <write description="LED on" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="01FF0000" type="WRITE_REQUEST"/>
+   <write description="Play sound" characteristic-uuid="ef680502-9b35-4933-9b10-52ffa9740042" service-uuid="ef680500-9b35-4933-9b10-52ffa9740042" value="BC0264003C" type="WRITE_COMMAND"/>
+   <write description="LED off" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="00" type="WRITE_REQUEST"/>
+   <sleep description="Sleep 200 ms" timeout="200"/>
+   <write description="LED on" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="01FF0000" type="WRITE_REQUEST"/>
+   <write description="Play sound" characteristic-uuid="ef680502-9b35-4933-9b10-52ffa9740042" service-uuid="ef680500-9b35-4933-9b10-52ffa9740042" value="BC0264003C" type="WRITE_COMMAND"/>
+   <write description="LED off" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="00" type="WRITE_REQUEST"/>
+   <sleep description="Sleep 100 ms" timeout="100"/>
+   <write description="LED on" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="01FF0000" type="WRITE_REQUEST"/>
+   <write description="Play sound" characteristic-uuid="ef680502-9b35-4933-9b10-52ffa9740042" service-uuid="ef680500-9b35-4933-9b10-52ffa9740042" value="BC02E8033C" type="WRITE_COMMAND"/>
+   <sleep description="Sleep 1000 ms" timeout="1000"/>
+   <write description="LED off" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="00" type="WRITE_REQUEST"/>
+   <sleep description="Sleep 100 ms" timeout="100"/>
+
+   <write description="Set speaker mode to Sample" characteristic-uuid="ef680501-9b35-4933-9b10-52ffa9740042" service-uuid="ef680500-9b35-4933-9b10-52ffa9740042" value="0301" type="WRITE_REQUEST"/>
+   <write description="LED on" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="01FF0000" type="WRITE_REQUEST"/>
+   <write description="Play Explosion_04" characteristic-uuid="ef680502-9b35-4933-9b10-52ffa9740042" service-uuid="ef680500-9b35-4933-9b10-52ffa9740042" value="03" type="WRITE_COMMAND"/>
+   <sleep description="Sleep 500 ms" timeout="500"/>
+   <write description="LED off" characteristic-uuid="ef680301-9b35-4933-9b10-52ffa9740042" service-uuid="ef680300-9b35-4933-9b10-52ffa9740042" value="00" type="WRITE_REQUEST"/>
+</macro>
