@@ -190,6 +190,28 @@
 	</test>
 	
 	<!-- Test executions -->
+	<run-test ref="dfu" description="Update Application from SDK 14.1">
+		<set name="DEVICE_NAME" value="DFU2A141" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A141" />
+		<set name="SDK" value="14.1" />
+		<set name="FIRMWARE" value="nrf52840_sdk_14.1_app.zip"/>
+	</run-test>
+
+	<run-test ref="dfu_downgrade" description="Downgrade to SDK 14">
+		<set name="DEVICE_NAME" value="DFU2A141" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A14" />
+		<set name="SDK" value="14.1" />
+		<set name="TARGET_SDK" value="14" />
+		<set name="FIRMWARE" value="nrf52840_sdk_14.1_to_14_all_in_one.zip"/>
+	</run-test>
+
+	<run-test ref="dfu" description="Update Application from SDK 14">
+		<set name="DEVICE_NAME" value="DFU2A14" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A14" />
+		<set name="SDK" value="14" />
+		<set name="FIRMWARE" value="nrf52840_sdk_14_app.zip"/>
+	</run-test>
+	
 	<run-test ref="dfu" description="Update Application from SDK 13">
 		<set name="DEVICE_NAME" value="DFU3A13" />
 		<set name="TEST_DEVICE_NAME" value="DFU3A13" />
