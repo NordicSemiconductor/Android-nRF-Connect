@@ -46,8 +46,8 @@
 	<set name="FIRMWARE_PATH" value="/Nordic Semiconductor/Board/pca10028/ble_app_hrm_dfu_s110_v8_0_0_sdk_v9_0.zip" />
 
 	<!-- 
-		Define devices to test. A Target MAY have a 'name' attribute with a user friendly name and MUST have the 'address' definition with the Bluetooth Smart device address.
-		You MAY specify more than one target but at least one MUST be specified. 
+		Define devices to test. A Target MAY have a 'name' attribute with a user friendly name and MAY have the 'address' definition with the Bluetooth Smart device address. Use 'scan-for' operation to bind a target that doesn't have the address with a scanned device.
+		Since version 4.3 specyfing target is not required as 'scan' operation does need such.
 	-->
 	<target id="devkit" name="Dev Kit" address="${EXTRA_ADDRESS}" />
 

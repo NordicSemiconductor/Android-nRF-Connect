@@ -405,4 +405,4 @@ The **dfu** operation sends the firmware Over-the-Air to the target using DFU. I
 
 The script may send the Soft Device, Bootloader or the application, or any combinations of those packed in a ZIP file. The new Distribution packets (recommended) are recommended since nRF Connect version 3.0 (known as nRF Master Control Panel at that time), however you may also use the ZIP file that contains the following content in order to be parsed correctly:
 
-![ZIP content](../images/zip.png)
+![ZIP content](../../images/zip.png)
