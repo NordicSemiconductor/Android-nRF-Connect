@@ -47,7 +47,7 @@
 
 	<!-- 
 		Define devices to test. A Target MAY have a 'name' attribute with a user friendly name and MAY have the 'address' definition with the Bluetooth Smart device address. Use 'scan-for' operation to bind a target that doesn't have the address with a scanned device.
-		Since version 4.3 specyfing target is not required as 'scan' operation does need such.
+		Since version 4.3 specifying target is not required as 'scan' operation does need such.
 	-->
 	<target id="devkit" name="Dev Kit" address="${EXTRA_ADDRESS}" />
 
