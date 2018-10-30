@@ -14,7 +14,7 @@ The automated tests should work with any Bluetooth Smart device that comunicates
 
 To make an easy start the *sample_test_hrm.xml* file contains a test that can be used with the HRS_DFU sample from the SDK. The instruction below describes steps that should be performed to successfully run this test. 
 
-**Note:** Starting from the SDK 8.0 the bootloader, in case the buttonless update is NOT being used, advertises with a device address increased by 1. Therefore, the test may fail in the first run if you have just the Soft Device and Bootloader flashed on the device. After flashing the HRS application onto it, it will start to advertise with a different address and a timeout will be thrown during connection attempt. But the test should work for the second time as the bootloader uses the same address if buttonless update is in use.
+**Note:** Starting from the SDK 8.0, the DFU bootloader, in case the buttonless update is NOT being used, advertises with a device address increased by 1. Therefore, the test may fail in the first run if you have just the Soft Device and Bootloader flashed on the device. After flashing the HRS application onto it, it will start to advertise with a different address and a timeout will be thrown during connection attempt. But the test should work for the second time as the bootloader uses the same address if buttonless update is in use.
 
 1. nRF Connect (nRF Master Control Panel v2.1 or newer) will create the above files in your phone's file system in */Nordic Semiconductor* folder. **Note:** newly created files may not be visible on the PC when connected with USB. This is beacuse Android must perform a scan of media files. Get the files from GitHub or trigger the media scanner manually: restart the phone/tablet or install and launch the *Rescan SD* application (or similar) from Google Play.
 2. Copy those files to your PC. You will use the *test.bat* to start the testing service. The sample may be used as a demo or a starting point.
@@ -296,6 +296,27 @@ Writes the given value to the descriptor.
 
 The instance-id attributes are optional and set to 0 by default.
 
+##### Reliable Write
+
+Reliable Write is described in Bluetooth Core Specification v5.0, Vol 3, Part G, chapter 4.9.5. In order to start the sup-procedure (supported from Android 4.3 and nRF Connect 4.21.0), use:
+
+```xml
+<begin-reliable-writer [description="DESCRIPTION"] />
+```
+
+All following write requests will use Prepare Write, instead of Write procedure. The target device will reply received data back to the Android for verification. If received data is different than the one sent, an assert error will be reported. Multiple characteristics may be written multiple times during a single Reliable Write operation. Other operations may also be performed while ongoing reliable write. However, at least one Write operation must be performed before executing or aborting the Reliable Write sub-procedure.
+
+When all data are sent and verified, use:
+
+```xml
+<execute-reliable-writer [description="DESCRIPTION"] [timeout="NUMBER"] [target="TARGET_ID"] [expected="SUCCESS"] />
+```
+or
+```xml
+<abort-reliable-writer [description="DESCRIPTION"] [timeout="NUMBER"] [target="TARGET_ID"] [expected="SUCCESS"] />
+```
+to revert to a state from before the sub-procedure was started.
+
 ##### Notifications / indications
 
 ```xml
@@ -354,13 +375,14 @@ Sends a MTU change request to the peripheral. MTU value must be between 23 and 5
   - BALANCED (default) (Conn interval: 30-55ms, slave latency: 0, supervision timeout multiplier: 20)
   - HIGH (Conn interval: 11.25-15ms on Android 6+ or 7.5-10ms before, slave latency: 0, supervision timeout multiplier: 20)
 -->
-<request-connection-priority [description="DESCRIPTION"] type="TYPE" [target="TARGET_ID"] [expected="SUCCESS"]/>
+<request-connection-priority [description="DESCRIPTION"] type="TYPE" [timeout="NUMBER"] [target="TARGET_ID"] [expected="SUCCESS"]/>
 ```
 
 Requests the change of connection priority. Only the 3 given values are supported by Android API. 
 
-This is not an asynchronuous method and will always end with a success, unless a serious problem occur. It does not mean that the requested 
-parameters has been set.
+Until Android 8 this is not an asynchronuous method ending always with a success, unless a serious problem occur. It did not mean that the requested 
+parameters has been set. From Android 8 there is a callback *onConnectionUpdated*, but it may be called with different parameters than requested.
+The operation will be assumed failed only if the status is different then **GATT_SUCCESS**.
 
 *Note:* Supported only on Android 5 and never devices.
 

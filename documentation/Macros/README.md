@@ -206,6 +206,27 @@ Writes the given value to the characteristic on a remote device.
 
 Writes the given value to the descriptor on a remote device.
 
+##### Reliable Write
+
+Reliable Write is described in Bluetooth Core Specification v5.0, Vol 3, Part G, chapter 4.9.5. In order to start the sup-procedure (supported from Android 4.3 and nRF Connect 4.21.0), use:
+
+```xml
+<begin-reliable-write [description="DESCRIPTION"] />
+```
+
+All following write requests will use Prepare Write, instead of Write procedure. The target device will reply received data back to the Android for verification. If received data is different than the one sent, an assert error will be reported. Multiple characteristics may be written multiple times during a single Reliable Write operation. Other operations may also be performed while ongoing reliable write. However, at least one Write operation must be performed before executing or aborting the Reliable Write sub-procedure.
+
+When all data are sent and verified, use:
+
+```xml
+<execute-reliable-write [description="DESCRIPTION"] />
+```
+or
+```xml
+<abort-reliable-write [description="DESCRIPTION"] />
+```
+to revert to a state from before the sub-procedure was started.
+
 ##### Notifications
 
 ```xml
@@ -307,6 +328,16 @@ nRF Connect will wait until the given characteristic is written from a remote de
 
 nRF Connect will wait until the given descriptor is written from a remote device. A value assertion may be used to check its value.
 
+##### Wait for Execute or Abort of Reliable Write
+
+```xml
+<wait-for-execute-reliable-write [description="DESCRIPTION"] execute="true|false" />
+```
+
+nRF Connect 4.21+ will wait for the Execute Write or Abort Write command.
+
+*Note:* The Begin Reliable Write is invisible from the server side.
+
 ##### Set server characteristic value
 
 ```xml
@@ -383,7 +414,7 @@ Sends a MTU change request to the peripheral. MTU value must be between 23 and 5
 
 Requests the change of connection priority. Only the 3 given values are supported by Android API. 
 
-This is not an asynchronuous method and will always end with a success, unless a serious problem occur. It does not mean that the requested 
-parameters has been set.
+Until Android 8 this is not an asynchronuous method ending always with a success, unless a serious problem occur. It did not mean that the requested 
+parameters has been set. From Android 8 there is a callback *onConnectionUpdated*, but it may be called with different parameters than requested.
 
 *Note:* Supported only on Android 5 and never devices.
