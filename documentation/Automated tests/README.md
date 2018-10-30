@@ -386,6 +386,53 @@ The operation will be assumed failed only if the status is different then **GATT
 
 *Note:* Supported only on Android 5 and never devices.
 
+##### Read PHY
+
+```xml
+<read-phy [description="DESCRIPTION"] [timeout="NUMBER"] [target="TARGET_ID"] [expected="SUCCESS"] >
+  <!--
+    Assert PHY.
+    Transmitter and Received PHY attributes accept the following values and logical OR operator ('|'):
+    - LE_1M - legacy LE 1M PHY, 
+    - LE_2M - double speed, Bluetooth 5 feature
+    - LE_CODED - long range, Bluetooth 5 feature
+
+    At least one of 'tx' or 'rx' must be set.
+    For example, a valid assert may look like this: <assert-value tx="LE_2M | LE_CODED" rx="LE_1M" />
+  -->
+  <assert-value [description="DESCRIPTION"] [tx="TRANSMITTER_PHY"] [rx="RECEIVER_PHY"] [expected="SUCCESS"] />
+</read-phy>
+```
+
+Reads the current PHY used for the transmitter and receiver. A value assertion may be used to check received PHYs.
+
+*Note:* Readnig PHY is supported only on Android 8 and newer devices.
+
+##### Set Preferred PHY
+
+```xml
+<!-- 
+  Transmitter and Receiver PHY attributes accept the fofflowing values and logical OR operator ('|'):
+    - LE_1M - legacy LE 1M PHY (default), 
+    - LE_2M - double speed, Bluetooth 5 feature,
+    - LE_CODED - long range, Bluetooth 5 feature.
+
+    The options for the Transmitter LE Coded PHY are:
+    - NO_PREFERRED - No preferred coding when transmitting on the LE Coded PHY (default),
+    - S2 - Prefer the S=2 coding to be used when transmitting on the LE Coded PHY,
+    - S8 - Prefer the S=8 coding to be used when transmitting on the LE Coded PHY. 
+
+    Example: <set-preferred-phy tx="LE_2M | LE_CODED" rx="LE_1M" />
+ -->
+<set-preferred-phy [description="DESCRIPTION"]  [tx="TRANSMITTER_PHY"] [rx="RECEIVER_PHY"] [option="OPTIONS"] [timeout="NUMBER"] [target="TARGET_ID"] [expected="SUCCESS"] />
+```
+
+Sets the preferred PHY that is to be used for the transmitter and receiver for the connection. Please note that this is just a recommendation, whether the PHY change will happen depends on other applications preferences, local and remote controller capabilities. Controller can override these settings. 
+
+LE 1M and no preferred coding option will be used by default, when not specified. 
+
+*Note:* Setting PHY is supported only on Android 8 and newer devices that support LE 2M or LE Coded.
+
 ##### Sleep
 
 ```xml
