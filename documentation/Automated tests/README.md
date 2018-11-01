@@ -301,7 +301,7 @@ The instance-id attributes are optional and set to 0 by default.
 Reliable Write is described in Bluetooth Core Specification v5.0, Vol 3, Part G, chapter 4.9.5. In order to start the sup-procedure (supported from Android 4.3 and nRF Connect 4.21.0), use:
 
 ```xml
-<begin-reliable-writer [description="DESCRIPTION"] />
+<begin-reliable-write [description="DESCRIPTION"] />
 ```
 
 All following write requests will use Prepare Write, instead of Write procedure. The target device will reply received data back to the Android for verification. If received data is different than the one sent, an assert error will be reported. Multiple characteristics may be written multiple times during a single Reliable Write operation. Other operations may also be performed while ongoing reliable write. However, at least one Write operation must be performed before executing or aborting the Reliable Write sub-procedure.
@@ -309,11 +309,11 @@ All following write requests will use Prepare Write, instead of Write procedure.
 When all data are sent and verified, use:
 
 ```xml
-<execute-reliable-writer [description="DESCRIPTION"] [timeout="NUMBER"] [target="TARGET_ID"] [expected="SUCCESS"] />
+<execute-reliable-write [description="DESCRIPTION"] [timeout="NUMBER"] [target="TARGET_ID"] [expected="SUCCESS"] />
 ```
 or
 ```xml
-<abort-reliable-writer [description="DESCRIPTION"] [timeout="NUMBER"] [target="TARGET_ID"] [expected="SUCCESS"] />
+<abort-reliable-write [description="DESCRIPTION"] [timeout="NUMBER"] [target="TARGET_ID"] [expected="SUCCESS"] />
 ```
 to revert to a state from before the sub-procedure was started.
 
