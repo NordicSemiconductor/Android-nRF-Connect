@@ -54,7 +54,7 @@ You may specify key-value pairs in execution or inside the test using
     
 and then use them as `${KEY}` (see the sample_test_hrm.xml).
 
-Read mode about the test suites in the [documentation](documentation/Automated tests/README.md).
+Read mode about the test suites in the [documentation](documentation/Automated%20tests/README.md).
 
 ## Macros
 
