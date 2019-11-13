@@ -1,10 +1,31 @@
 @echo off
-rem Copyright (c) 2014 Nordic Semiconductor. All Rights Reserved.
-rem   
-rem The information contained herein is property of Nordic Semiconductor ASA.
-rem Terms and conditions of usage are described in detail in NORDIC SEMICONDUCTOR STANDARD SOFTWARE LICENSE AGREEMENT.
-rem Licensees are granted free, non-transferable use of the information. NO WARRANTY of ANY KIND is provided. 
-rem This heading must NOT be removed from the file.
+rem Copyright (c) 2014-2019, Nordic Semiconductor
+rem All rights reserved.
+rem 
+rem Redistribution and use in source and binary forms, with or without
+rem modification, are permitted provided that the following conditions are met:
+rem 
+rem * Redistributions of source code must retain the above copyright notice, this
+rem   list of conditions and the following disclaimer.
+rem 
+rem * Redistributions in binary form must reproduce the above copyright notice,
+rem   this list of conditions and the following disclaimer in the documentation
+rem   and/or other materials provided with the distribution.
+rem 
+rem * Neither the name of nRF Toolbox nor the names of its
+rem   contributors may be used to endorse or promote products derived from
+rem   this software without specific prior written permission.
+rem 
+rem THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+rem AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+rem IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+rem DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+rem FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+rem DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+rem SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+rem CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+rem OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+rem OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 rem 
 rem Description:
 rem ------------
@@ -15,7 +36,7 @@ rem Requirements:
 rem -------------
 rem 1. Android device with Android version 4.3+ connected by USB cable with the PC
 rem 2. The path to Android platform-tools directory must be added to %PATH% environment variable, f.e: C:\Program Files\Android ADT Bundle\sdk\platform-tools
-rem 3. nRF Connect (previously nRF Master Control Panel) (2.1.0+) application installed on the Android device
+rem 3. nRF Connect (2.1.0+) application installed on the Android device
 rem 4. "Developer options" and "USB debugging" must be enabled on the Android device
 rem
 rem Usage:
@@ -42,7 +63,7 @@ rem Check ADB
 call adb devices > nul 2>&1
 if errorLevel 1 (
 	call :info
-	echo Error: adb is not recognized as an external command.
+	echo Error: adb is not recognized as an external command. 
 	echo        Add [Android Bundle path]/sdk/platform-tools to %%PATH%%
 	goto error
 )
@@ -105,7 +126,7 @@ if "%DEVICE%"=="" (
 			goto error
 		)
 		if not "%%a"=="1" (
-			echo Error: More than one device connected.
+			echo Error: More than one device connected. 
 			echo        Specify the device serial number using -d option:
 			call adb devices
 			goto usage_only
@@ -126,14 +147,12 @@ if "%DEVICE%"=="" (
 rem ==================================================================================
 rem Remove old result file (if exists)
 echo|set /p=Removing old result file...
-call adb shell rm "/sdcard/Nordic\ Semiconductor/Test/%RESULT_FILE%" > nul 2>&1
-if errorLevel 1 (
-	echo NOT FOUND
-) else echo OK
+call adb shell rm "/sdcard/Android/data/no.nordicsemi.android.mcp/files/Test/%RESULT_FILE%" > nul 2>&1
+echo OK
 
 rem Copy selected file onto the device
-echo|set /p=Copying "%XML_FILE%" to /sdcard/Nordic Semiconductor/Test...
-call adb %S_DEVICE% push %XML_PATH% "/sdcard/Nordic Semiconductor/Test/%XML_FILE%" > nul 2>&1
+echo|set /p=Copying "%XML_FILE%" to /sdcard/Android/data/no.nordicsemi.android.mcp/files/Test...
+call adb %S_DEVICE% push %XML_PATH% "/sdcard/Android/data/no.nordicsemi.android.mcp/files/Test/%XML_FILE%" > nul 2>&1
 if errorLevel 1 (
 	echo FAIL
 	echo Error: Device not found.
@@ -142,8 +161,9 @@ if errorLevel 1 (
 
 rem Start test service on the device
 echo|set /p=Starting test service...
-call adb %S_DEVICE% shell am startservice -a no.nordicsemi.android.action.START_TEST^
- %EXTRAS% -e no.nordicsemi.android.test.extra.EXTRA_FILE_PATH "/sdcard/Nordic\ Semiconductor/Test/%XML_FILE%" > nul 2>&1
+rem Note: For phones running Android system older than Oreo, use "am startservice" below.
+call adb %S_DEVICE% shell am start-foreground-service -a no.nordicsemi.android.action.START_TEST^
+ %EXTRAS% -e no.nordicsemi.android.test.extra.EXTRA_FILE_PATH "/sdcard/Android/data/no.nordicsemi.android.mcp/files/Test/%XML_FILE%" > nul 2>&1
 if errorLevel 1 (
 	echo FAIL
 	echo Error: Required application not installed.
@@ -158,7 +178,7 @@ echo|set /p=Waiting for the result...
 :read_result
 rem Wait 10 sec, this IP address is reserved and does not exist
 ping 192.0.2.3 -n 1 -w 10000 > nul
-call adb %S_DEVICE% pull "/sdcard/Nordic Semiconductor/Test/%RESULT_FILE%" "%RESULT_FILE%" > nul 2>&1
+call adb %S_DEVICE% pull "/sdcard/Android/data/no.nordicsemi.android.mcp/files/Test/%RESULT_FILE%" "%RESULT_FILE%" > nul 2>&1
 if errorLevel 1 goto :read_result
 
 echo OK

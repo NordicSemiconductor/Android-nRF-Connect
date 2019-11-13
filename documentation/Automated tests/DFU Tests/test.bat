@@ -140,7 +140,7 @@ if errorLevel 1 (
 
 rem Start test service on the device
 echo|set /p=Starting test service...
-call adb %S_DEVICE% shell am startservice -a no.nordicsemi.android.action.START_TEST^
+call adb %S_DEVICE% shell am start-foreground-service -a no.nordicsemi.android.action.START_TEST^
  %EXTRAS% -e no.nordicsemi.android.test.extra.EXTRA_FILE_PATH "/sdcard/Android/data/no.nordicsemi.android.mcp/files/Test/%XML_FILE%" > nul 2>&1
 if errorLevel 1 (
 	echo FAIL

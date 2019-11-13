@@ -1,0 +1,11 @@
+Experimental buttonless code modified looking at: 
+
+   https://devzone.nordicsemi.com/question/100609/sdk-12-bootloader-erased-after-programming/
+
+Bootloader must be compiled without those changes.
+
+
+--
+
+
+Service Changed enabled for both app and BL (softdevice_handler.c: #define SOFTDEVICE_GATTS_SRV_CHANGED   1)

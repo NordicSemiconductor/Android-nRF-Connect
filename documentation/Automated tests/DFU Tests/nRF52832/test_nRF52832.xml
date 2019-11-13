@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- Test-Suite element defines the test suite. It MAY have a 'description' attribute. All descriptions in the script are used when creating a result file. -->
+<!-- Test-Suite element defines the test suite. It MAY have a 'description' attribute. 
+     All descriptions in the script are used when creating a result file. 
+ -->
 <test-suite description="Test DFU on nRF52832">
 	<!-- Constants to be overwritten in run-test -->
 	<set name="DEVICE_NAME" value="TODO" />
@@ -23,15 +25,16 @@
 	<target id="devkit" name="nRF52832 DK" />
 
 	<!-- Tests -->
-	<test id="dfu_downgrade" description="DFU downgrade test" target="devkit">
+	<test id="dfu_upgrade" description="DFU upgrade test" target="devkit">
 
 		<!-- Scan for out target device -->
 		<scan-for description="Scan for target device" name="${DEVICE_NAME}" bind-target="devkit" timeout="5000"/>
 		
 		<dfu description="SDK ${SDK} -&gt; ${TARGET_SDK} update" file="${FIRMWARE_PATH}/${FIRMWARE}" />
+		<sleep timeout="2000"/>
 		
 		<!-- Connect and verify -->
-		<connect description="Connecting to target" />
+		<connect description="Connecting to ${TEST_DEVICE_NAME}" />
 		<sleep timeout="1600" />
 		<discover-services description="Discovering services" />
 		<!-- Check GATT Server Contents -->
@@ -51,17 +54,22 @@
 		<read description="Reading Device Name value" service-uuid="${GENERIC_ACCESS_UUID}" characteristic-uuid="${DEVICE_NAME_UUID}" >
 			<assert-value description="Check the name" value-string="${TEST_DEVICE_NAME}" />
 		</read>
+
+		<disconnect/>
+		<sleep timeout="2000"/>
 	</test>
 
 	<test id="dfu" description="DFU test" target="devkit">
 
 		<!-- Scan for out target device -->
-		<scan-for description="Scan for target device" name="${DEVICE_NAME}" bind-target="devkit" timeout="5000"/>
+		<scan-for description="Scan for ${DEVICE_NAME}" name="${DEVICE_NAME}" bind-target="devkit" timeout="5000"/>
 		
 		<dfu description="SDK ${SDK} update" file="${FIRMWARE_PATH}/${FIRMWARE}" />
+		<!-- It may take a while after updating SD+BL before the device switches back to application mode. -->
+		<sleep timeout="2000"/>
 		
 		<!-- Connect and verify -->
-		<connect description="Connecting to target" />
+		<connect description="Connecting to ${TEST_DEVICE_NAME}" timeout="15000" />
 		<sleep timeout="1600" />
 		<discover-services description="Discovering services" />
 		<!-- Check GATT Server Contents -->
@@ -81,143 +89,59 @@
 		<read description="Reading Device Name value" service-uuid="${GENERIC_ACCESS_UUID}" characteristic-uuid="${DEVICE_NAME_UUID}" >
 			<assert-value description="Check the name" value-string="${TEST_DEVICE_NAME}" />
 		</read>
-	</test>
 
-	<test id="bond" description="Bond" target="devkit">
-
-		<!-- Scan for out target device -->
-		<scan-for description="Scan for target device" name="${DEVICE_NAME}" bind-target="devkit" timeout="5000"/>
-
-		<!-- Connect -->
-		<connect description="Connecting to target" />
-		<discover-services description="Discovering services" />
-		<!-- Check GATT Server Contents -->
-		<assert-service description="Checking Generic Attribute service" uuid="${GENERIC_ATTRIBUTE_UUID}" >
-			<assert-characteristic description="Checking Device Name characteristic" uuid="${SERVICE_CHANGED_UUID}">
-				<property name="READ" requirement="OPTIONAL"/>
-				<property name="WRITE" requirement="EXCLUDED"/>
-				<property name="WRITE_WITHOUT_RESPONSE" requirement="EXCLUDED"/>
-				<property name="SIGNED_WRITE" requirement="EXCLUDED"/>
-				<property name="NOTIFY" requirement="EXCLUDED"/>
-				<property name="INDICATE" requirement="MANDATORY"/>                
-				<property name="BROADCAST" requirement="EXCLUDED"/>
-				<property name="EXTENDED_PROPERTIES" requirement="EXCLUDED"/>
-			</assert-characteristic>
-		</assert-service>
-		<assert-service description="Checking HR service" uuid="${HR_SERVICE_UUID}" >
-			<assert-characteristic description="Checking HRM characteristic" uuid="${HR_MEASUREMENT_UUID}">
-				<property name="READ" requirement="EXCLUDED"/>
-				<property name="WRITE" requirement="EXCLUDED"/>
-				<property name="WRITE_WITHOUT_RESPONSE" requirement="EXCLUDED"/>
-				<property name="SIGNED_WRITE" requirement="EXCLUDED"/>
-				<property name="NOTIFY" requirement="MANDATORY"/>
-				<property name="INDICATE" requirement="EXCLUDED"/>                
-				<property name="BROADCAST" requirement="EXCLUDED"/>
-				<property name="EXTENDED_PROPERTIES" requirement="EXCLUDED"/>
-				<assert-cccd/>
-			</assert-characteristic>
-			<assert-characteristic description="Checking Sensor Location characteristic" uuid="${SENSOR_LOCATION_UUID}">
-				<property name="READ" requirement="MANDATORY"/>
-				<property name="WRITE" requirement="EXCLUDED"/>
-				<property name="WRITE_WITHOUT_RESPONSE" requirement="EXCLUDED"/>
-				<property name="SIGNED_WRITE" requirement="EXCLUDED"/>
-				<property name="NOTIFY" requirement="EXCLUDED"/>
-				<property name="INDICATE" requirement="EXCLUDED"/>                
-				<property name="BROADCAST" requirement="EXCLUDED"/>
-				<property name="EXTENDED_PROPERTIES" requirement="EXCLUDED"/>
-			</assert-characteristic>
-		</assert-service>
-		<bond />
-		<!-- Make sure SC are enabled. Required for Android 4.3 - 5.1. Since Android 6.0 this is done automatically when bonding. -->
-		<write-descriptor description="Enable notifications" uuid="${CCCD_UUID}" service-uuid="${GENERIC_ATTRIBUTE_UUID}" characteristic-uuid="${SERVICE_CHANGED_UUID}" value="0200" />
-		<!-- Read Device Name -->
-		<read description="Reading Device Name value" service-uuid="${GENERIC_ACCESS_UUID}" characteristic-uuid="${DEVICE_NAME_UUID}" >
-			<assert-value description="Check the name" value-string="${DEVICE_NAME}" />
-		</read>
-		<!-- Enable HRM notifications and wait for one. First set the notification listener... -->
-		<assert-notification description="Check the HRM notifications" service-uuid="${HR_SERVICE_UUID}" characteristic-uuid="${HR_MEASUREMENT_UUID}" timeout="2000">
-			<!-- ...and when ready, start notifications -->
-			<write-descriptor description="Enable notifications" uuid="${CCCD_UUID}" service-uuid="${HR_SERVICE_UUID}" characteristic-uuid="${HR_MEASUREMENT_UUID}" value="0100" />
-		</assert-notification>
-		<!-- Ok, let's disconnect -->
-		<disconnect />
-	</test>
-
-	<test id="check_bond" description="Check bonding" target="devkit">
-
-		<!-- Scan for out target device -->
-		<scan-for description="Scan for target device" name="${DEVICE_NAME}" bind-target="devkit" timeout="5000"/>
-
-		<!-- Connect and verify -->
-		<connect description="Connecting to target" />
-		<!-- We have to wait for the Service Changed indication before discovering services -->
-		<sleep timeout="1600" />
-		<discover-services description="Discovering services" />
-		<!-- Check GATT Server Contents -->
-		<assert-service description="Checking HR service" uuid="${HR_SERVICE_UUID}" >
-			<assert-characteristic description="Checking HRM characteristic" uuid="${HR_MEASUREMENT_UUID}">
-				<property name="READ" requirement="EXCLUDED"/>
-				<property name="WRITE" requirement="EXCLUDED"/>
-				<property name="WRITE_WITHOUT_RESPONSE" requirement="EXCLUDED"/>
-				<property name="SIGNED_WRITE" requirement="EXCLUDED"/>
-				<property name="NOTIFY" requirement="MANDATORY"/>
-				<property name="INDICATE" requirement="EXCLUDED"/>                
-				<property name="BROADCAST" requirement="EXCLUDED"/>
-				<property name="EXTENDED_PROPERTIES" requirement="EXCLUDED"/>
-				<assert-cccd/>
-			</assert-characteristic>
-			<assert-characteristic description="Checking Sensor Location characteristic" uuid="${SENSOR_LOCATION_UUID}">
-				<property name="READ" requirement="MANDATORY"/>
-				<property name="WRITE" requirement="EXCLUDED"/>
-				<property name="WRITE_WITHOUT_RESPONSE" requirement="EXCLUDED"/>
-				<property name="SIGNED_WRITE" requirement="EXCLUDED"/>
-				<property name="NOTIFY" requirement="EXCLUDED"/>
-				<property name="INDICATE" requirement="EXCLUDED"/>                
-				<property name="BROADCAST" requirement="EXCLUDED"/>
-				<property name="EXTENDED_PROPERTIES" requirement="EXCLUDED"/>
-			</assert-characteristic>
-		</assert-service>
-
-		<!-- If bonding still exist the notifications should still be enabled -->
-		<assert-notification description="Check notifications enabled" service-uuid="${HR_SERVICE_UUID}" characteristic-uuid="${HR_MEASUREMENT_UUID}" timeout="2000"/>
-		<!-- Ok, let's disconnect -->
-		<disconnect />
-	</test>
-
-	<test id="unbond" description="Delete bond information" target="devkit">
-		<!-- Remove bonding -->
-		<unbond />
+		<disconnect/>
+		<!-- Wait until the device trully disconnects. -->
+		<sleep timeout="2000"/>
 	</test>
 	
 	<!-- Test executions -->
-	<run-test ref="dfu" description="Update Application from SDK 14.1">
-		<set name="DEVICE_NAME" value="DFU2A141" />
-		<set name="TEST_DEVICE_NAME" value="DFU2A141" />
-		<set name="SDK" value="14.1" />
-		<set name="FIRMWARE" value="nrf52832_sdk_14.1_app.zip"/>
+
+	<!-- SDK 12.2 -->
+	<run-test ref="dfu" description="Update Application from SDK 12.2">
+		<set name="DEVICE_NAME" value="DFU2A122" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A122" />
+		<set name="SDK" value="12.2" />
+		<set name="FIRMWARE" value="nrf52832_sdk_12.2_app.zip"/>
 	</run-test>
 
-	<run-test ref="dfu_downgrade" description="Downgrade to SDK 14">
-		<set name="DEVICE_NAME" value="DFU2A141" />
-		<set name="TEST_DEVICE_NAME" value="DFU2A14" />
-		<set name="SDK" value="14.1" />
-		<set name="TARGET_SDK" value="14" />
-		<set name="FIRMWARE" value="nrf52832_sdk_14.1_to_14_all_in_one.zip"/>
+	<!-- 
+	Updating SD on SDK 12.2 erases the App.
+	<run-test ref="dfu" description="Update SD only">
+		<set name="DEVICE_NAME" value="DFU2A122" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A122" />
+		<set name="SDK" value="12.2" />
+		<set name="FIRMWARE" value="nrf52832_sdk_12.2_sd.zip"/>
 	</run-test>
-
-	<run-test ref="dfu" description="Update Application from SDK 14">
-		<set name="DEVICE_NAME" value="DFU2A14" />
-		<set name="TEST_DEVICE_NAME" value="DFU2A14" />
-		<set name="SDK" value="14" />
-		<set name="FIRMWARE" value="nrf52832_sdk_14_app.zip"/>
+	
+	<run-test ref="dfu" description="Update SD+BL">
+		<set name="DEVICE_NAME" value="DFU2A122" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A122" />
+		<set name="SDK" value="12.2" />
+		<set name="FIRMWARE" value="nrf52832_sdk_12.2_sd_bl_1.zip"/>
 	</run-test>
+	
+	<run-test ref="dfu" description="Update BL only">
+		<set name="DEVICE_NAME" value="DFU2A122" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A122" />
+		<set name="SDK" value="12.2" />
+		<set name="FIRMWARE" value="nrf52832_sdk_12.2_bl_2.zip"/>
+	</run-test>
+	
+	<run-test ref="dfu" description="Update SD+BL+App">
+		<set name="DEVICE_NAME" value="DFU2A122" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A122" />
+		<set name="SDK" value="12.2" />
+		<set name="FIRMWARE" value="nrf52832_sdk_12.2_sd_bl_app_3.zip"/>
+	</run-test> -->
 
-	<run-test ref="dfu_downgrade" description="Downgrade to SDK 13">
-		<set name="DEVICE_NAME" value="DFU2A14" />
+	<!-- SDK 13 -->
+	<run-test ref="dfu_upgrade" description="Upgrade to SDK 13">
+		<set name="DEVICE_NAME" value="DFU2A122" />
 		<set name="TEST_DEVICE_NAME" value="DFU2A13" />
-		<set name="SDK" value="14" />
+		<set name="SDK" value="12.2" />
 		<set name="TARGET_SDK" value="13" />
-		<set name="FIRMWARE" value="nrf52832_sdk_14_to_13_all_in_one.zip"/>
+		<set name="FIRMWARE" value="nrf52832_sdk_12.2_to_13_all_in_one.zip"/>
 	</run-test>
 
 	<run-test ref="dfu" description="Update Application from SDK 13">
@@ -226,45 +150,253 @@
 		<set name="SDK" value="13" />
 		<set name="FIRMWARE" value="nrf52832_sdk_13_app.zip"/>
 	</run-test>
-
-	<run-test ref="dfu_downgrade" description="Downgrade to SDK 12.2">
+	
+	<!-- <run-test ref="dfu" description="Update SD only">
 		<set name="DEVICE_NAME" value="DFU2A13" />
-		<set name="TEST_DEVICE_NAME" value="DFU2A122" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A13" />
 		<set name="SDK" value="13" />
-		<set name="TARGET_SDK" value="12.2" />
-		<set name="FIRMWARE" value="nrf52832_sdk_13_to_12.2_all_in_one.zip"/>
+		<set name="FIRMWARE" value="nrf52832_sdk_13_sd.zip"/>
+	</run-test>
+	
+	<run-test ref="dfu" description="Update SD+BL">
+		<set name="DEVICE_NAME" value="DFU2A13" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A13" />
+		<set name="SDK" value="13" />
+		<set name="FIRMWARE" value="nrf52832_sdk_13_sd_bl_1.zip"/>
+	</run-test>-->
+	
+	<run-test ref="dfu" description="Update BL only">
+		<set name="DEVICE_NAME" value="DFU2A13" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A13" />
+		<set name="SDK" value="13" />
+		<set name="FIRMWARE" value="nrf52832_sdk_13_bl_2.zip"/>
+	</run-test>
+	
+	<!-- <run-test ref="dfu" description="Update SD+BL+App">
+		<set name="DEVICE_NAME" value="DFU2A13" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A13" />
+		<set name="SDK" value="13" />
+		<set name="FIRMWARE" value="nrf52832_sdk_13_sd_bl_app_3.zip"/>
+	</run-test> -->
+
+	<!-- SDK 14.1 -->
+	<run-test ref="dfu_upgrade" description="Upgrade to SDK 14.1">
+		<set name="DEVICE_NAME" value="DFU2A13" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A141" />
+		<set name="SDK" value="13" />
+		<set name="TARGET_SDK" value="14.1" />
+		<set name="FIRMWARE" value="nrf52832_sdk_13_to_14.1_all_in_one.zip"/>
 	</run-test>
 
-	<run-test ref="dfu" description="Update Application from SDK 12.2">
-		<set name="DEVICE_NAME" value="DFU2A122" />
-		<set name="TEST_DEVICE_NAME" value="DFU2A122" />
-		<set name="SDK" value="12.2" />
-		<set name="FIRMWARE" value="nrf52832_sdk_12.2_app.zip"/>
+	<!-- <run-test ref="dfu" description="Update Application from SDK 14.1">
+		<set name="DEVICE_NAME" value="DFU2A141" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A141" />
+		<set name="SDK" value="14.1" />
+		<set name="FIRMWARE" value="nrf52832_sdk_14.1_app.zip"/>
+	</run-test>
+	
+	<run-test ref="dfu" description="Update SD only">
+		<set name="DEVICE_NAME" value="DFU2A141" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A141" />
+		<set name="SDK" value="14.1" />
+		<set name="FIRMWARE" value="nrf52832_sdk_14.1_sd.zip"/>
+	</run-test> -->
+	
+	<run-test ref="dfu" description="Update SD+BL">
+		<set name="DEVICE_NAME" value="DFU2A141" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A141" />
+		<set name="SDK" value="14.1" />
+		<set name="FIRMWARE" value="nrf52832_sdk_14.1_sd_bl_1.zip"/>
+	</run-test>
+	
+	<!-- <run-test ref="dfu" description="Update BL only">
+		<set name="DEVICE_NAME" value="DFU2A141" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A141" />
+		<set name="SDK" value="14.1" />
+		<set name="FIRMWARE" value="nrf52832_sdk_14.1_bl_2.zip"/>
+	</run-test>
+	
+	<run-test ref="dfu" description="Update SD+BL+App">
+		<set name="DEVICE_NAME" value="DFU2A141" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A141" />
+		<set name="SDK" value="14.1" />
+		<set name="FIRMWARE" value="nrf52832_sdk_14.1_sd_bl_app_3.zip"/>
+	</run-test> -->
+
+	<!-- SDK 15 -->
+	<run-test ref="dfu_upgrade" description="Upgrade to SDK 15">
+		<set name="DEVICE_NAME" value="DFU2A141" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A15" />
+		<set name="SDK" value="14.1" />
+		<set name="TARGET_SDK" value="15" />
+		<set name="FIRMWARE" value="nrf52832_sdk_14.1_to_15_all_in_one.zip"/>
 	</run-test>
 
-	<run-test ref="dfu_downgrade" description="Downgrade to SDK 11">
-		<set name="DEVICE_NAME" value="DFU2A122" />
-		<set name="TEST_DEVICE_NAME" value="DFU2A11" />
-		<set name="SDK" value="12.2" />
-		<set name="TARGET_SDK" value="11" />
-		<set name="FIRMWARE" value="nrf52832_sdk_12.2_to_11_all_in_one_android_only.zip"/>
+	<!-- <run-test ref="dfu" description="Update Application from SDK 15">
+		<set name="DEVICE_NAME" value="DFU2A15" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A15" />
+		<set name="SDK" value="15" />
+		<set name="FIRMWARE" value="nrf52832_sdk_15_app.zip"/>
+	</run-test>
+	
+	<run-test ref="dfu" description="Update SD only">
+		<set name="DEVICE_NAME" value="DFU2A15" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A15" />
+		<set name="SDK" value="15" />
+		<set name="FIRMWARE" value="nrf52832_sdk_15_sd.zip"/>
+	</run-test>
+	
+	<run-test ref="dfu" description="Update SD+BL">
+		<set name="DEVICE_NAME" value="DFU2A15" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A15" />
+		<set name="SDK" value="15" />
+		<set name="FIRMWARE" value="nrf52832_sdk_15_sd_bl_1.zip"/>
+	</run-test>
+	
+	<run-test ref="dfu" description="Update BL only">
+		<set name="DEVICE_NAME" value="DFU2A15" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A15" />
+		<set name="SDK" value="15" />
+		<set name="FIRMWARE" value="nrf52832_sdk_15_bl_2.zip"/>
+	</run-test>
+	
+	<run-test ref="dfu" description="Update SD+BL+App">
+		<set name="DEVICE_NAME" value="DFU2A15" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A15" />
+		<set name="SDK" value="15" />
+		<set name="FIRMWARE" value="nrf52832_sdk_15_sd_bl_app_3.zip"/>
+	</run-test> -->
+
+	<!-- SDK 15.2 -->
+	<run-test ref="dfu_upgrade" description="Upgrade to SDK 15.2">
+		<set name="DEVICE_NAME" value="DFU2A15" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A152" />
+		<set name="SDK" value="15" />
+		<set name="TARGET_SDK" value="15.2" />
+		<set name="FIRMWARE" value="nrf52832_sdk_15_to_15.2_all_in_one.zip"/>
 	</run-test>
 
-	<run-test ref="bond" description="Connect, bond and enable HRM notifications">
-		<set name="DEVICE_NAME" value="DFU2A11" />
+	<!-- <run-test ref="dfu" description="Update Application from SDK 15.2">
+		<set name="DEVICE_NAME" value="DFU2A152" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A152" />
+		<set name="SDK" value="15.2" />
+		<set name="FIRMWARE" value="nrf52832_sdk_15.2_app.zip"/>
+	</run-test>
+	
+	<run-test ref="dfu" description="Update SD only">
+		<set name="DEVICE_NAME" value="DFU2A152" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A152" />
+		<set name="SDK" value="15.2" />
+		<set name="FIRMWARE" value="nrf52832_sdk_15.2_sd.zip"/>
+	</run-test> -->
+	
+	<run-test ref="dfu" description="Update SD+BL">
+		<set name="DEVICE_NAME" value="DFU2A152" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A152" />
+		<set name="SDK" value="15.2" />
+		<set name="FIRMWARE" value="nrf52832_sdk_15.2_sd_bl_1.zip"/>
+	</run-test>
+	
+	<!-- <run-test ref="dfu" description="Update BL only">
+		<set name="DEVICE_NAME" value="DFU2A152" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A152" />
+		<set name="SDK" value="15.2" />
+		<set name="FIRMWARE" value="nrf52832_sdk_15.2_bl_2.zip"/>
+	</run-test>
+	
+	<run-test ref="dfu" description="Update SD+BL+App">
+		<set name="DEVICE_NAME" value="DFU2A152" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A152" />
+		<set name="SDK" value="15.2" />
+		<set name="FIRMWARE" value="nrf52832_sdk_15.2_sd_bl_app_3.zip"/>
+	</run-test> -->
+
+	<!-- SDK 15.3 -->
+	<run-test ref="dfu_upgrade" description="Upgrade to SDK 15.3">
+		<set name="DEVICE_NAME" value="DFU2A152" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A153" />
+		<set name="SDK" value="15.2" />
+		<set name="TARGET_SDK" value="15.3" />
+		<set name="FIRMWARE" value="nrf52832_sdk_15.2_to_15.3_all_in_one.zip"/>
 	</run-test>
 
-	<run-test ref="dfu" description="Update SD+BL+App from SDK 11">
-		<set name="DEVICE_NAME" value="DFU2A11" />
-		<set name="TEST_DEVICE_NAME" value="DFU2A11" />
-		<set name="SDK" value="11" />
-		<set name="FIRMWARE" value="nrf52832_sdk_11_all_in_one.zip"/>
+	<!-- <run-test ref="dfu" description="Update Application from SDK 15.2">
+		<set name="DEVICE_NAME" value="DFU2A153" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A153" />
+		<set name="SDK" value="15.3" />
+		<set name="FIRMWARE" value="nrf52832_sdk_15.3_app.zip"/>
+	</run-test>
+	
+	<run-test ref="dfu" description="Update SD only">
+		<set name="DEVICE_NAME" value="DFU2A153" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A153" />
+		<set name="SDK" value="15.3" />
+		<set name="FIRMWARE" value="nrf52832_sdk_15.3_sd.zip"/>
+	</run-test>
+	
+	<run-test ref="dfu" description="Update SD+BL">
+		<set name="DEVICE_NAME" value="DFU2A153" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A153" />
+		<set name="SDK" value="15.3" />
+		<set name="FIRMWARE" value="nrf52832_sdk_15.3_sd_bl_1.zip"/>
+	</run-test>
+	
+	<run-test ref="dfu" description="Update BL only">
+		<set name="DEVICE_NAME" value="DFU2A153" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A153" />
+		<set name="SDK" value="15.3" />
+		<set name="FIRMWARE" value="nrf52832_sdk_15.3_bl_2.zip"/>
+	</run-test> -->
+	
+	<run-test ref="dfu" description="Update SD+BL+App">
+		<set name="DEVICE_NAME" value="DFU2A153" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A153" />
+		<set name="SDK" value="15.3" />
+		<set name="FIRMWARE" value="nrf52832_sdk_15.3_sd_bl_app_3.zip"/>
 	</run-test>
 
-	<run-test ref="check_bond" description="Check if bonding is preserved">
-		<set name="DEVICE_NAME" value="DFU2A11" />
+	<!-- SDK 16 -->
+	<run-test ref="dfu_upgrade" description="Upgrade to SDK 16">
+		<set name="DEVICE_NAME" value="DFU2A153" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A16" />
+		<set name="SDK" value="15.3" />
+		<set name="TARGET_SDK" value="16" />
+		<set name="FIRMWARE" value="nrf52832_sdk_15.3_to_16_all_in_one.zip"/>
 	</run-test>
 
-	<run-test ref="unbond" description="Clean up" />
+	<run-test ref="dfu" description="Update Application from SDK 16">
+		<set name="DEVICE_NAME" value="DFU2A16" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A16" />
+		<set name="SDK" value="16" />
+		<set name="FIRMWARE" value="nrf52832_sdk_16_app.zip"/>
+	</run-test>
+	
+	<!-- <run-test ref="dfu" description="Update SD only">
+		<set name="DEVICE_NAME" value="DFU2A16" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A16" />
+		<set name="SDK" value="16" />
+		<set name="FIRMWARE" value="nrf52832_sdk_16_sd.zip"/>
+	</run-test>
+	
+	<run-test ref="dfu" description="Update SD+BL">
+		<set name="DEVICE_NAME" value="DFU2A16" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A16" />
+		<set name="SDK" value="16" />
+		<set name="FIRMWARE" value="nrf52832_sdk_16_sd_bl_1.zip"/>
+	</run-test> -->
+	
+	<run-test ref="dfu" description="Update BL only">
+		<set name="DEVICE_NAME" value="DFU2A16" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A16" />
+		<set name="SDK" value="16" />
+		<set name="FIRMWARE" value="nrf52832_sdk_16_bl_2.zip"/>
+	</run-test>
+	
+	<run-test ref="dfu" description="Update SD+BL+App">
+		<set name="DEVICE_NAME" value="DFU2A16" />
+		<set name="TEST_DEVICE_NAME" value="DFU2A16" />
+		<set name="SDK" value="16" />
+		<set name="FIRMWARE" value="nrf52832_sdk_16_sd_bl_app_3.zip"/>
+	</run-test>
 	
 </test-suite>
