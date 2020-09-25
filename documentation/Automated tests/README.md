@@ -1,6 +1,6 @@
 # Automated tests
 
-Automated tests allow you to configure and run set of tests foor your Bluetooth Smart device using an Android 4.3+ phone. Fill free to submit comments, bugs or feature ideas.
+Automated tests allow you to configure and run set of tests foor your Bluetooth Smart device using an Android 4.3+ phone. Feel free to submit comments, bugs or feature ideas.
 
 ## Resources
 
@@ -10,26 +10,25 @@ Automated tests allow you to configure and run set of tests foor your Bluetooth 
 
 ## How to begin
 
-The automated tests should work with any Bluetooth Smart device that comunicates over the GATT protocol. A test XML can be created to test it the services, characteristics and descriptors have the correct values and behaviour. A Device Firmware Update (DFU) also may be performed. 
+The automated tests should work with any Bluetooth Smart device that communicates over the GATT protocol. A test XML can be created to test that the services, characteristics and descriptors have the correct values and behaviour. A Device Firmware Update (DFU) also may be performed. 
 
-To make an easy start the *sample_test_hrm.xml* file contains a test that can be used with the HRS_DFU sample from the SDK. The instruction below describes steps that should be performed to successfully run this test. 
+To make an easy start the *sample_test_hrm.xml* file contains a test that can be used with the HRS_DFU sample from the SDK. The instruction below describes steps that should be performed to successfully run this test.
 
-**Note:** Starting from the SDK 8.0, the DFU bootloader, in case the buttonless update is NOT being used, advertises with a device address increased by 1. Therefore, the test may fail in the first run if you have just the Soft Device and Bootloader flashed on the device. After flashing the HRS application onto it, it will start to advertise with a different address and a timeout will be thrown during connection attempt. But the test should work for the second time as the bootloader uses the same address if buttonless update is in use.
+*Note:* Starting from the SDK 8.0, the DFU bootloader, in case the buttonless update is NOT being used, advertises with a device address increased by 1. Therefore, the test may fail in the first run if you have just the Soft Device and Bootloader flashed on the device. After flashing the HRS application onto it, it will start to advertise with a different address and a timeout will be thrown during connection attempt. But the test should work for the second time as the bootloader uses the same address if buttonless update is in use.
 
-1. nRF Connect (nRF Master Control Panel v2.1 or newer) will create the above files in your phone's file system in */Nordic Semiconductor* folder. **Note:** newly created files may not be visible on the PC when connected with USB. This is beacuse Android must perform a scan of media files. Get the files from GitHub or trigger the media scanner manually: restart the phone/tablet or install and launch the *Rescan SD* application (or similar) from Google Play.
-2. Copy those files to your PC. You will use the *test.bat* to start the testing service. The sample may be used as a demo or a starting point.
-3. To prepare the nRF51 DK for the test flash the Soft Device and the DFU bootloader.
-  1. Flash the Soft Device s110 version 8.0 or newer (for example using nRF Go Studio)
-  2. Flash the DFU Bootloader from SDK 9.0 or newer (both SD and Bootloader are available on http://developer.nordicsemi.com website)
+1. nRF Connect (nRF Master Control Panel v2.1 or newer) will create the above files in your phone's file system in */Nordic Semiconductor* folder. *Note:* Newly created files may not be visible on the PC when connected with USB. This is beacuse Android must perform a scan of media files. Get the files from GitHub or trigger the media scanner manually: restart the phone/tablet or install and launch the *Rescan SD* application (or similar) from Google Play.
+2. Copy the above mentioned files to your PC. You will use the *test.bat* to start the testing service. The sample may be used as a demo or a starting point.
+3. Prepare the nRF51 DK for the test flash with the Soft Device and the DFU bootloader. *Note:* This change is not required for newer versions of the DFU bootloader.
+  1. Flash the Soft Device s110 version 8.0 or newer (for example using nRF Go Studio).
+  2. Flash the DFU Bootloader from SDK 9.0 or newer (both SD and Bootloader are available on http://developer.nordicsemi.com website).
     - If you want to use the buttonless update in DFU bootloader from SDK 7.1, modify the *dfu_transport_ble.c* file in your bootloader source (you may have to unlock the file in Explorer first as it's READ ONLY by default). 
     - Increase the **APP_DIRECTED_ADV_TIMEOUT** value to 50 (it's 5 by default) in line 62: `#define APP_DIRECTED_ADV_TIMEOUT             50`
     - Compile the modified Bootloader and flash the new HEX.
-    - This change is required for the Android to reconnect to the bootloader after switching the device to bootloader mode. By default, the bootloader advertises for 6 seconds (5 * 1.28s) which is shorter than the disconnection timeout on Android. The Android, after sending *jump* command, waits for the disconnection event about 22 seconds, depending on the device model. Value 50 (1 minute) should be more than enough.
-    - Note: this change is not be required for newer versions of the DFU bootloader.
+    - This change is required for Android to reconnect to the bootloader after switching the device to bootloader mode. By default, the bootloader advertises for 6 seconds (5 * 1.28s) which is shorter than the disconnection timeout on Android. Android, after sending the *jump* command, waits for the disconnection event for about 22 seconds, depending on the device model. Value 50 (1 minute) should be more than enough.
 4. Connect your Android device to the PC, enable USB debugging on it and install required drivers and ADB (Android Debug Bridge) on the PC. Add the ABD to the PATH global variable or copy it (and dlls) to the same folder.
 5. Try the ADB by writing `adb devices` command in the command line. A list of connected Android devices should be shown.
 6. Find out the address of your device. You may use the nRF Connect to do that. Your device should advertise as a DFU Targ. Make sure you are not connected with the bootloader.
-7. Optional: install the [nRF Logger](https://play.google.com/store/apps/details?id=no.nordicsemi.android.log) application to get more information about the test progress and syntax errors.
+7. *Optional:* Install the [nRF Logger](https://play.google.com/store/apps/details?id=no.nordicsemi.android.log) application to get more information about the test progress and syntax errors.
 8. Start the sample test with the following command. Use your device address, f.e. AA:BB:CC:DD:EE:FF instead of address*. The -d option is required only when more than one Android device is connected and configured for USB debugging.
 
     `test.bat [-d your_android_device_id] -E EXTRA_ADDRESS address* sample_test_hrm.xml`
@@ -37,7 +36,7 @@ To make an easy start the *sample_test_hrm.xml* file contains a test that can be
 9. A *Test in progress...* notification will be shown. If you had the nRF Logger installed click the notification to display the test progress.
 10. When test is completed the *sample_test_hrm_result.txt* file will be created in the script location. The result of the sample HRM test is [here](sample_test_hrm_result.txt).
 
-To test the HRM sample test on nRF52 device you have to modify the XML script and either remove the run-test with id **dfu**, or modify the FIRMWARE_PATH constant to ```/Nordic Semiconductor/Board/pca10040/ble_app_hrm_dfu_s132_v2_0_0_sdk_11_0.zip``` and make sure the Soft Device 2.0.0 and HRM_DFU app is flashed.
+To test the HRM sample test on nRF52 device you have to modify the XML script and either remove the run-test with the id *dfu*, or modify the FIRMWARE_PATH constant to ```/Nordic Semiconductor/Board/pca10040/ble_app_hrm_dfu_s132_v2_0_0_sdk_11_0.zip``` and make sure the Soft Device 2.0.0 and HRM_DFU app is flashed.
 
 **Scanning sample test** - the second test does not require providing the device address. The test service will perform a BLE scan and find a device that advertises with HRM service UUID, connect and do some basic operations just to prove it works.
 
@@ -81,15 +80,15 @@ Each operation in the test may end with SUCCESS, WARNING or FAIL. If the operati
 - FAIL                    - a fail is required to proceed,
 - FAIL_WARNING_ON_SUCCESS - a fail is expected but in case of a success a warning will be logged to the result file. 
 
-If **expected** attribute is set to FAIL the tag may also specify the exected error code using **expectedErrorCode** attribute. For example, it writing to a characteritistic should fail because of its CCCD not being enabled the **read** tag may contain ```expected="FAIL" expectedErrorCode="253"``` (GATT CCCD CFG ERROR, 0xFD). This attribute has been added in nRF Connect v.4.11.
+If **expected** attribute is set to FAIL the tag may also specify the expected error code using **expectedErrorCode** attribute. For example, if writing to a characteritistic should fail because of its CCCD not being enabled the **read** tag may contain ```expected="FAIL" expectedErrorCode="253"``` (GATT CCCD CFG ERROR, 0xFD). This attribute has been added in nRF Connect v.4.11.
 
 ### Timeouts
 
-Each operation, except **dfu** may have the timeout specified. The default timeout for each is set to 5000ms and may be changed using the **timeout="NUMBER"** attribute. The number is in milliseconds.
+Each operation, except **dfu**, may have the timeout specified. The default timeout for each is set to 5000ms and may be changed using the **timeout="NUMBER"** attribute. The number is in milliseconds.
 
 ### Operations
 
-The fillowing operations are currently supported:
+The following operations are currently supported:
 
 ##### Scan
 
@@ -139,9 +138,9 @@ Attribute **bind-target** MAY be used to bind the first matching device with giv
 <connect [description="DESCRIPTION"] [timeout="NUMBER"] [target="TARGET_ID"] />
 ```
 
-This operation must be defined if a test should connect to the device. The only operations that do not need the connection are **bond** and **dfu**. If you forget to add the **connect** tag an error will occur and the test ask you whether you did not forget to connect.
+This operation must be defined if a test should connect to the device. The only operations that do not need the connection are **bond** and **dfu**. If you forget to add the **connect** tag an error will occur and the test will ask you whether you forgot to connect.
 
-The **connect** operation is folowed by 1 second break to give Android some time before the next operation. This seconds may be used f.e. for re-establishing bond and/or starting the service discovery.
+The **connect** operation is followed by a 1 second break to give Android some time before the next operation. This second may be used f.e. for re-establishing a bond and/or starting the service discovery.
 
 ##### Service Discovery
 
@@ -161,7 +160,7 @@ This operation clears the device services cache. It's using the hidden Android m
 
 This method must be called after the device has been connected at least once in the test using the **connect** operation. Otherwise an error message will be shown. This is because it is being invoked on a *BluetoothGatt* object which is created using *connectGatt(..)* method.
 
-The **refresh** operation is folowed by 1 second break to give Android some time before the next operation. The break may be used to start the Android-internal service discovery.
+The **refresh** operation is followed by a 1 second break to give Android some time before the next operation. The break may be used to start the Android-internal service discovery.
 
 ##### Disconnect
 
@@ -169,7 +168,7 @@ The **refresh** operation is folowed by 1 second break to give Android some time
 <disconnect [description="DESCRIPTION"] [timeout="NUMBER"] [target="TARGET_ID"] />
 ```
 
-Each device used in the test is automatically disconnected when the test ends (no matter the result). However, when a diconnection is to be a part of the test this operation may be used.
+Each device used in the test is automatically disconnected when the test ends (no matter the result). However, when a diconnection is part of the test this operation may be used.
 
 ##### Assert services and characteristics
 
@@ -225,7 +224,7 @@ Each device used in the test is automatically disconnected when the test ends (n
 
 The **assert-service** operation and its child nodes may be used to validate the proper configuration of the device. For all assert operations an **expected** attribute may be specified (see above).
 
-Remember that before you read the characteristic its value is *null* (null is equal to 00+, as on the example above or to an empty string). The only exception are the CCCD descriptors for bonded devices. When notifications or indications were enabled in the previuos connection the value of the descriptor is saved in application's database and will not change. However, there is no guarantee that that is the real value of the descriptor on the target device unless the **read-descriptor** operation will be executed.
+Remember that before you read the characteristic its value is *null* (null is equal to 00+, as on the example above or to an empty string). The only exceptions are the CCCD descriptors for bonded devices. When notifications or indications were enabled in the previuos connection the value of the descriptor is saved in the application's database and will not change. However, there is no guarantee that that is the real value of the descriptor on the target device unless the **read-descriptor** operation will be executed.
 
 The value may be given in bytes using the **value** attribute, or as a string using **value-string**.
 
@@ -298,7 +297,7 @@ The instance-id attributes are optional and set to 0 by default.
 
 ##### Reliable Write
 
-Reliable Write is described in Bluetooth Core Specification v5.0, Vol 3, Part G, chapter 4.9.5. In order to start the sup-procedure (supported from Android 4.3 and nRF Connect 4.21.0), use:
+Reliable Write is described in Bluetooth Core Specification v5.0, Vol 3, Part G, chapter 4.9.5. In order to start the sub-procedure (supported from Android 4.3 and nRF Connect 4.21.0), use:
 
 ```xml
 <begin-reliable-write [description="DESCRIPTION"] />
@@ -380,9 +379,9 @@ Sends a MTU change request to the peripheral. MTU value must be between 23 and 5
 
 Requests the change of connection priority. Only the 3 given values are supported by Android API. 
 
-Until Android 8 this is not an asynchronuous method ending always with a success, unless a serious problem occur. It did not mean that the requested 
-parameters has been set. From Android 8 there is a callback *onConnectionUpdated*, but it may be called with different parameters than requested.
-The operation will be assumed failed only if the status is different then **GATT_SUCCESS**.
+Until Android 8 this is not an asynchronuous method ending always with a success, unless a serious problem occurred. It does not mean that the requested 
+parameters have been set. From Android 8 there is a callback *onConnectionUpdated*, but it may be called with different parameters than requested.
+The operation will be assumed failed only if the status is different to **GATT_SUCCESS**.
 
 *Note:* Supported only on Android 5 and never devices.
 
@@ -406,7 +405,7 @@ The operation will be assumed failed only if the status is different then **GATT
 
 Reads the current PHY used for the transmitter and receiver. A value assertion may be used to check received PHYs.
 
-*Note:* Readnig PHY is supported only on Android 8 and newer devices.
+*Note:* Reading PHY is supported only on Android 8 and newer devices.
 
 ##### Set Preferred PHY
 
@@ -447,7 +446,7 @@ Waits a NUMBER value of milliseconds without doing anything. Always results with
 <sleep-if [description="DESCRIPTION"] service-uuid="SERVICE_UUID" [service-instance-id="SII"] characteristic-uuid="CHAR_UUID" [characteristic-instance-id="CII"] value="BYTES"|value-string="TEXT" [timeout="NUMBER"] [target="TARGET_ID"] [expected="SUCCESS"]/>
 ```
 
-Waits if value of the given characteristic is equal to the given one. Timeout may be set to force stop waiting. The default timeout equals 0 (no timeout). A value containing only 0s is equal to no value. If the characteristic value was different than given one when operation started the operation ends immediately. Notifications should be enabled for given characteristic (otherwise value can't change).
+Waits if value of the given characteristic is equal to the given one. Timeout may be set to force stop waiting. The default timeout equals 0 (no timeout). A value containing only 0s is equal to no value. If the characteristic value was different than the one given when operation started the operation ends immediately. Notifications should be enabled for the given characteristic (otherwise the value can't change).
 
 ##### Sleep Until
 
@@ -455,7 +454,7 @@ Waits if value of the given characteristic is equal to the given one. Timeout ma
 <sleep-until [description="DESCRIPTION"] service-uuid="SERVICE_UUID" [service-instance-id="SII"] characteristic-uuid="CHAR_UUID" [characteristic-instance-id="CII"] value="BYTES"|value-string="TEXT" [timeout="NUMBER"] [target="TARGET_ID"] [expected="SUCCESS"]/>
 ```
 
-Waits until value of the given characteristic is equal to the given one. Timeout may be set to force stop waiting. The default timeout equals 0 (no timeout). A value containing only 0s is equal to no value. If the characteristic value was equal to than given one when operation started the operation ends immediately. Notifications should be enabled for given characteristic (otherwise value can't change).
+Waits until value of the given characteristic is equal to the given one. Timeout may be set to force stop waiting. The default timeout equals 0 (no timeout). A value containing only 0s is equal to no value. If the characteristic value was equal to the given one when operation started the operation ends immediately. Notifications should be enabled for the given characteristic (otherwise the value can't change).
 
 ##### DFU - Device Firmware Update
 
@@ -472,6 +471,6 @@ Waits until value of the given characteristic is equal to the given one. Timeout
 
 The **dfu** operation sends the firmware Over-the-Air to the target using DFU. In case of a DFU Bootloader from SDK 7.0+ the init file is required. Check the [How to create Init file for DFU](../init packet handling/README.md) for details.
 
-The script may send the Soft Device, Bootloader or the application, or any combinations of those packed in a ZIP file. The new Distribution packets (recommended) are recommended since nRF Connect version 3.0 (known as nRF Master Control Panel at that time), however you may also use the ZIP file that contains the following content in order to be parsed correctly:
+The script may send the Soft Device, Bootloader or the application, or any combinations of those packed in a ZIP file. The new Distribution packets are recommended since nRF Connect version 3.0 (known as nRF Master Control Panel at that time), however you may also use the ZIP file that contains the following content in order to be parsed correctly:
 
 ![ZIP content](../../images/zip.png)
