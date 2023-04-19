@@ -6,7 +6,7 @@
 
 The nRF Connect is an application designed for Bluetooth Low Energy developers. It allows for scanning for BLE devices and communicating with them.
 
-The nRF Connect for Android applicaiton requires Android version 4.3 or later and is available on Google Play:
+The nRF Connect for Android application requires Android version 4.3 or later and is available on Google Play:
 
 https://play.google.com/store/apps/details?id=no.nordicsemi.android.mcp
 
