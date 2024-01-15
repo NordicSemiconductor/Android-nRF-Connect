@@ -1,18 +1,13 @@
 # nRF Connect
 
-(previosly named nRF Master Control Panel)
+The nRF Connect for Mobile is an application designed for Bluetooth Low Energy developers. It allows for scanning for BLE devices and communicating with them.
 
-## Application
+The nRF Connect for Android application requires Android version 4.3 or later and is available on Google Play or [releases](https://github.com/NordicSemiconductor/Android-nRF-Connect/releases), in case Google Play is not available. We recommend to install the application using Google Play as it will get automatic updates.
 
-The nRF Connect is an application designed for Bluetooth Low Energy developers. It allows for scanning for BLE devices and communicating with them.
+<a href='https://play.google.com/store/apps/details?id=no.nordicsemi.android.mcp'><img alt='Get it on Google Play' height='80' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png'/></a>
 
-The nRF Connect for Android application requires Android version 4.3 or later and is available on Google Play:
-
-https://play.google.com/store/apps/details?id=no.nordicsemi.android.mcp
-
-or [here](https://github.com/NordicSemiconductor/Android-nRF-Connect/releases), in case Google Play is not available. We recommend to install the application using Google Play as it will get automatic updates.
-
-**Note: The source code of nRF Connect is not available.**
+> [!IMPORTANT]
+> The **source code** of nRF Connect is not available. This repo proveds only documentation and Issue tracker.
 
 ## Features
 
@@ -34,8 +29,13 @@ or [here](https://github.com/NordicSemiconductor/Android-nRF-Connect/releases), 
 
 ## DFU - Device Firmware Update
 
-The Device Firmware Update BLE protocol may be used to update the Soft Device, Bootloader or application Over-the-Air on nRF5 device. 
-The full DFU documentation may be found on http://infocenter.nordicsemi.com/.
+nRF Connect supports the following DFU proptocols:
+
+Name | SDK | Supported Devices | Documentation
+-----|-----|---------|--------------
+Legacy DFU | nRF5 SDK | nRF51, nRF52 | [Link](https://infocenter.nordicsemi.com/topic/com.nordic.infocenter.sdk5.v11.0.0/examples_ble_dfu.html?cp=9_5_13_4_3_1)
+Secure DFU | nRF5 SDK | nRF52 | [Link](https://infocenter.nordicsemi.com/topic/sdk_nrf5_v17.1.0/lib_bootloader_modules.html?cp=9_1_3_5)
+McuManager | nRF Connect SDK, Zephyr, Mynewt | nRF52, nRF53, nRF54, ... | [Link](https://docs.nordicsemi.com/bundle/ncs-latest/page/nrf/config_and_build/dfu/index.html)
 
 ## Automated testing
 
@@ -45,9 +45,13 @@ Copy those files and the *test.bat* script to your PC and run. Currently only Wi
 be called from Mac and Linux as well.
 
 To start the test run the *test.bat* script:
-
-    test.bat [-d device_id] [-E KEY EXTRA]* test.xml
-
+```batch
+test.bat [-d device_id] [-E KEY EXTRA] test.xml
+```
+or **test.sh** script:
+```sh
+./test.sh [-d device_id] [-E KEY EXTRA] test.xml 
+```
 You may specify key-value pairs in execution or inside the test using 
 
     <set name="KEY" value="VALUE" />
