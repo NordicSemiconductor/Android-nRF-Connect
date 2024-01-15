@@ -1,42 +1,42 @@
 # Automated tests
 
-Automated tests allow you to configure and run set of tests foor your Bluetooth Smart device using an Android 4.3+ phone. Feel free to submit comments, bugs or feature ideas.
+Automated tests allow you to configure and run set of tests foor your Bluetooth Low Energy device using an Android 4.3+ phone. Feel free to submit comments, bugs or feature ideas.
 
 ## Resources
 
-1. [test.bat](test.bat) - the Windows script that may be used to run the test on the Android device.
+1. Starting script that may be used to run the test on the Android device.
+   a. [test.bat](test.bat) - for Windows
+   b. [test.sh](test.sh) - for Unix/Mac
 2. [sample_test_hrm.xml](sample_test_hrm.xml) - one of the sample tests. It covers almost all features of the automated tests, except those added in nRF Connect 4.3 or later. It can be run on the HRS_DFU sample application from the SDK. You may modify it to match your application.
 3. [sample_test_scanning.xml](sample_test_scanning.xml) - the second sample test. Covers new scanning feature in automated tests added in nRF Connect v. 4.3.
 
 ## How to begin
 
-The automated tests should work with any Bluetooth Smart device that communicates over the GATT protocol. A test XML can be created to test that the services, characteristics and descriptors have the correct values and behaviour. A Device Firmware Update (DFU) also may be performed. 
+The automated tests should work with any Bluetooth LE device that communicates over the GATT protocol. A test XML can be created to test that the services, characteristics and descriptors have the correct values and behaviour. A Device Firmware Update (DFU) also may be performed. 
 
 To make an easy start the *sample_test_hrm.xml* file contains a test that can be used with the HRS_DFU sample from the SDK. The instruction below describes steps that should be performed to successfully run this test.
 
-*Note:* Starting from the SDK 8.0, the DFU bootloader, in case the buttonless update is NOT being used, advertises with a device address increased by 1. Therefore, the test may fail in the first run if you have just the Soft Device and Bootloader flashed on the device. After flashing the HRS application onto it, it will start to advertise with a different address and a timeout will be thrown during connection attempt. But the test should work for the second time as the bootloader uses the same address if buttonless update is in use.
+> [!NOTE]
+> Starting from the SDK 8.0, the DFU bootloader, in case the buttonless update is NOT being used, advertises with a device address increased by 1. Therefore, the test may fail in the first run if you have just the Soft Device and Bootloader flashed on the device. After flashing the HRS application onto it, it will start to advertise with a different address and a timeout will be thrown during connection attempt. But the test should work for the second time as the bootloader uses the same address if buttonless update is in use.
 
-1. nRF Connect (nRF Master Control Panel v2.1 or newer) will create the above files in your phone's file system in */Nordic Semiconductor* folder. *Note:* Newly created files may not be visible on the PC when connected with USB. This is beacuse Android must perform a scan of media files. Get the files from GitHub or trigger the media scanner manually: restart the phone/tablet or install and launch the *Rescan SD* application (or similar) from Google Play.
-2. Copy the above mentioned files to your PC. You will use the *test.bat* to start the testing service. The sample may be used as a demo or a starting point.
-3. Prepare the nRF51 DK for the test flash with the Soft Device and the DFU bootloader. *Note:* This change is not required for newer versions of the DFU bootloader.
-  1. Flash the Soft Device s110 version 8.0 or newer (for example using nRF Go Studio).
-  2. Flash the DFU Bootloader from SDK 9.0 or newer (both SD and Bootloader are available on http://developer.nordicsemi.com website).
-    - If you want to use the buttonless update in DFU bootloader from SDK 7.1, modify the *dfu_transport_ble.c* file in your bootloader source (you may have to unlock the file in Explorer first as it's READ ONLY by default). 
-    - Increase the **APP_DIRECTED_ADV_TIMEOUT** value to 50 (it's 5 by default) in line 62: `#define APP_DIRECTED_ADV_TIMEOUT             50`
-    - Compile the modified Bootloader and flash the new HEX.
-    - This change is required for Android to reconnect to the bootloader after switching the device to bootloader mode. By default, the bootloader advertises for 6 seconds (5 * 1.28s) which is shorter than the disconnection timeout on Android. Android, after sending the *jump* command, waits for the disconnection event for about 22 seconds, depending on the device model. Value 50 (1 minute) should be more than enough.
-4. Connect your Android device to the PC, enable USB debugging on it and install required drivers and ADB (Android Debug Bridge) on the PC. Add the ABD to the PATH global variable or copy it (and dlls) to the same folder.
-5. Try the ADB by writing `adb devices` command in the command line. A list of connected Android devices should be shown.
-6. Find out the address of your device. You may use the nRF Connect to do that. Your device should advertise as a DFU Targ. Make sure you are not connected with the bootloader.
-7. *Optional:* Install the [nRF Logger](https://play.google.com/store/apps/details?id=no.nordicsemi.android.log) application to get more information about the test progress and syntax errors.
-8. Start the sample test with the following command. Use your device address, f.e. AA:BB:CC:DD:EE:FF instead of address*. The -d option is required only when more than one Android device is connected and configured for USB debugging.
+1. Copy the files to your PC. You will use the *test.bat/sh* to start the testing service. The sample may be used as a demo or a starting point.
+2. Prepare the device for the test flash with initial firmware.
+3. Connect your Android device to the PC, enable USB debugging on it and install required drivers and ADB (Android Debug Bridge) on the PC. Add the ABD to the PATH global variable.
+4. Try the ADB by writing `adb devices` command in the command line. A list of connected Android devices should be shown.
+5. Find out the address of your device. You may use the nRF Connect to do that. Your device should advertise as a DFU Targ. Make sure you are not connected with the bootloader.
+6. *Optional:* Install the [nRF Logger](https://play.google.com/store/apps/details?id=no.nordicsemi.android.log) application to get more information about the test progress and syntax errors.
+7. Start the sample test with the following command. Use your device address, f.e. AA:BB:CC:DD:EE:FF instead of address*. The -d option is required only when more than one Android device is connected and configured for USB debugging.
 
-    `test.bat [-d your_android_device_id] -E EXTRA_ADDRESS address* sample_test_hrm.xml`
+```batch
+test.bat [-d your_android_device_id] -E EXTRA_ADDRESS address* sample_test_hrm.xml
+```
+or
+```sh
+./test.sh [-d your_android_device_id] -E EXTRA_ADDRESS address* sample_test_hrm.xml
+```
 
 9. A *Test in progress...* notification will be shown. If you had the nRF Logger installed click the notification to display the test progress.
 10. When test is completed the *sample_test_hrm_result.txt* file will be created in the script location. The result of the sample HRM test is [here](sample_test_hrm_result.txt).
-
-To test the HRM sample test on nRF52 device you have to modify the XML script and either remove the run-test with the id *dfu*, or modify the FIRMWARE_PATH constant to ```/Nordic Semiconductor/Board/pca10040/ble_app_hrm_dfu_s132_v2_0_0_sdk_11_0.zip``` and make sure the Soft Device 2.0.0 and HRM_DFU app is flashed.
 
 **Scanning sample test** - the second test does not require providing the device address. The test service will perform a BLE scan and find a device that advertises with HRM service UUID, connect and do some basic operations just to prove it works.
 
