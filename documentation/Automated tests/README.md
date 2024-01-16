@@ -474,3 +474,21 @@ The **dfu** operation sends the firmware Over-the-Air to the target using DFU. I
 The script may send the Soft Device, Bootloader or the application, or any combinations of those packed in a ZIP file. The new Distribution packets are recommended since nRF Connect version 3.0 (known as nRF Master Control Panel at that time), however you may also use the ZIP file that contains the following content in order to be parsed correctly:
 
 ![ZIP content](../../images/zip.png)
+
+##### MCU Manager
+
+```xml
+<!-- 
+  Specify the update mode:
+  * TEST_AND_CONFIRM
+  * TEST_ONLY
+  * CONFIRM_ONLY (default)
+  * NONE (upload only)
+
+  Swap time is in seconds.
+-->
+<mcu file="${FILE}" [mode="TEST_AND_CONFIRM"] [swap-time="20"] [number-of-buffers="3"] [memory-alignment="4"] [erase-app-storage="false"] />
+```
+
+The **mcu** operation updates a device using MCU Manager feature. This feature is supported on Zephyr and nRF Connect SDK-based devices when enabled.
+

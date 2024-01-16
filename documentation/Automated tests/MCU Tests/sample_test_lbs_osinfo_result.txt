@@ -1,0 +1,381 @@
+17-01-2024 00:00:00
+Version: 4.28.0
+Device: Pixel 7, Android version: 14 (AP11.231215.007)
+
+Starting 'Test LED Button Service' for 'Run Scan and Connect test with local CCCD'
+   Scan for LBS...
+00:00:00.915 FC:8B:18:2E:43:2A -58 0201060B094E6F726469635F4C4253110723D1BCEA5F782315DEEF121223150000
+   OK
+   Connect...OK
+   Refresh...OK
+   Discover-Services...OK
+   Check if LBS Service exists...OK
+   Read Button state...OK
+Starting 'Upgrade the device from version 1.0.0 to version 2.0.0' for 'Run Upgrade test'
+   Connect...OK
+   Refresh...OK
+   Discover-Services...OK
+   Check if SMP Service exists...OK
+   Request-MTU...OK
+   Enable notifications...OK
+   Assert-Notification...   
+   |- Read Version...OK
+   OK
+   Updating device using MCU Manager...OK
+   Reconnect after the update...OK
+   Discover-Services...OK
+   Enable notifications...OK
+   Assert-Notification...   
+   |- Read Version...OK
+   OK
+
+nRF Connect Test, 2024-01-17
+Test FOTA (sample_test_lbs_osinfo.xml)
+A	00:00:00.753	Starting 'Test LED Button Service' for 'Run Scan and Connect test with local CCCD'
+A	00:00:00.761	Scan for LBS...
+V	00:00:00.766	Starting scan...
+D	00:00:00.770	scanner.startScan(null, LOW_LATENCY, callback)
+V	00:00:00.948	Stopping scanning...
+D	00:00:00.954	scanner.stopScan(callback)
+I	00:00:00.959	Device found: FC:8B:18:2E:43:2A
+A	00:00:00.966	Connect...
+V	00:00:00.988	Connecting to FC:8B:18:2E:43:2A...
+D	00:00:00.988	gatt = device.connectGatt(autoConnect = false, TRANSPORT_LE, preferred PHY = LE 1M)
+D	00:00:01.292	[Callback] Connection state changed with status: 0 and new state: CONNECTED (2)
+I	00:00:01.292	Connected to FC:8B:18:2E:43:2A
+A	00:00:01.307	Refresh...
+V	00:00:01.318	Refreshing device cache...
+D	00:00:01.318	gatt.refresh() (hidden)
+I	00:00:01.320	Cache refreshed
+D	00:00:01.322	wait(1000)
+I	00:00:01.819	Connection parameters updated (interval: 7.5ms, latency: 0, timeout: 5000ms)
+I	00:00:01.883	PHY updated (TX: LE 2M, RX: LE 2M)
+I	00:00:02.260	Connection parameters updated (interval: 45.0ms, latency: 0, timeout: 5000ms)
+A	00:00:02.331	Discover-Services...
+V	00:00:02.339	Discovering services...
+D	00:00:02.339	gatt.discoverServices()
+D	00:00:02.348	[Callback] Services discovered with status: 0
+I	00:00:02.348	Services discovered
+V	00:00:02.395	Generic Attribute (0x1801)
+- Service Changed [I] (0x2A05)
+   Client Characteristic Configuration (0x2902)
+- Client Supported Features [R W] (0x2B29)
+- Database Hash [R] (0x2B2A)
+Generic Access (0x1800)
+- Device Name [R] (0x2A00)
+- Appearance [R] (0x2A01)
+- Peripheral Preferred Connection Parameters [R] (0x2A04)
+Nordic LED Button Service (00001523-1212-efde-1523-785feabcd123)
+- Button [N R] (00001524-1212-efde-1523-785feabcd123)
+   Client Characteristic Configuration (0x2902)
+- LED [W] (00001525-1212-efde-1523-785feabcd123)
+SMP Service (8d53dc1d-1db7-4cd3-868b-8a527460aa84)
+- SMP Characteristic [N WNR] (da2e7828-fbce-4e01-ae9e-261174997c48)
+   Client Characteristic Configuration (0x2902)
+D	00:00:02.396	gatt.setCharacteristicNotification(00002a05-0000-1000-8000-00805f9b34fb, true)
+D	00:00:02.400	gatt.setCharacteristicNotification(00001524-1212-efde-1523-785feabcd123, true)
+A	00:00:02.421	Check if LBS Service exists...
+V	00:00:02.429	Reading services...
+I	00:00:02.431	Service (uuid=00001523-1212-efde-1523-785feabcd123, instance-id=0) found
+A	00:00:02.431	Check Button characteristic...
+V	00:00:02.433	Reading characteristics...
+I	00:00:02.433	Characteristic (uuid=00001524-1212-efde-1523-785feabcd123, instance-id=0) found
+V	00:00:02.434	Reading properties...
+I	00:00:02.434	Required property NOTIFY found
+I	00:00:02.434	Excluded property WRITE not found
+I	00:00:02.434	Excluded property WRITE_WITHOUT_RESPONSE not found
+I	00:00:02.434	Excluded property SIGNED_WRITE not found
+A	00:00:02.436	Checking [local] CCCD descriptor...
+V	00:00:02.437	Reading descriptors...
+I	00:00:02.437	Descriptor (uuid=00002902-0000-1000-8000-00805f9b34fb, instance-id=0) found
+A	00:00:02.438	Check if notifications are disabled by default...
+V	00:00:02.443	Asserting descriptor value...
+I	00:00:02.456	Value of the descriptor matches '0000'
+A	00:00:02.463	Check LED characteristic...
+V	00:00:02.465	Reading characteristics...
+I	00:00:02.466	Characteristic (uuid=00001525-1212-efde-1523-785feabcd123, instance-id=0) found
+V	00:00:02.466	Reading properties...
+I	00:00:02.466	Required property WRITE found
+A	00:00:02.502	Read Button state...
+V	00:00:02.512	Reading characteristic 00001524-1212-efde-1523-785feabcd123
+D	00:00:02.512	gatt.readCharacteristic(00001524-1212-efde-1523-785feabcd123)
+I	00:00:02.598	Read Response received from 00001524-1212-efde-1523-785feabcd123, value: (0x) 00
+A	00:00:02.599	"Button released" received
+I	00:00:02.605	Reading characteristic succeeded
+A	00:00:02.617	Check if button is released...
+V	00:00:02.625	Asserting characteristic value...
+I	00:00:02.632	Value of the characteristic matches '00'
+V	00:00:02.641	Cleaning up...
+V	00:00:04.650	Disconnecting...
+D	00:00:04.650	gatt.disconnect()
+D	00:00:04.670	[Callback] Connection state changed with status: 0 and new state: DISCONNECTED (0)
+I	00:00:04.670	Disconnected
+D	00:00:04.671	gatt.close()
+D	00:00:04.678	wait(200)
+A	00:00:04.890	'Run Scan and Connect test with local CCCD' completed
+A	00:00:04.905	Starting 'Upgrade the device from version 1.0.0 to version 2.0.0' for 'Run Upgrade test'
+A	00:00:04.918	Connect...
+V	00:00:04.942	Connecting to FC:8B:18:2E:43:2A...
+D	00:00:04.942	gatt = device.connectGatt(autoConnect = false, TRANSPORT_LE, preferred PHY = LE 1M)
+D	00:00:04.960	[Callback] Connection state changed with status: 0 and new state: CONNECTED (2)
+I	00:00:04.960	Connected to FC:8B:18:2E:43:2A
+A	00:00:04.966	Refresh...
+V	00:00:04.984	Refreshing device cache...
+D	00:00:04.984	gatt.refresh() (hidden)
+I	00:00:04.987	Cache refreshed
+D	00:00:04.992	wait(1000)
+I	00:00:05.419	Connection parameters updated (interval: 7.5ms, latency: 0, timeout: 5000ms)
+I	00:00:05.868	Connection parameters updated (interval: 45.0ms, latency: 0, timeout: 5000ms)
+A	00:00:06.007	Discover-Services...
+V	00:00:06.019	Discovering services...
+D	00:00:06.019	gatt.discoverServices()
+D	00:00:06.032	[Callback] Services discovered with status: 0
+I	00:00:06.032	Services discovered
+V	00:00:06.065	Generic Attribute (0x1801)
+- Service Changed [I] (0x2A05)
+   Client Characteristic Configuration (0x2902)
+- Client Supported Features [R W] (0x2B29)
+- Database Hash [R] (0x2B2A)
+Generic Access (0x1800)
+- Device Name [R] (0x2A00)
+- Appearance [R] (0x2A01)
+- Peripheral Preferred Connection Parameters [R] (0x2A04)
+Nordic LED Button Service (00001523-1212-efde-1523-785feabcd123)
+- Button [N R] (00001524-1212-efde-1523-785feabcd123)
+   Client Characteristic Configuration (0x2902)
+- LED [W] (00001525-1212-efde-1523-785feabcd123)
+SMP Service (8d53dc1d-1db7-4cd3-868b-8a527460aa84)
+- SMP Characteristic [N WNR] (da2e7828-fbce-4e01-ae9e-261174997c48)
+   Client Characteristic Configuration (0x2902)
+D	00:00:06.066	gatt.setCharacteristicNotification(00002a05-0000-1000-8000-00805f9b34fb, true)
+D	00:00:06.069	gatt.setCharacteristicNotification(00001524-1212-efde-1523-785feabcd123, true)
+A	00:00:06.091	Check if SMP Service exists...
+V	00:00:06.107	Reading services...
+I	00:00:06.110	Service (uuid=8D53DC1D-1DB7-4CD3-868B-8A527460AA84, instance-id=0) found
+A	00:00:06.111	Check SMP Characteristic...
+V	00:00:06.114	Reading characteristics...
+I	00:00:06.116	Characteristic (uuid=DA2E7828-FBCE-4E01-AE9E-261174997C48, instance-id=0) found
+V	00:00:06.116	Reading properties...
+I	00:00:06.116	Required property NOTIFY found
+I	00:00:06.117	Required property WRITE_WITHOUT_RESPONSE found
+I	00:00:06.117	Excluded property INDICATE not found
+A	00:00:06.119	Checking [global] CCCD descriptor...
+V	00:00:06.122	Reading descriptors...
+I	00:00:06.123	Descriptor (uuid=00002902-0000-1000-8000-00805f9b34fb, instance-id=0) found
+A	00:00:06.123	Check if notifications are disabled by default...
+V	00:00:06.133	Asserting descriptor value...
+I	00:00:06.158	Value of the descriptor matches '0000'
+A	00:00:06.226	Request-MTU...
+V	00:00:06.236	Requesting new MTU...
+D	00:00:06.236	gatt.requestMtu(498)
+I	00:00:06.404	MTU changed to: 498
+A	00:00:06.413	Enable notifications...
+V	00:00:06.437	Enabling notifications for da2e7828-fbce-4e01-ae9e-261174997c48
+D	00:00:06.438	gatt.setCharacteristicNotification(da2e7828-fbce-4e01-ae9e-261174997c48, true)
+D	00:00:06.442	gatt.writeDescriptor(00002902-0000-1000-8000-00805f9b34fb, value=0x0100)
+I	00:00:06.580	Data written to descr. 00002902-0000-1000-8000-00805f9b34fb, value: (0x) 01-00
+A	00:00:06.580	"Notifications enabled" sent
+V	00:00:06.588	Notifications enabled for da2e7828-fbce-4e01-ae9e-261174997c48
+I	00:00:06.595	Writing descriptor succeeded
+A	00:00:06.614	Assert-Notification...
+I	00:00:06.614	Connection parameters updated (interval: 45.0ms, latency: 0, timeout: 420ms)
+V	00:00:06.639	Changing write type for da2e7828-fbce-4e01-ae9e-261174997c48 to WRITE COMMAND
+D	00:00:06.639	characteristic.setWriteType(WRITE COMMAND)
+V	00:00:06.654	Writing command to characteristic da2e7828-fbce-4e01-ae9e-261174997c48
+D	00:00:06.655	gatt.writeCharacteristic(da2e7828-fbce-4e01-ae9e-261174997c48, value=0x0800000000010000)
+I	00:00:06.663	Data written to da2e7828-fbce-4e01-ae9e-261174997c48, value: (0x) 08-00-00-00-00-01-00-00
+A	00:00:06.663	"Operation: READ
+Flags: 0
+Length: 0
+Group Id: 1 (IMAGE)
+Sequence Num: 0
+Command Id: 0 (STATE)
+No message" sent
+I	00:00:06.666	Writing characteristic succeeded
+I	00:00:06.813	Notification received
+A	00:00:06.836	Verify version is 1.0.0...
+V	00:00:06.854	Asserting characteristic value...
+I	00:00:06.869	Value of the characteristic matches '0900008600010000BF66696D616765739FBF64736C6F74006776657273696F6E65312E302E3064686173685820A0DFC33DE0F6699C6995903D449FAD5695207D7516A8554DCE11132D0AEE2EED68626F6F7461626C65F56770656E64696E67F469636F6E6669726D6564F566616374697665F5697065726D616E656E74F4FFFF6B73706C697453746174757300FF'
+A	00:00:06.885	Updating device using MCU Manager...
+I	00:00:06.920	Notification received from da2e7828-fbce-4e01-ae9e-261174997c48, value: (0x) 09-00-00-86-00-01-00-00-BF-66-69-6D-61-67-65-73-9F-BF-64-73-6C-6F-74-00-67-76-65-72-73-69-6F-6E-65-31-2E-30-2E-30-64-68-61-73-68-58-20-A0-DF-C3-3D-E0-F6-69-9C-69-95-90-3D-44-9F-AD-56-95-20-7D-75-16-A8-55-4D-CE-11-13-2D-0A-EE-2E-ED-68-62-6F-6F-74-61-62-6C-65-F5-67-70-65-6E-64-69-6E-67-F4-69-63-6F-6E-66-69-72-6D-65-64-F5-66-61-63-74-69-76-65-F5-69-70-65-72-6D-61-6E-65-6E-74-F4-FF-FF-6B-73-70-6C-69-74-53-74-61-74-75-73-00-FF
+A	00:00:06.920	"Operation: READ RESPONSE
+Flags: 0
+Length: 134
+Group Id: 1 (IMAGE)
+Sequence Num: 0
+Command Id: 0 (STATE)
+Message: {"images":[{"slot":0,"version":"1.0.0","hash":"oN/DPeD2aZxplZA9RJ+tVpUgfXUWqFVNzhETLQruLu0=","bootable":true,"pending":false,"confirmed":true,"active":true,"permanent":false}],"splitStatus":0}" received
+V	00:00:07.032	[McuMgr] Connecting...
+D	00:00:07.038	[McuMgr] gatt = device.connectGatt(autoConnect = false, TRANSPORT_LE, LE 1M)
+D	00:00:07.053	[McuMgr] [Callback] Connection state changed with status: 0 and new state: 2 (CONNECTED)
+I	00:00:07.065	[McuMgr] Connected to FC:8B:18:2E:43:2A
+D	00:00:07.077	[McuMgr] wait(300)
+I	00:00:07.089	[McuMgr] MTU changed to: 498
+I	00:00:07.131	Connection parameters updated (interval: 11.25ms, latency: 0, timeout: 420ms)
+I	00:00:07.135	[McuMgr] Connection parameters updated (interval: 11.25ms, latency: 0, timeout: 420ms)
+V	00:00:07.393	[McuMgr] Discovering services...
+D	00:00:07.407	[McuMgr] gatt.discoverServices()
+I	00:00:07.435	[McuMgr] Services discovered
+V	00:00:07.455	[McuMgr] Primary service found
+D	00:00:07.537	[McuMgr] gatt.setCharacteristicNotification(da2e7828-fbce-4e01-ae9e-261174997c48, true)
+V	00:00:07.548	[McuMgr] Enabling notifications for da2e7828-fbce-4e01-ae9e-261174997c48
+D	00:00:07.554	[McuMgr] gatt.writeDescriptor(00002902-0000-1000-8000-00805f9b34fb, value=0x01-00)
+I	00:00:07.585	[McuMgr] Data written to descr. 00002902-0000-1000-8000-00805f9b34fb
+V	00:00:07.594	[McuMgr] Waiting for value change...
+V	00:00:07.602	[McuMgr] Writing characteristic da2e7828-fbce-4e01-ae9e-261174997c48 (WRITE COMMAND)
+D	00:00:07.609	[McuMgr] gatt.writeCharacteristic(da2e7828-fbce-4e01-ae9e-261174997c48, value=0x000000010000FF06A0, WRITE COMMAND)
+I	00:00:07.620	[McuMgr] Data written to da2e7828-fbce-4e01-ae9e-261174997c48
+I	00:00:07.643	[McuMgr] Notification received from da2e7828-fbce-4e01-ae9e-261174997c48, value: (0x) 01-00-00-19-00-00-FF-06-BF-68-62-75-66-5F-73-69-7A-65-19-09-AB-69-62-75-66-5F-63-6F-75-6E-74-04-FF
+I	00:00:07.657	[McuMgr] Wait for value changed complete
+A	00:00:07.669	[McuMgr] Received Header (Version: 0, Op: 1, Flags: 0, Len: 25, Group: 0, Seq: 255, Command: 6) CBOR {"buf_size":2475,"buf_count":4}
+I	00:00:07.717	[McuMgr] SMP reassembly supported with buffer size: 2475 bytes and count: 4
+A	00:00:07.725	[McuMgr] Sending (10 bytes) Header (Version: 1, Op: 0, Flags: 0, Len: 2, Group: 0, Seq: 0, Command: 8) CBOR {}
+V	00:00:07.731	[McuMgr] Writing characteristic da2e7828-fbce-4e01-ae9e-261174997c48 (WRITE COMMAND)
+D	00:00:07.737	[McuMgr] gatt.writeCharacteristic(da2e7828-fbce-4e01-ae9e-261174997c48, value=0x0800000200000008BFFF, WRITE COMMAND)
+I	00:00:07.751	[McuMgr] Data written to da2e7828-fbce-4e01-ae9e-261174997c48
+I	00:00:07.778	[McuMgr] Notification received from da2e7828-fbce-4e01-ae9e-261174997c48, value: (0x) 09-00-00-15-00-00-00-08-BF-6A-62-6F-6F-74-6C-6F-61-64-65-72-67-4D-43-55-62-6F-6F-74-FF
+A	00:00:07.786	[McuMgr] Received Header (Version: 1, Op: 1, Flags: 0, Len: 21, Group: 0, Seq: 0, Command: 8) CBOR {"bootloader":"MCUboot"}
+A	00:00:07.829	[McuMgr] Sending (21 bytes) Header (Version: 1, Op: 0, Flags: 0, Len: 13, Group: 0, Seq: 1, Command: 8) CBOR {"query":"mode"}
+V	00:00:07.837	[McuMgr] Writing characteristic da2e7828-fbce-4e01-ae9e-261174997c48 (WRITE COMMAND)
+D	00:00:07.843	[McuMgr] gatt.writeCharacteristic(da2e7828-fbce-4e01-ae9e-261174997c48, value=0x0800000D00000108BF657175657279646D6F6465FF, WRITE COMMAND)
+I	00:00:07.853	[McuMgr] Data written to da2e7828-fbce-4e01-ae9e-261174997c48
+I	00:00:07.875	[McuMgr] Notification received from da2e7828-fbce-4e01-ae9e-261174997c48, value: (0x) 09-00-00-08-00-00-01-08-BF-64-6D-6F-64-65-03-FF
+A	00:00:07.884	[McuMgr] Received Header (Version: 1, Op: 1, Flags: 0, Len: 8, Group: 0, Seq: 1, Command: 8) CBOR {"mode":3}
+A	00:00:07.910	[McuMgr] Sending (10 bytes) Header (Version: 1, Op: 0, Flags: 0, Len: 2, Group: 1, Seq: 2, Command: 0) CBOR {}
+V	00:00:07.920	[McuMgr] Writing characteristic da2e7828-fbce-4e01-ae9e-261174997c48 (WRITE COMMAND)
+D	00:00:07.926	[McuMgr] gatt.writeCharacteristic(da2e7828-fbce-4e01-ae9e-261174997c48, value=0x0800000200010200BFFF, WRITE COMMAND)
+I	00:00:07.939	[McuMgr] Data written to da2e7828-fbce-4e01-ae9e-261174997c48
+I	00:00:07.957	[McuMgr] Notification received from da2e7828-fbce-4e01-ae9e-261174997c48, value: (0x) 09-00-00-86-00-01-02-00-BF-66-69-6D-61-67-65-73-9F-BF-64-73-6C-6F-74-00-67-76-65-72-73-69-6F-6E-65-31-2E-30-2E-30-64-68-61-73-68-58-20-A0-DF-C3-3D-E0-F6-69-9C-69-95-90-3D-44-9F-AD-56-95-20-7D-75-16-A8-55-4D-CE-11-13-2D-0A-EE-2E-ED-68-62-6F-6F-74-61-62-6C-65-F5-67-70-65-6E-64-69-6E-67-F4-69-63-6F-6E-66-69-72-6D-65-64-F5-66-61-63-74-69-76-65-F5-69-70-65-72-6D-61-6E-65-6E-74-F4-FF-FF-6B-73-70-6C-69-74-53-74-61-74-75-73-00-FF
+A	00:00:07.968	[McuMgr] Received Header (Version: 1, Op: 1, Flags: 0, Len: 134, Group: 1, Seq: 2, Command: 0) CBOR {"images":[{"slot":0,"version":"1.0.0","hash":"oN/DPeD2aZxplZA9RJ+tVpUgfXUWqFVNzhETLQruLu0=","bootable":true,"pending":false,"confirmed":true,"active":true,"permanent":false}],"splitStatus":0}
+V	00:00:08.003	[McuMgr] Uploading firmware...
+A	00:00:18.992	[McuMgr] 213879 bytes sent in 10762 ms (19.87 kB/s)
+V	00:00:19.018	[McuMgr] New state: TEST
+A	00:00:19.037	[McuMgr] Sending (58 bytes) Header (Version: 1, Op: 2, Flags: 0, Len: 50, Group: 1, Seq: 92, Command: 0) CBOR {"confirm":false,"hash":"M5wJ29f88yprx2FoZ1Lrl9xd8qvAq3U3xAylG1Y0nAw="}
+V	00:00:19.054	[McuMgr] Writing characteristic da2e7828-fbce-4e01-ae9e-261174997c48 (WRITE COMMAND)
+D	00:00:19.070	[McuMgr] gatt.writeCharacteristic(da2e7828-fbce-4e01-ae9e-261174997c48, value=0x0A00003200015C00BF67636F6E6669726DF464686173685820339C09DBD7FCF32A6BC761686752EB97DC5DF2ABC0AB7537C40CA51B56349C0CFF, WRITE COMMAND)
+I	00:00:19.093	[McuMgr] Data written to da2e7828-fbce-4e01-ae9e-261174997c48
+I	00:00:19.141	[McuMgr] Notification received from da2e7828-fbce-4e01-ae9e-261174997c48, value: (0x) 0B-00-00-F4-00-01-5C-00-BF-66-69-6D-61-67-65-73-9F-BF-64-73-6C-6F-74-00-67-76-65-72-73-69-6F-6E-65-31-2E-30-2E-30-64-68-61-73-68-58-20-A0-DF-C3-3D-E0-F6-69-9C-69-95-90-3D-44-9F-AD-56-95-20-7D-75-16-A8-55-4D-CE-11-13-2D-0A-EE-2E-ED-68-62-6F-6F-74-61-62-6C-65-F5-67-70-65-6E-64-69-6E-67-F4-69-63-6F-6E-66-69-72-6D-65-64-F5-66-61-63-74-69-76-65-F5-69-70-65-72-6D-61-6E-65-6E-74-F4-FF-BF-64-73-6C-6F-74-01-67-76-65-72-73-69-6F-6E-65-32-2E-30-2E-30-64-68-61-73-68-58-20-33-9C-09-DB-D7-FC-F3-2A-6B-C7-61-68-67-52-EB-97-DC-5D-F2-AB-C0-AB-75-37-C4-0C-A5-1B-56-34-9C-0C-68-62-6F-6F-74-61-62-6C-65-F5-67-70-65-6E-64-69-6E-67-F5-69-63-6F-6E-66-69-72-6D-65-64-F4-66-61-63-74-69-76-65-F4-69-70-65-72-6D-61-6E-65-6E-74-F4-FF-FF-6B-73-70-6C-69-74-53-74-61-74-75-73-00-FF
+A	00:00:19.158	[McuMgr] Received Header (Version: 1, Op: 3, Flags: 0, Len: 244, Group: 1, Seq: 92, Command: 0) CBOR {"images":[{"slot":0,"version":"1.0.0","hash":"oN/DPeD2aZxplZA9RJ+tVpUgfXUWqFVNzhETLQruLu0=","bootable":true,"pending":false,"confirmed":true,"active":true,"permanent":false},{"slot":1,"version":"2.0.0","hash":"M5wJ29f88yprx2FoZ1Lrl9xd8qvAq3U3xAylG1Y0nAw=","bootable":true,"pending":true,"confirmed":false,"active":false,"permanent":false}],"splitStatus":0}
+V	00:00:19.203	[McuMgr] New state: RESET
+A	00:00:19.214	[McuMgr] Sending (10 bytes) Header (Version: 1, Op: 2, Flags: 0, Len: 2, Group: 0, Seq: 93, Command: 5) CBOR {}
+V	00:00:19.221	[McuMgr] Writing characteristic da2e7828-fbce-4e01-ae9e-261174997c48 (WRITE COMMAND)
+D	00:00:19.226	[McuMgr] gatt.writeCharacteristic(da2e7828-fbce-4e01-ae9e-261174997c48, value=0x0A00000200005D05BFFF, WRITE COMMAND)
+I	00:00:19.235	[McuMgr] Data written to da2e7828-fbce-4e01-ae9e-261174997c48
+I	00:00:19.260	[McuMgr] Notification received from da2e7828-fbce-4e01-ae9e-261174997c48, value: (0x) 0B-00-00-02-00-00-5D-05-BF-FF
+A	00:00:19.269	[McuMgr] Received Header (Version: 1, Op: 3, Flags: 0, Len: 2, Group: 0, Seq: 93, Command: 5) CBOR {}
+D	00:00:19.947	[Callback] Connection state changed with status: 8 and new state: DISCONNECTED (0)
+D	00:00:19.949	[McuMgr] [Callback] Connection state changed with status: 8 and new state: 0 (DISCONNECTED)
+E	00:00:19.953	Error 8 (0x8): GATT CONN TIMEOUT
+I	00:00:19.955	Disconnected
+W	00:00:19.959	[McuMgr] Error: (0x8): GATT CONN TIMEOUT
+I	00:00:19.972	[McuMgr] Disconnected
+D	00:00:19.989	[McuMgr] gatt.close()
+V	00:00:39.352	[McuMgr] Connecting...
+D	00:00:39.367	[McuMgr] gatt = device.connectGatt(autoConnect = false, TRANSPORT_LE, LE 1M)
+V	00:00:39.393	[McuMgr] New state: CONFIRM
+D	00:00:41.356	[McuMgr] [Callback] Connection state changed with status: 0 and new state: 2 (CONNECTED)
+I	00:00:41.367	[McuMgr] Connected to FC:8B:18:2E:43:2A
+D	00:00:41.378	[McuMgr] wait(300)
+V	00:00:41.695	[McuMgr] Discovering services...
+D	00:00:41.708	[McuMgr] gatt.discoverServices()
+I	00:00:41.726	[McuMgr] Services discovered
+V	00:00:41.738	[McuMgr] Primary service found
+V	00:00:41.755	[McuMgr] Requesting new MTU...
+D	00:00:41.767	[McuMgr] gatt.requestMtu(498)
+I	00:00:41.862	[McuMgr] MTU changed to: 498
+D	00:00:41.871	[McuMgr] gatt.setCharacteristicNotification(da2e7828-fbce-4e01-ae9e-261174997c48, true)
+V	00:00:41.877	[McuMgr] Enabling notifications for da2e7828-fbce-4e01-ae9e-261174997c48
+D	00:00:41.890	[McuMgr] gatt.writeDescriptor(00002902-0000-1000-8000-00805f9b34fb, value=0x01-00)
+I	00:00:41.954	[McuMgr] Data written to descr. 00002902-0000-1000-8000-00805f9b34fb
+V	00:00:41.965	[McuMgr] Waiting for value change...
+V	00:00:41.976	[McuMgr] Writing characteristic da2e7828-fbce-4e01-ae9e-261174997c48 (WRITE COMMAND)
+D	00:00:41.987	[McuMgr] gatt.writeCharacteristic(da2e7828-fbce-4e01-ae9e-261174997c48, value=0x000000010000FF06A0, WRITE COMMAND)
+I	00:00:42.002	[McuMgr] PHY updated (TX: LE 2M, RX: LE 2M)
+I	00:00:42.015	[McuMgr] Data written to da2e7828-fbce-4e01-ae9e-261174997c48
+I	00:00:42.185	[McuMgr] Notification received from da2e7828-fbce-4e01-ae9e-261174997c48, value: (0x) 01-00-00-19-00-00-FF-06-BF-68-62-75-66-5F-73-69-7A-65-19-09-AB-69-62-75-66-5F-63-6F-75-6E-74-04-FF
+I	00:00:42.203	[McuMgr] Wait for value changed complete
+A	00:00:42.223	[McuMgr] Received Header (Version: 0, Op: 1, Flags: 0, Len: 25, Group: 0, Seq: 255, Command: 6) CBOR {"buf_size":2475,"buf_count":4}
+I	00:00:42.275	[McuMgr] SMP reassembly supported with buffer size: 2475 bytes and count: 4
+A	00:00:42.287	[McuMgr] Sending (58 bytes) Header (Version: 1, Op: 2, Flags: 0, Len: 50, Group: 1, Seq: 0, Command: 0) CBOR {"confirm":true,"hash":"M5wJ29f88yprx2FoZ1Lrl9xd8qvAq3U3xAylG1Y0nAw="}
+V	00:00:42.293	[McuMgr] Writing characteristic da2e7828-fbce-4e01-ae9e-261174997c48 (WRITE COMMAND)
+D	00:00:42.298	[McuMgr] gatt.writeCharacteristic(da2e7828-fbce-4e01-ae9e-261174997c48, value=0x0A00003200010000BF67636F6E6669726DF564686173685820339C09DBD7FCF32A6BC761686752EB97DC5DF2ABC0AB7537C40CA51B56349C0CFF, WRITE COMMAND)
+I	00:00:42.307	[McuMgr] Data written to da2e7828-fbce-4e01-ae9e-261174997c48
+I	00:00:42.360	[McuMgr] Notification received from da2e7828-fbce-4e01-ae9e-261174997c48, value: (0x) 0B-00-00-F4-00-01-00-00-BF-66-69-6D-61-67-65-73-9F-BF-64-73-6C-6F-74-00-67-76-65-72-73-69-6F-6E-65-32-2E-30-2E-30-64-68-61-73-68-58-20-33-9C-09-DB-D7-FC-F3-2A-6B-C7-61-68-67-52-EB-97-DC-5D-F2-AB-C0-AB-75-37-C4-0C-A5-1B-56-34-9C-0C-68-62-6F-6F-74-61-62-6C-65-F5-67-70-65-6E-64-69-6E-67-F4-69-63-6F-6E-66-69-72-6D-65-64-F5-66-61-63-74-69-76-65-F5-69-70-65-72-6D-61-6E-65-6E-74-F4-FF-BF-64-73-6C-6F-74-01-67-76-65-72-73-69-6F-6E-65-31-2E-30-2E-30-64-68-61-73-68-58-20-A0-DF-C3-3D-E0-F6-69-9C-69-95-90-3D-44-9F-AD-56-95-20-7D-75-16-A8-55-4D-CE-11-13-2D-0A-EE-2E-ED-68-62-6F-6F-74-61-62-6C-65-F5-67-70-65-6E-64-69-6E-67-F4-69-63-6F-6E-66-69-72-6D-65-64-F4-66-61-63-74-69-76-65-F4-69-70-65-72-6D-61-6E-65-6E-74-F4-FF-FF-6B-73-70-6C-69-74-53-74-61-74-75-73-00-FF
+A	00:00:42.374	[McuMgr] Received Header (Version: 1, Op: 3, Flags: 0, Len: 244, Group: 1, Seq: 0, Command: 0) CBOR {"images":[{"slot":0,"version":"2.0.0","hash":"M5wJ29f88yprx2FoZ1Lrl9xd8qvAq3U3xAylG1Y0nAw=","bootable":true,"pending":false,"confirmed":true,"active":true,"permanent":false},{"slot":1,"version":"1.0.0","hash":"oN/DPeD2aZxplZA9RJ+tVpUgfXUWqFVNzhETLQruLu0=","bootable":true,"pending":false,"confirmed":false,"active":false,"permanent":false}],"splitStatus":0}
+V	00:00:42.413	[McuMgr] Disconnecting...
+D	00:00:42.422	[McuMgr] gatt.disconnect()
+D	00:00:42.433	[McuMgr] [Callback] Connection state changed with status: 0 and new state: 0 (DISCONNECTED)
+I	00:00:42.442	[McuMgr] Disconnected
+D	00:00:42.451	[McuMgr] gatt.close()
+A	00:00:42.468	Reconnect after the update...
+D	00:00:42.475	gatt.close()
+D	00:00:42.476	wait(200)
+V	00:00:42.678	Connecting to FC:8B:18:2E:43:2A...
+D	00:00:42.678	gatt = device.connectGatt(autoConnect = false, TRANSPORT_LE, preferred PHY = LE 1M)
+D	00:00:42.706	[Callback] Connection state changed with status: 0 and new state: CONNECTED (2)
+I	00:00:42.707	Connected to FC:8B:18:2E:43:2A
+A	00:00:42.715	Discover-Services...
+V	00:00:42.729	Discovering services...
+D	00:00:42.729	gatt.discoverServices()
+D	00:00:42.764	[Callback] Services discovered with status: 0
+I	00:00:42.764	Services discovered
+V	00:00:42.834	Generic Attribute (0x1801)
+- Service Changed [I] (0x2A05)
+   Client Characteristic Configuration (0x2902)
+- Client Supported Features [R W] (0x2B29)
+- Database Hash [R] (0x2B2A)
+Generic Access (0x1800)
+- Device Name [R] (0x2A00)
+- Appearance [R] (0x2A01)
+- Peripheral Preferred Connection Parameters [R] (0x2A04)
+Nordic LED Button Service (00001523-1212-efde-1523-785feabcd123)
+- Button [N R] (00001524-1212-efde-1523-785feabcd123)
+   Client Characteristic Configuration (0x2902)
+- LED [W] (00001525-1212-efde-1523-785feabcd123)
+SMP Service (8d53dc1d-1db7-4cd3-868b-8a527460aa84)
+- SMP Characteristic [N WNR] (da2e7828-fbce-4e01-ae9e-261174997c48)
+   Client Characteristic Configuration (0x2902)
+D	00:00:42.834	gatt.setCharacteristicNotification(00002a05-0000-1000-8000-00805f9b34fb, true)
+D	00:00:42.837	gatt.setCharacteristicNotification(00001524-1212-efde-1523-785feabcd123, true)
+A	00:00:42.845	Enable notifications...
+V	00:00:42.854	Enabling notifications for da2e7828-fbce-4e01-ae9e-261174997c48
+D	00:00:42.854	gatt.setCharacteristicNotification(da2e7828-fbce-4e01-ae9e-261174997c48, true)
+D	00:00:42.856	gatt.writeDescriptor(00002902-0000-1000-8000-00805f9b34fb, value=0x0100)
+I	00:00:42.941	Data written to descr. 00002902-0000-1000-8000-00805f9b34fb, value: (0x) 01-00
+A	00:00:42.941	"Notifications enabled" sent
+V	00:00:42.946	Notifications enabled for da2e7828-fbce-4e01-ae9e-261174997c48
+I	00:00:42.959	Writing descriptor succeeded
+A	00:00:42.969	Assert-Notification...
+V	00:00:42.987	Changing write type for da2e7828-fbce-4e01-ae9e-261174997c48 to WRITE COMMAND
+D	00:00:42.987	characteristic.setWriteType(WRITE COMMAND)
+V	00:00:42.997	Writing command to characteristic da2e7828-fbce-4e01-ae9e-261174997c48
+D	00:00:42.998	gatt.writeCharacteristic(da2e7828-fbce-4e01-ae9e-261174997c48, value=0x0800000000010000)
+I	00:00:43.001	Data written to da2e7828-fbce-4e01-ae9e-261174997c48, value: (0x) 08-00-00-00-00-01-00-00
+A	00:00:43.001	"Operation: READ
+Flags: 0
+Length: 0
+Group Id: 1 (IMAGE)
+Sequence Num: 0
+Command Id: 0 (STATE)
+No message" sent
+I	00:00:43.007	Writing characteristic succeeded
+I	00:00:43.078	Notification received from da2e7828-fbce-4e01-ae9e-261174997c48, value: (0x) 09-00-00-F4-00-01-00-00-BF-66-69-6D-61-67-65-73-9F-BF-64-73-6C-6F-74-00-67-76-65-72-73-69-6F-6E-65-32-2E-30-2E-30-64-68-61-73-68-58-20-33-9C-09-DB-D7-FC-F3-2A-6B-C7-61-68-67-52-EB-97-DC-5D-F2-AB-C0-AB-75-37-C4-0C-A5-1B-56-34-9C-0C-68-62-6F-6F-74-61-62-6C-65-F5-67-70-65-6E-64-69-6E-67-F4-69-63-6F-6E-66-69-72-6D-65-64-F5-66-61-63-74-69-76-65-F5-69-70-65-72-6D-61-6E-65-6E-74-F4-FF-BF-64-73-6C-6F-74-01-67-76-65-72-73-69-6F-6E-65-31-2E-30-2E-30-64-68-61-73-68-58-20-A0-DF-C3-3D-E0-F6-69-9C-69-95-90-3D-44-9F-AD-56-95-20-7D-75-16-A8-55-4D-CE-11-13-2D-0A-EE-2E-ED-68-62-6F-6F-74-61-62-6C-65-F5-67-70-65-6E-64-69-6E-67-F4-69-63-6F-6E-66-69-72-6D-65-64-F4-66-61-63-74-69-76-65-F4-69-70-65-72-6D-61-6E-65-6E-74-F4-FF-FF-6B-73-70-6C-69-74-53-74-61-74-75-73-00-FF
+A	00:00:43.078	"Operation: READ RESPONSE
+Flags: 0
+Length: 244
+Group Id: 1 (IMAGE)
+Sequence Num: 0
+Command Id: 0 (STATE)
+Message: {"images":[{"slot":0,"version":"2.0.0","hash":"M5wJ29f88yprx2FoZ1Lrl9xd8qvAq3U3xAylG1Y0nAw=","bootable":true,"pending":false,"confirmed":true,"active":true,"permanent":false},{"slot":1,"version":"1.0.0","hash":"oN/DPeD2aZxplZA9RJ+tVpUgfXUWqFVNzhETLQruLu0=","bootable":true,"pending":false,"confirmed":false,"active":false,"permanent":false}],"splitStatus":0}" received
+I	00:00:43.082	Notification received
+A	00:00:43.091	Checking if version is 2.0.0...
+V	00:00:43.098	Asserting characteristic value...
+I	00:00:43.110	Value of the characteristic matches '090000F400010000BF66696D616765739FBF64736C6F74006776657273696F6E65322E302E3064686173685820339C09DBD7FCF32A6BC761686752EB97DC5DF2ABC0AB7537C40CA51B56349C0C68626F6F7461626C65F56770656E64696E67F469636F6E6669726D6564F566616374697665F5697065726D616E656E74F4FFBF64736C6F74016776657273696F6E65312E302E3064686173685820A0DFC33DE0F6699C6995903D449FAD5695207D7516A8554DCE11132D0AEE2EED68626F6F7461626C65F56770656E64696E67F469636F6E6669726D6564F466616374697665F4697065726D616E656E74F4FFFF6B73706C697453746174757300FF'
+V	00:00:43.120	Cleaning up...
+V	00:00:45.123	Disconnecting...
+D	00:00:45.123	gatt.disconnect()
+D	00:00:45.152	[Callback] Connection state changed with status: 0 and new state: DISCONNECTED (0)
+I	00:00:45.153	Disconnected
+D	00:00:45.155	gatt.close()
+D	00:00:45.168	wait(200)
+A	00:00:45.383	'Run Upgrade test' completed
