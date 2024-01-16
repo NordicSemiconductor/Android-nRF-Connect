@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  ~ Copyright (c) 2024, Nordic Semiconductor
+  ~ All rights reserved.
+  ~
+  ~ Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+  ~
+  ~ 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+  ~
+  ~ 2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the
+  ~ documentation and/or other materials provided with the distribution.
+  ~
+  ~ 3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this
+  ~ software without specific prior written permission.
+  ~
+  ~ THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+  ~ LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+  ~ HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+  ~ LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+  ~ ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE
+  ~ USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~-->
+
+<!--
+	Automated test script example and documentation.
+
+	This script is an example of a test suite definition which can be parsed and performed by nRF Connect application.
+	nRF Connect may be used in automated tests for Bluetooth Smart devices.
+
+	Should you have any comments or suggestions, please write us on mag@nordicsemi.no.
+
+	This is a second sample for Automated Tests covering updating device using McuManager. 
+	See sample_test_hrm.xml for more information.
+-->
+
+<!-- Test-Suite element defines the test suite. It MAY have a 'description' attribute. All descriptions in the script are used when creating a result file. -->
+<test-suite description="Test FOTA">
+	<!--
+		Tests MAY be parametrized. To define a variable use the 'set' element.
+		You may also inject variables from the command line with -E KEY VALUE.
+	-->
+	<set name="DESC_NAME" value="[global] CCCD" />
+	<set name="CCCD_UUID" value="00002902-0000-1000-8000-00805f9b34fb" />
+
+	<set name="LBS_SERVICE_UUID" value="00001523-1212-efde-1523-785feabcd123" />
+	<set name="BUTTON_CHAR_UUID" value="00001524-1212-efde-1523-785feabcd123" />
+	<set name="LED_CHAR_UUID" value="00001525-1212-efde-1523-785feabcd123" />
+
+	<set name="SMP_SERVICE_UUID" value="8D53DC1D-1DB7-4CD3-868B-8A527460AA84" />
+	<set name="SMP_CHAR_UUID" value="DA2E7828-FBCE-4E01-AE9E-261174997C48" />
+
+	<!--
+		In this test the target will not have the address specified as a parameter.
+		Instead, the service will scan for a BLE devices and assign first that matches the filter to it.
+
+		NEW: device address is no longer a required parameter but to use the target later it must be bound with a scanned device using 'scan-for' command.
+	-->
+	<target id="devkit" name="Dev Kit" />
+
+	<!--
+		The second test will scan for a device with given address and, if such found, perform some operations on this target.
+		The 'devkit' target is not yet bound with any device address. It has to be bound prior to using it in a command
+		that requires a connection ('connect' in this case). To bound a target with a device use 'scan-for' command and 'bind-target' attribute.
+	-->
+	<test id="scan_and_connect" description="Test LED Button Service" target="devkit">
+
+		<!--
+			The 'scan-for' command will perform a BLE scan and finish when a device matching given filter parameters (address, rssi and/or advertising data)
+			is found, or the timeout specified by the 'timeout' attribute occur.
+
+			Attributes 'address', 'rssi', 'data' and/or 'target' MAY be specified to filter the device by address or advertising data:
+				'address' - scan will continue until a device with given Bluetooth address
+				'rssi'    - scan will continue until a packet with RSSI value greater or equal to specified is received.
+				            RSSI values vary from around -100 dBm (far) to approx -40 dBm (very close)
+				'data'    - scan will continue until given data will be found in received advertising packet.
+				            Matching is done using Pattern#find(String) method after converting the adv. packet to an uppercase HEX string representation.
+				            This means, that if a device advertises with "020104" a data="10" will be found.
+				            The 'data' attribute SHOULD contain only HEX characters, otherwise it will fo r100% not match any HEX data.
+				'target'  - scan will continue until a device with the same address as the target is found. The target must be bound before.
+
+			Attribute 'bind-target' MAY be used to bind the first matching device with given target identifier.	A target may be bound multiple times
+			(but only when it's not connected), so you may reuse the test using multiple 'run-test' commands with different filters.
+
+			An 'expected' attribute may be set to all operations (except 'property' and 'sleep') to specify the expected result.
+			Expected result may be one of the following:
+				- SUCCESS                 - success is required to go on (default) (device required to proceed)
+				- SUCCESS_WARNING_ON_FAIL - a warning will be logged in the result file but the test will continue (checking if device advertises, but no bounding to target)
+				- FAIL                    - a fail is required to proceed (device must not be found)
+				- FAIL_WARNING_ON_SUCCESS - a fail is expected but in case of a success a warning will be logged to the result file (device should not be found, but is not critical if it does)
+
+			NEW: 'scan-for' command
+		-->
+		<!--<scan-for description="Scan for ${EXTRA_ADDRESS}" address="${EXTRA_ADDRESS}" rssi="-90" data="${FILTER}" bind-target="devkit" expected="SUCCESS"/>-->
+		<scan-for description="Scan for LBS" data="${FILTER}" bind-target="devkit" expected="SUCCESS"/>
+
+		<!-- Perform some standard tests on the target. Connect... -->
+		<connect timeout="4000"/>
+
+		<!-- Refresh cache... -->
+		<refresh />
+
+		<!-- Discover services... -->
+		<discover-services />
+
+		<!-- Check if device has specified service. Instance id MAY be specified using instance-id="n". The default instance id value is 0. -->
+		<assert-service description="Check if LBS Service exists" uuid="${LBS_SERVICE_UUID}" instance-id="0">
+
+			<!-- The service should have the following characteristics. -->
+			<assert-characteristic description="Check Button characteristic" uuid="${BUTTON_CHAR_UUID}" instance-id="0" >
+				<!-- Let's check if the characteristic has required properties. Requirement="MANDATORY" is default and MAY be skipped. -->
+				<property name="NOTIFY" requirement="MANDATORY" />
+				<!-- But for sure it must not have those properties -->
+				<property name="WRITE" requirement="EXCLUDED" />
+				<property name="WRITE_WITHOUT_RESPONSE" requirement="EXCLUDED" />
+				<property name="SIGNED_WRITE" requirement="EXCLUDED" />
+
+				<!-- This characteristic should have the CCCD descriptor. Attribute 'instance-id' is optional -->
+				<assert-descriptor description="Checking ${DESC_NAME} descriptor" uuid="${CCCD_UUID}">
+					<!-- And even check the value of any descriptor, including the CCCD -->
+					<assert-value description="Check if notifications are disabled by default" value="0000" />
+				</assert-descriptor>
+			</assert-characteristic>
+
+			<!-- Another required characteristic. Like in assert-service the instance-id does not have to be specified if equal to 0 -->
+			<assert-characteristic description="Check LED characteristic" uuid="${LED_CHAR_UUID}">
+				<!-- Write property is required. We don't care about the others -->
+				<property name="WRITE" />
+			</assert-characteristic>
+		</assert-service>
+
+		<!-- Read a value from characteristic. Attributes: 'service-instance-id' and 'characteristic-instance-id' are optional. -->
+		<read description="Read Button state" service-uuid="${LBS_SERVICE_UUID}" service-instance-id="0" characteristic-uuid="${BUTTON_CHAR_UUID}" characteristic-instance-id="0">
+
+			<!-- Check if the value is what we expect to be . A value may be given in bytes using 'value' attribute or as string using 'value-string'-->
+			<assert-value description="Check if button is released" value="00" />
+		</read>
+
+	</test>
+
+	<test id="upgrade" description="Upgrade the device from version 1.0.0 to version 2.0.0" target="devkit">
+
+		<!-- Perform some standard tests on the target. Connect... -->
+		<connect timeout="4000"/>
+
+		<!-- Refresh cache... -->
+		<refresh />
+
+		<!-- Discover services... -->
+		<discover-services />
+
+		<!-- Check if device has specified service. Instance id MAY be specified using instance-id="n". The default instance id value is 0. -->
+		<assert-service description="Check if SMP Service exists" uuid="${SMP_SERVICE_UUID}" instance-id="0">
+
+			<!-- The service should have the following characteristics. -->
+			<assert-characteristic description="Check SMP Characteristic" uuid="${SMP_CHAR_UUID}" instance-id="0" >
+				<!-- Let's check if the characteristic has required properties. Requirement="MANDATORY" is default and MAY be skipped. -->
+				<property name="NOTIFY" requirement="MANDATORY" />
+				<property name="WRITE_WITHOUT_RESPONSE" requirement="MANDATORY" />
+				<!-- But for sure it must not have those properties -->
+				<property name="INDICATE" requirement="EXCLUDED" />
+
+				<!-- This characteristic should have the CCCD descriptor. Attribute 'instance-id' is optional -->
+				<assert-descriptor description="Checking ${DESC_NAME} descriptor" uuid="${CCCD_UUID}">
+					<!-- And even check the value of any descriptor, including the CCCD -->
+					<assert-value description="Check if notifications are disabled by default" value="0000" />
+				</assert-descriptor>
+			</assert-characteristic>
+		</assert-service>
+
+		<!-- Request high MTU, so that the following commands can be received in a single notification -->
+		<request-mtu value="498" />
+
+		<!-- Enable notifications for SMP Characteristic -->
+		<write-descriptor description="Enable notifications" service-uuid="${SMP_SERVICE_UUID}" characteristic-uuid="${SMP_CHAR_UUID}" uuid="${CCCD_UUID}" value="0100" />
+
+		<!-- Verify the current fw version by reading Image List -->
+		<assert-notification service-uuid="${SMP_SERVICE_UUID}" characteristic-uuid="${SMP_CHAR_UUID}">
+
+			<!-- Request Image List command using SMP protocol -->
+			<write description="Read Version" service-uuid="${SMP_SERVICE_UUID}" characteristic-uuid="${SMP_CHAR_UUID}" type="WRITE_COMMAND" value="0800000000010000" />
+
+			<!-- Assert version number -->
+			<assert-value description="Verify version is 1.0.0" value="0900008600010000BF66696D616765739FBF64736C6F74006776657273696F6E65312E302E3064686173685820A0DFC33DE0F6699C6995903D449FAD5695207D7516A8554DCE11132D0AEE2EED68626F6F7461626C65F56770656E64696E67F469636F6E6669726D6564F566616374697665F5697065726D616E656E74F4FFFF6B73706C697453746174757300FF" expected="SUCCESS_WARNING_ON_FAIL" /> 
+		</assert-notification>
+
+		<!-- Perform upgrade. The file has to be copied to the phone before the test is started -->
+		<mcu file="${FILE}" mode="TEST_AND_CONFIRM" swap-time="20000" />
+
+		<!-- Reconnect to the device -->
+		<connect timeout="5000" description="Reconnect after the update" />
+
+		<!-- Discover services... -->
+		<discover-services />
+		
+		<!-- Enable notifications for SMP Characteristic -->
+		<write-descriptor description="Enable notifications" service-uuid="${SMP_SERVICE_UUID}" characteristic-uuid="${SMP_CHAR_UUID}" uuid="${CCCD_UUID}" value="0100" />
+		
+		<!-- Verify the current fw version by reading Image List -->
+		<assert-notification service-uuid="${SMP_SERVICE_UUID}" characteristic-uuid="${SMP_CHAR_UUID}">
+
+			<!-- Request Image List command using SMP protocol -->
+			<write description="Read Version" service-uuid="${SMP_SERVICE_UUID}" characteristic-uuid="${SMP_CHAR_UUID}" type="WRITE_COMMAND" value="0800000000010000" />
+
+			<!-- Assert version number -->
+			<assert-value description="Checking if version is 2.0.0" value="090000F400010000BF66696D616765739FBF64736C6F74006776657273696F6E65322E302E3064686173685820339C09DBD7FCF32A6BC761686752EB97DC5DF2ABC0AB7537C40CA51B56349C0C68626F6F7461626C65F56770656E64696E67F469636F6E6669726D6564F566616374697665F5697065726D616E656E74F4FFBF64736C6F74016776657273696F6E65312E302E3064686173685820A0DFC33DE0F6699C6995903D449FAD5695207D7516A8554DCE11132D0AEE2EED68626F6F7461626C65F56770656E64696E67F469636F6E6669726D6564F466616374697665F4697065726D616E656E74F4FFFF6B73706C697453746174757300FF" /> 
+		</assert-notification>
+
+	</test>
+
+	<!--
+		At last we provide test cases to be performed. Each may overwrite 'set' parameters.
+	-->
+	<run-test ref="scan_and_connect" description="Run Scan and Connect test with local CCCD">
+		<!-- Parameters may be given for a single test also, Overwriting global one -->
+		<set name="DESC_NAME" value="[local] CCCD" />
+		<set name="FILTER" value="2315" />
+	</run-test>
+
+	<run-test ref="upgrade" description="Run Upgrade test" />
+
+</test-suite>
