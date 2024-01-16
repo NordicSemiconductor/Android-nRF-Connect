@@ -111,7 +111,6 @@ fi
 # Check if there is only one device connected
 if [ -z "$DEVICE" ]; then
     DEVICE_COUNT=$(adb devices | grep -v "devices" | grep -c "device\|unauthorized\|emulator")
-    echo $DEVICE_COUNT
     if [ "$DEVICE_COUNT" -eq 0 ]; then
         echo "Error: No device connected."
         exit 1
